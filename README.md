@@ -19,8 +19,8 @@ A short video showing some theme features is available [here](https://www.antoni
 
 ### Installation
 
-1. Download latest release [here](https://github.com/bic-ed/multiverse/releases) and extract the content.
-2. Use an ftp client (or the elFinder ZP extension) to upload `multiverse` folder into `themes` folder of your ZP installation.
+1. Download latest release and extract the content.
+2. Find the `multiverse` folder and use an ftp client to upload exclusively it into `themes` folder of your ZP installation.
 3. Visit Multiverse option page in your admin area.
 4. Activate Multiverse to use it as the main theme of your gallery or assign it to any album you wish.
 
