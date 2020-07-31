@@ -1,0 +1,406 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Multiverse\n"
+"POT-Creation-Date: 2020-07-30 11:24+0200\n"
+"PO-Revision-Date: 2020-07-31 19:04+0200\n"
+"Last-Translator: fretzl\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: ;gettext_th;ngettext_th:1,2\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: footer.php:25
+msgid "Follow me on..."
+msgstr "Volg me op…"
+
+#: footer.php:66
+msgid "Copyright info"
+msgstr "Copyright info"
+
+#: footer.php:72
+msgid "Photographer"
+msgstr "Fotograaf"
+
+#: footer.php:79
+msgid "Get in touch"
+msgstr "Contact"
+
+#: footer.php:92
+msgid "See more"
+msgstr "Meer"
+
+#: footer.php:137
+msgid "Language"
+msgstr "Taal"
+
+#: search.php:36
+msgid "Search results"
+msgstr "Zoekresultaten"
+
+#: search.php:144
+msgid "album"
+msgid_plural "albums"
+msgstr[0] "album"
+msgstr[1] "albums"
+
+#: search.php:176
+msgid "image"
+msgid_plural "images"
+msgstr[0] "afbeelding"
+msgstr[1] "afbeeldingen"
+
+#: themeoptions.php:54
+msgid "Image width"
+msgstr "Breedte afbeeldingen"
+
+#: themeoptions.php:58
+msgid "Set the max width in pixels for the image displayed in the popup."
+msgstr "Maximale breedte van de afbeelding in de popup."
+
+#: themeoptions.php:59
+msgid "Image height"
+msgstr "Hoogte afbeeldingen"
+
+#: themeoptions.php:63
+msgid "Set the max height in pixels for the image displayed in the popup."
+msgstr "Maximale hoogte van de afbeelding in de popup."
+
+#: themeoptions.php:63
+msgid ""
+"<strong>Note:</strong> images in the popup might be visually reduced in "
+"width and height to fit user screen, but they can be zoomed to the sizes set "
+"here by double clicking on them."
+msgstr ""
+"<strong>Opmerking:</strong> afbeeldingen in de popup worden geschaald zodat "
+"ze in het browservenster passen."
+
+#: themeoptions.php:69
+msgid "Email subject"
+msgstr "E-mail onderwerp"
+
+#: themeoptions.php:73
+msgid ""
+"Subject of the email sent through the contact form included in Multiverse "
+"footer. Zenphoto automatically adds the title of your gallery (between "
+"brackets)"
+msgstr ""
+"Het onderwerp van de e-mail die verzonden wordt via het contactformulier. "
+"Zenphoto voegt automatisch de titel van de website toe (tussen haakjes)."
+
+#: themeoptions.php:73
+msgid ""
+"<strong>Note:</strong> leave this field empty to include a subject field in "
+"the contact form and let users fill it as they wish."
+msgstr ""
+"<strong>Opmerking:</strong> als dit veld leeg is krijgt de gebruiker de "
+"mogelijkheid zelf een onderwerp in te vullen."
+
+#: themeoptions.php:74
+msgid "Copyright owner"
+msgstr "Copyright eigenaar"
+
+#: themeoptions.php:78
+msgid ""
+"Write the name of the copyright owner here. To this will be automatically "
+"added the year of the older image present in your gallery, followed by the "
+"current year, with a link to the full archive page."
+msgstr ""
+"De naam van de copyright eigenaar. Hieraan wordt automatisch het eerste en "
+"het laatste jaar van afbeeldingen toegevoegd met een link naar de "
+"archiefpagina gemaakt."
+
+#: themeoptions.php:78
+msgid ""
+"<strong>Note:</strong> leave this field empty if you don’t want any "
+"copyright text displayed."
+msgstr ""
+"<strong>Opmerking:</strong> laat dit leeg als je geen copyright tekst op de "
+"website wilt."
+
+#: themeoptions.php:79
+msgid "Copyright page"
+msgstr "Copyright pagina"
+
+#: themeoptions.php:85
+msgid ""
+"Choose the page that contains your site copyright terms, if any. A link to "
+"this page will be generated on the name of the copyright owner."
+msgstr ""
+"Kies een pagina met je copyright voorwaarden. De naam van de copyright "
+"eigenaar wordt dan een link naar deze pagina."
+
+#: themeoptions.php:85 themeoptions.php:97 themeoptions.php:102
+msgid ""
+"<strong>Note:</strong> You need the Zenpage extension enabled to use this "
+"feature."
+msgstr ""
+"<strong>Opmerking:</strong> Om dit te kunnen gebruiken moet de Zenpage "
+"plugin geactiveerd zijn."
+
+#: themeoptions.php:86
+msgid "Social profiles"
+msgstr "Social media profielen"
+
+#: themeoptions.php:90
+msgid ""
+"Check to display a list of icons with links to your social media profiles, "
+"defined by filling the fields below with the following data:"
+msgstr ""
+"Vink aan om social media iconen te tonen met links naar de betreffende "
+"pagina’s. De iconen en links worden gecreëerd door de volgende gegevens in "
+"te vullen:"
+
+#: themeoptions.php:90
+msgid "Your social profile URL"
+msgstr "URL van je socal media pagina"
+
+#: themeoptions.php:90
+msgid "Font Awesome class for the icon (i.e. <em>fa-github</em> for GitHub)."
+msgstr ""
+"Font Awesome class voor het icoon (b.v. <em>fa-github</em> for GitHub)."
+
+#: themeoptions.php:90
+msgid "Here the full list"
+msgstr "Bekijk de volledige lijst"
+
+#: themeoptions.php:90
+msgid "Name of the social media"
+msgstr "Naam van het social media platform"
+
+#: themeoptions.php:90
+msgid ""
+"Use the <strong>Add</strong> button to add a new social media or the "
+"<strong>Delete</strong> button to remove the last one."
+msgstr ""
+"Gebruik de <strong>Toevoegen</strong> knop om meer social media pagina’s toe "
+"te voegen of de <strong>Verwijder</strong> knop op de laatste te verwijderen."
+
+#: themeoptions.php:102
+msgid "This overrides the <em>Homepage</em> option above."
+msgstr "Deze optie gaat vóór de <em>Homepage</em> optie hierboven."
+
+#: themeoptions.php:103
+msgid "Enable Pagination"
+msgstr "Activeer paginering"
+
+#: themeoptions.php:107
+msgid ""
+"Check to split albums into multiple pages, depending on the options "
+"<code>Albums</code> and <code>Images</code> found at the top of this page. "
+"The album design is cleaner with this option disabled (default), however if "
+"you have some albums with many images and you are experiencing a too long "
+"loading time, you may wish to enable this option."
+msgstr ""
+"Wanneer dit is aangevinkt worden album- en afbeeldingspagina’s gepagineerd "
+"volgens de opties <code>Albums</code> and <code>Images</code> bovenaan deze "
+"pagina. Gebruik dit vooral wanneer er heel veel afbeeldingen in albums "
+"zitten en de webite daardoor traag wordt."
+
+#~ msgid "Allow search"
+#~ msgstr "Abilita ricerca"
+
+#~ msgid "Check to enable search form."
+#~ msgstr "Spunta per abilitare il modulo di ricerca."
+
+#~ msgid "none"
+#~ msgstr "nessuna"
+
+#~ msgid "Homepage"
+#~ msgstr "Home page"
+
+#~ msgid ""
+#~ "Choose here any <em>un-published Zenpage page</em> (listed by "
+#~ "<em>titlelink</em>) to act as your site’s homepage instead the normal "
+#~ "gallery index."
+#~ msgstr ""
+#~ "Scegli una <em>pagina non pubblicata di Zenpage</em> (elencata col "
+#~ "<em>collegamento al titolo</em>) per usarla come Home page del sito al "
+#~ "posto del normale indice della galleria."
+
+#~ msgid "News on index page"
+#~ msgstr "Notizie nella pagina indice"
+
+#~ msgid ""
+#~ "Enable this if you want to show the news section’s first page on the "
+#~ "<code>index.php</code> page."
+#~ msgstr ""
+#~ "Abilita questa opzione se vuoi mostrare la prima pagina della sezione "
+#~ "notizie nella pagina <code>index.php</code>."
+
+#~ msgid "Add"
+#~ msgstr "Aggiungi"
+
+#~ msgid "Delete"
+#~ msgstr "Elimina"
+
+#~ msgid "Albums"
+#~ msgstr "Album"
+
+#~ msgid "Images"
+#~ msgstr "Immagini"
+
+#~ msgid "View album:"
+#~ msgstr "Visualizza album:"
+
+#~ msgid "Password required"
+#~ msgstr "Password richiesta"
+
+#~ msgid "Gallery RSS"
+#~ msgstr "RSS galleria"
+
+#~ msgid "Gallery archive"
+#~ msgstr "Archivio galleria"
+
+#, php-format
+#~ msgid "%1$u Hit for <em>%2$s</em>"
+#~ msgid_plural "%1$u Hits for <em>%2$s</em>"
+#~ msgstr[0] "%1$u Risultato per <em>%2$s</em>"
+#~ msgstr[1] "%1$u Risultati per <em>%2$s</em>"
+
+#~ msgid "Sorry, no matches found. Try refining your search."
+#~ msgstr "Spiacente, nessun risultato. Prova a perfezionare la ricerca."
+
+#~ msgid "Pages"
+#~ msgstr "Pagine"
+
+#, php-format
+#~ msgid "Articles (%s)"
+#~ msgstr "Articoli (%s)"
+
+#~ msgid "info"
+#~ msgstr "info"
+
+#~ msgid "Comments:"
+#~ msgstr "Commenti:"
+
+#~ msgid "Categories: "
+#~ msgstr "Categorie: "
+
+#~ msgid "Tags"
+#~ msgstr "Tag"
+
+#~ msgid "news archive"
+#~ msgstr "archivio notizie"
+
+#~ msgid "All news"
+#~ msgstr "Tutte le notizie"
+
+#~ msgid "Show more results"
+#~ msgstr "Mostra più risultati"
+
+#~ msgid "Show fewer results"
+#~ msgstr "Mostra meno risultati"
+
+#~ msgid "search"
+#~ msgstr "cerca"
+
+#~ msgid "Comment"
+#~ msgstr "Commento"
+
+#~ msgid "Archive"
+#~ msgstr "Archivio"
+
+#~ msgid "Gallery Index"
+#~ msgstr "Indice galleria"
+
+#~ msgid "News"
+#~ msgstr "Notizie"
+
+#~ msgid "Gallery"
+#~ msgstr "Galleria"
+
+#~ msgid "Subalbums"
+#~ msgstr "Sub-album"
+
+#~ msgid "Object not found"
+#~ msgstr "Oggetto non trovato"
+
+#~ msgid "Pages (%s)"
+#~ msgstr "Pagine (%s)"
+
+#~ msgid "news"
+#~ msgstr "notizie"
+
+#~ msgid "albums"
+#~ msgstr "album"
+
+#~ msgid "Images (%s)"
+#~ msgstr "Immagini (%s)"
+
+#~ msgid "Albums (%s)"
+#~ msgstr "Album (%s)"
+
+#~ msgid "Albums (%1$s) &amp; Images (%2$s)"
+#~ msgstr "Album (%1$s) &amp; immagini (%2$s)"
+
+#, fuzzy
+#~ msgid "tags"
+#~ msgstr "tag"
+
+#~ msgid "<strong>Tags:</strong>"
+#~ msgstr "<strong>Tag:</strong>"
+
+#, fuzzy
+#~ msgid "<strong>Note:</strong> Bla bla."
+#~ msgstr "<strong>Tag:</strong>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<strong>Note:</strong> This of course overrides the <em>News on index "
+#~ "page</em> option and your theme must be setup for this feature! Visit the "
+#~ "theming tutorial for details."
+#~ msgstr ""
+#~ "<strong>Nota:</strong> questa impostazione sovrascrive l’opzione "
+#~ "<em>Notizie nella pagina indice</em> e il tema deve supportare questa "
+#~ "funzione. Visitare la guida per la creazione di un tema per maggiori "
+#~ "dettagli."
+
+#, fuzzy
+#~ msgid "here subalbums"
+#~ msgstr "album"
+
+#, fuzzy
+#~ msgid "Default theme color scheme."
+#~ msgstr "Colori standard del tema"
+
+#, fuzzy
+#~ msgid "Theme Color"
+#~ msgstr "Colori tema"
+
+#, fuzzy
+#~ msgid "next"
+#~ msgstr "succ"
+
+#, fuzzy
+#~ msgid "prev"
+#~ msgstr "prec"
+
+#, fuzzy
+#~ msgid "Set ."
+#~ msgstr "Impostare per abilitare il form di ricerca."
+
+#, fuzzy
+#~ msgid "y."
+#~ msgstr "Ritaglia asse Y"
+
+#, fuzzy
+#~ msgid "Powered by"
+#~ msgstr "Basato su"
+
+#~ msgid "Message from your site"
+#~ msgstr "Messaggio dal tuo sito"
+
+#, fuzzy
+#~ msgid ""
+#~ "Text used for the learn more info button. Leave empty to use the default "
+#~ "text."
+#~ msgstr ""
+#~ "Testo utilizzato per il pulsante altre informazioni. Lascia in bianco per "
+#~ "usare il testo predefinito."
