@@ -82,11 +82,11 @@ if (!defined('WEBPATH')) die();
 
 	// Open popup with the image defined by redirect from image.php
 	if (isset($_GET['title'])) {
-		$title = $_GET['title']; ?>
+		$title = sanitize($_GET['title']); ?>
 		<script>
 		$(window).load(function(){
 			$('a.image, a.icon').css("pointer-events", "none");
-			var title = "<?php echo $title ?>",
+			var title = "<?php echo js_encode($title); ?>",
 			$image = $('a.image[title="' + title + '"]');
 			setTimeout(function(){
 				$('html').animate({scrollTop: $image.offset().top + ($image.height() - $(window).height())/2}, 400, function(){
