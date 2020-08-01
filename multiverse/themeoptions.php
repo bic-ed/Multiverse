@@ -2,7 +2,6 @@
 
 // force UTF-8 Ø
 
-require_once(dirname(__FILE__) . '/functions.php');
 class ThemeOptions {
 
 	function __construct() {

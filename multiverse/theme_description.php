@@ -1,7 +1,7 @@
 <?php
 
 // Zenphoto theme definition file
-$theme_description['name'] = ucfirst(basename(dirname(__FILE__)));
+$theme_description['name'] = 'Multiverse';
 $theme_description['author'] = '<a href="https://www.antonioranesi.it" target="_blank">Antonio Ranesi (bic-ed)</a>';
 $theme_description['version'] = "1.0";
 $theme_description['date'] = "30/07/2020";
