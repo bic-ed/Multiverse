@@ -1,6 +1,7 @@
 <?php
 // force UTF-8 Ø
-if (!defined('WEBPATH')) 	die();
+if (!defined('WEBPATH'))
+	die();
 
 if (getOption('pagination')) {
 	$page = getAlbumPage();
@@ -10,7 +11,9 @@ if (getOption('pagination')) {
 
 $title = html_encode($_zp_current_image->getTitle());
 $redir = $_zp_current_album->getLink($page);
-
-$redir = rewrite_path($redir . '?title=' . $title, $redir . '&title=' . $title);
-header('Location:' . $redir);
-?>
+if (MOD_REWRITE) {
+	$redir .= '?title=' . $title;
+} else {
+	$redir .= '&title=' . $title;
+}
+redirectURL($redir, '301');
