@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Multiverse 1.0\n"
-"POT-Creation-Date: 2020-08-01 11:40+0200\n"
-"PO-Revision-Date: 2020-08-01 11:57+0200\n"
+"POT-Creation-Date: 2020-08-01 19:03+0200\n"
+"PO-Revision-Date: 2020-08-01 19:03+0200\n"
 "Last-Translator: Malte Müller (acrylian) <wartgart@gmx.net>\n"
 "Language-Team: Malte Müller (acrylian)\n"
 "Language: de_DE\n"
@@ -13,41 +13,8 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: gettext_th;ngettext_th\n"
+"X-Poedit-KeywordsList: ;gettext_th;ngettext_th\n"
 "X-Poedit-SearchPath-0: .\n"
-
-#: 404.php:18
-msgid "Object not found"
-msgstr "Objekt nicht gefunden"
-
-#: album.php:39 album.php:54
-msgid "Subalbums"
-msgstr "Unteralben"
-
-#: album.php:42 album.php:43 album.php:57 album.php:58 gallery.php:21
-#: gallery.php:22 search.php:149 search.php:150
-msgid "View album:"
-msgstr "Album ansehen:"
-
-#: album.php:66 search.php:113 search.php:117 search.php:121
-msgid "Images"
-msgstr "Bilder"
-
-#: archive.php:19 footer.php:64
-msgid "Archive"
-msgstr "Archiv"
-
-#: archive.php:20
-msgid "Gallery"
-msgstr "Galerie"
-
-#: archive.php:23 footer.php:125
-msgid "News"
-msgstr "Neuigkeiten"
-
-#: archive.php:26 news.php:36 news.php:75
-msgid "Tags"
-msgstr "Schlagwörter"
 
 #: footer.php:25
 msgid "Follow me on..."
@@ -69,91 +36,13 @@ msgstr "In Verbindung treten"
 msgid "See more"
 msgstr "Mehr sehen"
 
-#: footer.php:101 search.php:115 search.php:117 search.php:119
-msgid "Albums"
-msgstr "Alben"
-
-#: footer.php:105
-msgid "Gallery Index"
-msgstr "Galerie-Index"
-
-#: footer.php:114 search.php:72
-msgid "Pages"
-msgstr "Seiten"
-
 #: footer.php:137
 msgid "Language"
 msgstr "Sprache"
 
-#: functions.php:42
-msgid "Show more results"
-msgstr "Mehr Ergebnisse anzeigen"
-
-#: functions.php:43
-msgid "Show fewer results"
-msgstr "Weniger Ergebnisse anzeigen"
-
-#: functions.php:175
-msgid "search"
-msgstr "Suchen"
-
-#: functions.php:176
-msgid "Comment"
-msgstr "Kommentar"
-
-#: gallery.php:12 search.php:23
-msgid "Gallery RSS"
-msgstr "Galerie-RSS"
-
-#: header.php:11
-msgid "Info"
-msgstr "Info"
-
-#: news.php:28 news.php:67
-msgid "Comments:"
-msgstr "Kommentare:"
-
-#: news.php:30 news.php:69
-msgid "Categories: "
-msgstr "Kategorien:"
-
-#: news.php:51
-msgid "news archive"
-msgstr "Neuigkeiten-Archiv"
-
-#: news.php:54
-msgid "All news"
-msgstr "Alle Neuigkeiten"
-
-#: password.php:19
-msgid "Password required"
-msgstr "Passwort erforderlich"
-
-#: search.php:34
-msgid "Gallery archive"
-msgstr "Galerie-Archiv"
-
 #: search.php:36
 msgid "Search results"
 msgstr "Suchergebnisse"
-
-#: search.php:60
-#, php-format
-msgid "%1$u Hit for <em>%2$s</em>"
-msgid_plural "%1$u Hits for <em>%2$s</em>"
-msgstr[0] "%1$u Ergebniss für <em>%2$s</em>"
-msgstr[1] "%1$u Ergebnisse für <em>%2$s</em>"
-
-#: search.php:64
-msgid "Sorry, no matches found. Try refining your search."
-msgstr ""
-"Tut mir leider, leider keien Übereinstimmung gefunden. Versuchen Sie ihre "
-"Suche zu verfeinern."
-
-#: search.php:92
-#, php-format
-msgid "Articles (%s)"
-msgstr "Artikel (%s)"
 
 #: search.php:144
 msgid "album"
@@ -170,7 +59,7 @@ msgstr "Bildbreite"
 #: themeoptions.php:58
 msgid "Set the max width in pixels for the image displayed in the popup."
 msgstr ""
-"Definieren Sie die maximale Höhe in Pixeln für das Bild in der Popup-Anzeige"
+"Definieren Sie die maximale Höhe in Pixeln für das Bild in der Popup-Anzeige."
 
 #: themeoptions.php:59
 msgid "Image height"
@@ -178,7 +67,7 @@ msgstr "Bildhöhe"
 
 #: themeoptions.php:63
 msgid "Set the max height in pixels for the image displayed in the popup."
-msgstr "Definieren Sie die maximale Höhe für das Bild in der Popup-Anzeige"
+msgstr "Definieren Sie die maximale Höhe für das Bild in der Popup-Anzeige."
 
 #: themeoptions.php:63
 msgid ""
@@ -189,14 +78,6 @@ msgstr ""
 "<strong>Hinweis:</strong> Bilder im Popup können optisch in Höhe und Breite "
 "verkleinert erscheinen, um auf den Bilschirm des Besuchers zu passen, aber "
 "sie können rangezoomt werden, indem man auf sie doppelklickt."
-
-#: themeoptions.php:64
-msgid "Allow search"
-msgstr "Suche erlauben"
-
-#: themeoptions.php:68
-msgid "Check to enable search form."
-msgstr "Auswählen, um das Suchformular zu aktivieren."
 
 #: themeoptions.php:69
 msgid "Email subject"
@@ -231,7 +112,7 @@ msgid ""
 msgstr ""
 "Definieren Sie den Namen des Copyright-Inhabers. es wird automatisch das "
 "Jahr des ältesten Bilders Ihrer Galerie sowie gefolgt vom aktuellen Jahr "
-"hinzugefügt, verlinkt auf die volle Archivseite"
+"hinzugefügt, verlinkt auf die volle Archivseite."
 
 #: themeoptions.php:78
 msgid ""
@@ -244,10 +125,6 @@ msgstr ""
 #: themeoptions.php:79
 msgid "Copyright page"
 msgstr "Copyright-Seite"
-
-#: themeoptions.php:84 themeoptions.php:96
-msgid "none"
-msgstr "keine"
 
 #: themeoptions.php:85
 msgid ""
@@ -302,31 +179,6 @@ msgstr ""
 "Netzwerke hinzuzufügen oder den <strong>Löschen</strong>-Button, um sie zu "
 "entfernen."
 
-#: themeoptions.php:91
-msgid "Homepage"
-msgstr "Homepage"
-
-#: themeoptions.php:97
-msgid ""
-"Choose here any <em>un-published Zenpage page</em> (listed by <em>titlelink</"
-"em>) to act as your site’s homepage instead the normal gallery index."
-msgstr ""
-"Welchen Sie hier eine<em>unveröffentlichte Zenpage-Seite</em> (aufgelistet "
-"nach <em>titlelink</em>), um sie als Homepage anstatt des normalen "
-"Galerieindexes zu verwenden."
-
-#: themeoptions.php:98
-msgid "News on index page"
-msgstr "Neuigkeiten auf Index"
-
-#: themeoptions.php:102
-msgid ""
-"Enable this if you want to show the news section’s first page on the "
-"<code>index.php</code> page."
-msgstr ""
-"Aktivieren Sie dies, wenn Sie die erste Seite der Neuigkeiten auf der "
-"<code>index.php</code>-Seite anzeigen möchten."
-
 #: themeoptions.php:102
 msgid "This overrides the <em>Homepage</em> option above."
 msgstr "Dadurch wird die <em>obige Homepage-Option</em> außer Kraft setzen."
@@ -349,10 +201,123 @@ msgstr ""
 "deaktiviert (Standard), aber wenn Sie einige Alben mit vielen Bildern haben "
 "und eine zu lange Ladezeit haben, können Sie diese Option aktivieren."
 
-#: themeoptions.php:135
-msgid "add"
-msgstr "Hinzufügen"
+#~ msgid "Object not found"
+#~ msgstr "Objekt nicht gefunden"
 
-#: themeoptions.php:136
-msgid "Delete"
-msgstr "Löschen"
+#~ msgid "Subalbums"
+#~ msgstr "Unteralben"
+
+#~ msgid "View album:"
+#~ msgstr "Album ansehen:"
+
+#~ msgid "Images"
+#~ msgstr "Bilder"
+
+#~ msgid "Archive"
+#~ msgstr "Archiv"
+
+#~ msgid "Gallery"
+#~ msgstr "Galerie"
+
+#~ msgid "News"
+#~ msgstr "Neuigkeiten"
+
+#~ msgid "Tags"
+#~ msgstr "Schlagwörter"
+
+#~ msgid "Albums"
+#~ msgstr "Alben"
+
+#~ msgid "Gallery Index"
+#~ msgstr "Galerie-Index"
+
+#~ msgid "Pages"
+#~ msgstr "Seiten"
+
+#~ msgid "Show more results"
+#~ msgstr "Mehr Ergebnisse anzeigen"
+
+#~ msgid "Show fewer results"
+#~ msgstr "Weniger Ergebnisse anzeigen"
+
+#~ msgid "search"
+#~ msgstr "Suchen"
+
+#~ msgid "Comment"
+#~ msgstr "Kommentar"
+
+#~ msgid "Gallery RSS"
+#~ msgstr "Galerie-RSS"
+
+#~ msgid "Info"
+#~ msgstr "Info"
+
+#~ msgid "Comments:"
+#~ msgstr "Kommentare:"
+
+#~ msgid "Categories: "
+#~ msgstr "Kategorien:"
+
+#~ msgid "news archive"
+#~ msgstr "Neuigkeiten-Archiv"
+
+#~ msgid "All news"
+#~ msgstr "Alle Neuigkeiten"
+
+#~ msgid "Password required"
+#~ msgstr "Passwort erforderlich"
+
+#~ msgid "Gallery archive"
+#~ msgstr "Galerie-Archiv"
+
+#, php-format
+#~ msgid "%1$u Hit for <em>%2$s</em>"
+#~ msgid_plural "%1$u Hits for <em>%2$s</em>"
+#~ msgstr[0] "%1$u Ergebniss für <em>%2$s</em>"
+#~ msgstr[1] "%1$u Ergebnisse für <em>%2$s</em>"
+
+#~ msgid "Sorry, no matches found. Try refining your search."
+#~ msgstr ""
+#~ "Tut mir leider, leider keien Übereinstimmung gefunden. Versuchen Sie ihre "
+#~ "Suche zu verfeinern."
+
+#, php-format
+#~ msgid "Articles (%s)"
+#~ msgstr "Artikel (%s)"
+
+#~ msgid "Allow search"
+#~ msgstr "Suche erlauben"
+
+#~ msgid "Check to enable search form."
+#~ msgstr "Auswählen, um das Suchformular zu aktivieren."
+
+#~ msgid "none"
+#~ msgstr "keine"
+
+#~ msgid "Homepage"
+#~ msgstr "Homepage"
+
+#~ msgid ""
+#~ "Choose here any <em>un-published Zenpage page</em> (listed by "
+#~ "<em>titlelink</em>) to act as your site’s homepage instead the normal "
+#~ "gallery index."
+#~ msgstr ""
+#~ "Welchen Sie hier eine<em>unveröffentlichte Zenpage-Seite</em> "
+#~ "(aufgelistet nach <em>titlelink</em>), um sie als Homepage anstatt des "
+#~ "normalen Galerieindexes zu verwenden."
+
+#~ msgid "News on index page"
+#~ msgstr "Neuigkeiten auf Index"
+
+#~ msgid ""
+#~ "Enable this if you want to show the news section’s first page on the "
+#~ "<code>index.php</code> page."
+#~ msgstr ""
+#~ "Aktivieren Sie dies, wenn Sie die erste Seite der Neuigkeiten auf der "
+#~ "<code>index.php</code>-Seite anzeigen möchten."
+
+#~ msgid "add"
+#~ msgstr "Hinzufügen"
+
+#~ msgid "Delete"
+#~ msgstr "Löschen"
