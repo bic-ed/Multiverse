@@ -133,7 +133,6 @@ if (!OFFSET_PATH) {
 	enableExtension('print_album_menu', 1 | THEME_PLUGIN, false);
 	setOption('user_logout_login_form', 2, false);
 	define('ZENPAGE_ON', extensionEnabled('zenpage'));
-	define('ISO_CODE', strtr(getOption('locale'), "_", "-"));
 	$_zp_page_check = 'my_checkPageValidity';
 	if (ZENPAGE_ON) {
 		define('PAGE_IS_HOME', getOption('zenpage_homepage'));

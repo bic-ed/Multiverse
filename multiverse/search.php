@@ -15,7 +15,7 @@ if ($pag_tot > 1) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo ISO_CODE; ?>">
+<html<?php printLangAttribute(); ?>>
 <head>
 	<meta charset="<?php echo LOCAL_CHARSET; ?>">
 	<?php printHeadTitle() ?>
