@@ -65,7 +65,7 @@ zp_register_filter('theme_body_close', 'multiverse');
 
 /**
  * 
- * Set viewport, load fonts, load CSS
+ * Set viewport & load CSS
  * @author bic-ed
  * 
  */
@@ -73,7 +73,6 @@ function css_head() {
 	global $_zp_themeroot;
 	?>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href='https://fonts.googleapis.com/css?family=Raleway:300,300italic,400,400italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="<?php echo pathurlencode($_zp_themeroot . '/css/multi.css') ?>">
 <?php
 }
@@ -133,7 +132,6 @@ if (!OFFSET_PATH) {
 	enableExtension('print_album_menu', 1 | THEME_PLUGIN, false);
 	setOption('user_logout_login_form', 2, false);
 	define('ZENPAGE_ON', extensionEnabled('zenpage'));
-	define('ISO_CODE', strtr(getOption('locale'), "_", "-"));
 	$_zp_page_check = 'my_checkPageValidity';
 	if (ZENPAGE_ON) {
 		define('PAGE_IS_HOME', getOption('zenpage_homepage'));

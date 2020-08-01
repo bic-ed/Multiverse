@@ -1,0 +1,358 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Multiverse 1.0\n"
+"POT-Creation-Date: 2020-08-01 11:40+0200\n"
+"PO-Revision-Date: 2020-08-01 11:57+0200\n"
+"Last-Translator: Malte Müller (acrylian) <wartgart@gmx.net>\n"
+"Language-Team: Malte Müller (acrylian)\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: gettext_th;ngettext_th\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: 404.php:18
+msgid "Object not found"
+msgstr "Objekt nicht gefunden"
+
+#: album.php:39 album.php:54
+msgid "Subalbums"
+msgstr "Unteralben"
+
+#: album.php:42 album.php:43 album.php:57 album.php:58 gallery.php:21
+#: gallery.php:22 search.php:149 search.php:150
+msgid "View album:"
+msgstr "Album ansehen:"
+
+#: album.php:66 search.php:113 search.php:117 search.php:121
+msgid "Images"
+msgstr "Bilder"
+
+#: archive.php:19 footer.php:64
+msgid "Archive"
+msgstr "Archiv"
+
+#: archive.php:20
+msgid "Gallery"
+msgstr "Galerie"
+
+#: archive.php:23 footer.php:125
+msgid "News"
+msgstr "Neuigkeiten"
+
+#: archive.php:26 news.php:36 news.php:75
+msgid "Tags"
+msgstr "Schlagwörter"
+
+#: footer.php:25
+msgid "Follow me on..."
+msgstr "Folgt mir auf…"
+
+#: footer.php:66
+msgid "Copyright info"
+msgstr "Copyright-Info"
+
+#: footer.php:72
+msgid "Photographer"
+msgstr "Fotograf"
+
+#: footer.php:79
+msgid "Get in touch"
+msgstr "In Verbindung treten"
+
+#: footer.php:92
+msgid "See more"
+msgstr "Mehr sehen"
+
+#: footer.php:101 search.php:115 search.php:117 search.php:119
+msgid "Albums"
+msgstr "Alben"
+
+#: footer.php:105
+msgid "Gallery Index"
+msgstr "Galerie-Index"
+
+#: footer.php:114 search.php:72
+msgid "Pages"
+msgstr "Seiten"
+
+#: footer.php:137
+msgid "Language"
+msgstr "Sprache"
+
+#: functions.php:42
+msgid "Show more results"
+msgstr "Mehr Ergebnisse anzeigen"
+
+#: functions.php:43
+msgid "Show fewer results"
+msgstr "Weniger Ergebnisse anzeigen"
+
+#: functions.php:175
+msgid "search"
+msgstr "Suchen"
+
+#: functions.php:176
+msgid "Comment"
+msgstr "Kommentar"
+
+#: gallery.php:12 search.php:23
+msgid "Gallery RSS"
+msgstr "Galerie-RSS"
+
+#: header.php:11
+msgid "Info"
+msgstr "Info"
+
+#: news.php:28 news.php:67
+msgid "Comments:"
+msgstr "Kommentare:"
+
+#: news.php:30 news.php:69
+msgid "Categories: "
+msgstr "Kategorien:"
+
+#: news.php:51
+msgid "news archive"
+msgstr "Neuigkeiten-Archiv"
+
+#: news.php:54
+msgid "All news"
+msgstr "Alle Neuigkeiten"
+
+#: password.php:19
+msgid "Password required"
+msgstr "Passwort erforderlich"
+
+#: search.php:34
+msgid "Gallery archive"
+msgstr "Galerie-Archiv"
+
+#: search.php:36
+msgid "Search results"
+msgstr "Suchergebnisse"
+
+#: search.php:60
+#, php-format
+msgid "%1$u Hit for <em>%2$s</em>"
+msgid_plural "%1$u Hits for <em>%2$s</em>"
+msgstr[0] "%1$u Ergebniss für <em>%2$s</em>"
+msgstr[1] "%1$u Ergebnisse für <em>%2$s</em>"
+
+#: search.php:64
+msgid "Sorry, no matches found. Try refining your search."
+msgstr ""
+"Tut mir leider, leider keien Übereinstimmung gefunden. Versuchen Sie ihre "
+"Suche zu verfeinern."
+
+#: search.php:92
+#, php-format
+msgid "Articles (%s)"
+msgstr "Artikel (%s)"
+
+#: search.php:144
+msgid "album"
+msgstr "Album"
+
+#: search.php:176
+msgid "image"
+msgstr "Bild"
+
+#: themeoptions.php:54
+msgid "Image width"
+msgstr "Bildbreite"
+
+#: themeoptions.php:58
+msgid "Set the max width in pixels for the image displayed in the popup."
+msgstr ""
+"Definieren Sie die maximale Höhe in Pixeln für das Bild in der Popup-Anzeige"
+
+#: themeoptions.php:59
+msgid "Image height"
+msgstr "Bildhöhe"
+
+#: themeoptions.php:63
+msgid "Set the max height in pixels for the image displayed in the popup."
+msgstr "Definieren Sie die maximale Höhe für das Bild in der Popup-Anzeige"
+
+#: themeoptions.php:63
+msgid ""
+"<strong>Note:</strong> images in the popup might be visually reduced in "
+"width and height to fit user screen, but they can be zoomed to the sizes set "
+"here by double clicking on them."
+msgstr ""
+"<strong>Hinweis:</strong> Bilder im Popup können optisch in Höhe und Breite "
+"verkleinert erscheinen, um auf den Bilschirm des Besuchers zu passen, aber "
+"sie können rangezoomt werden, indem man auf sie doppelklickt."
+
+#: themeoptions.php:64
+msgid "Allow search"
+msgstr "Suche erlauben"
+
+#: themeoptions.php:68
+msgid "Check to enable search form."
+msgstr "Auswählen, um das Suchformular zu aktivieren."
+
+#: themeoptions.php:69
+msgid "Email subject"
+msgstr "E-Mail-Betreff"
+
+#: themeoptions.php:73
+msgid ""
+"Subject of the email sent through the contact form included in Multiverse "
+"footer. Zenphoto automatically adds the title of your gallery (between "
+"brackets)"
+msgstr ""
+"Betreff der Mail, die durch das Kontaktforumlar im Multiverse-Fuss geschickt "
+"wird. Zenphoto fügt automatisch den Titel Ihrer Galerie (in Klammern) hinzu."
+
+#: themeoptions.php:73
+msgid ""
+"<strong>Note:</strong> leave this field empty to include a subject field in "
+"the contact form and let users fill it as they wish."
+msgstr ""
+"<strong>Hinweis:</strong> lassen Sie diese Feld leer, um das Feld im "
+"Kontaktformular anzuzeigen und den Besucher selbst auszufüllen."
+
+#: themeoptions.php:74
+msgid "Copyright owner"
+msgstr "Copyright-Inhaber"
+
+#: themeoptions.php:78
+msgid ""
+"Write the name of the copyright owner here. To this will be automatically "
+"added the year of the older image present in your gallery, followed by the "
+"current year, with a link to the full archive page."
+msgstr ""
+"Definieren Sie den Namen des Copyright-Inhabers. es wird automatisch das "
+"Jahr des ältesten Bilders Ihrer Galerie sowie gefolgt vom aktuellen Jahr "
+"hinzugefügt, verlinkt auf die volle Archivseite"
+
+#: themeoptions.php:78
+msgid ""
+"<strong>Note:</strong> leave this field empty if you don’t want any "
+"copyright text displayed."
+msgstr ""
+"<strong>Note:</strong> Lassen Sie diese Feld leer, wenn Sie keinen "
+"Copyrighttext anzeigen möchten."
+
+#: themeoptions.php:79
+msgid "Copyright page"
+msgstr "Copyright-Seite"
+
+#: themeoptions.php:84 themeoptions.php:96
+msgid "none"
+msgstr "keine"
+
+#: themeoptions.php:85
+msgid ""
+"Choose the page that contains your site copyright terms, if any. A link to "
+"this page will be generated on the name of the copyright owner."
+msgstr ""
+"Wählen Sie eine Seite, die Ihre Copyright-Bedingungen enthält. Ein Link zu "
+"dieser Seite wird auf den Namen des Copryright-Inhabers erstellt."
+
+#: themeoptions.php:85 themeoptions.php:97 themeoptions.php:102
+msgid ""
+"<strong>Note:</strong> You need the Zenpage extension enabled to use this "
+"feature."
+msgstr ""
+"<strong>Hinweis:</strong> Für diese Feature müssen Sie die Zenpage-"
+"Erweiterung aktivieren."
+
+#: themeoptions.php:86
+msgid "Social profiles"
+msgstr "Soziale Netzwerke"
+
+#: themeoptions.php:90
+msgid ""
+"Check to display a list of icons with links to your social media profiles, "
+"defined by filling the fields below with the following data:"
+msgstr ""
+"Aktivieren Sie dies, um eine Liste von Icons Ihrer Sozialen-Netzwerk-Profile "
+"anzuzeigen, definiert durch das Ausfüllen der folgenden Daten:"
+
+#: themeoptions.php:90
+msgid "Your social profile URL"
+msgstr "URL Ihres Sozialen Netzwerks"
+
+#: themeoptions.php:90
+msgid "Font Awesome class for the icon (i.e. <em>fa-github</em> for GitHub)."
+msgstr "Font Awesome-Klasse für das Icon (z.B. <em>fa-github</em> für GitHub)."
+
+#: themeoptions.php:90
+msgid "Here the full list"
+msgstr "Hier die komplette Liste"
+
+#: themeoptions.php:90
+msgid "Name of the social media"
+msgstr "Name des Sozialen-Netzwerk-Profils"
+
+#: themeoptions.php:90
+msgid ""
+"Use the <strong>Add</strong> button to add a new social media or the "
+"<strong>Delete</strong> button to remove the last one."
+msgstr ""
+"Verwenden Sie den <strong>Hinzufügen</strong>-Button, um neue Soziale-"
+"Netzwerke hinzuzufügen oder den <strong>Löschen</strong>-Button, um sie zu "
+"entfernen."
+
+#: themeoptions.php:91
+msgid "Homepage"
+msgstr "Homepage"
+
+#: themeoptions.php:97
+msgid ""
+"Choose here any <em>un-published Zenpage page</em> (listed by <em>titlelink</"
+"em>) to act as your site’s homepage instead the normal gallery index."
+msgstr ""
+"Welchen Sie hier eine<em>unveröffentlichte Zenpage-Seite</em> (aufgelistet "
+"nach <em>titlelink</em>), um sie als Homepage anstatt des normalen "
+"Galerieindexes zu verwenden."
+
+#: themeoptions.php:98
+msgid "News on index page"
+msgstr "Neuigkeiten auf Index"
+
+#: themeoptions.php:102
+msgid ""
+"Enable this if you want to show the news section’s first page on the "
+"<code>index.php</code> page."
+msgstr ""
+"Aktivieren Sie dies, wenn Sie die erste Seite der Neuigkeiten auf der "
+"<code>index.php</code>-Seite anzeigen möchten."
+
+#: themeoptions.php:102
+msgid "This overrides the <em>Homepage</em> option above."
+msgstr "Dadurch wird die <em>obige Homepage-Option</em> außer Kraft setzen."
+
+#: themeoptions.php:103
+msgid "Enable Pagination"
+msgstr "Paginierung aktivieren"
+
+#: themeoptions.php:107
+msgid ""
+"Check to split albums into multiple pages, depending on the options "
+"<code>Albums</code> and <code>Images</code> found at the top of this page. "
+"The album design is cleaner with this option disabled (default), however if "
+"you have some albums with many images and you are experiencing a too long "
+"loading time, you may wish to enable this option."
+msgstr ""
+"Aktivieren Sie diese Option, um Alben in mehrere Seiten aufzuteilen, "
+"abhängig von den Optionen <code>Albums</code> und oben auf dieser "
+"<code>Images</code> Seite. Das Albumdesign ist sauberer mit dieser Option "
+"deaktiviert (Standard), aber wenn Sie einige Alben mit vielen Bildern haben "
+"und eine zu lange Ladezeit haben, können Sie diese Option aktivieren."
+
+#: themeoptions.php:135
+msgid "add"
+msgstr "Hinzufügen"
+
+#: themeoptions.php:136
+msgid "Delete"
+msgstr "Löschen"
