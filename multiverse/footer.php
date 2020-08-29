@@ -139,7 +139,7 @@ if (getThemeOption('social_contacts')) {
               <ul class="drop">
                 <li>
                   <a>
-                    <?php echo ISO_CODE; // real value set via javascript ?>
+                    <?php printLangAttribute(); // real value set via javascript ?>
                   </a>
                 </li>
               </ul>
