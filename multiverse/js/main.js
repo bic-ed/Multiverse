@@ -326,7 +326,6 @@
           switch (e.keyCode) {
 
 						case 37:
-						case 32:
             if (once) {
               return false;
             }
