@@ -52,7 +52,7 @@ if ($pag_tot > 1) {
 					}
 					$searchwords .= $searchdate;
 				}
-				if (count($_zp_current_search->fieldList) == 1 && $_zp_current_search->fieldList[0] == "tags") {
+				if (isset($_GET['searchfields']) && $_GET['searchfields'] === "tags") {
 					$searchwords = "tag = " . $searchwords;
 				}
 				?>
