@@ -155,11 +155,11 @@ if ($pag_tot > 1) {
 <?php } ?>
 <?php if ($numimages) { ?>
 	<?php
-	// Spare some questions to database getting size options before the loop
+	// Get size options before the loops
 	$image_x = getThemeOption('image_size_x');
 	$image_y = getThemeOption('image_size_y');
-	$thumb_x = getThemeOption('thumb_size_x');
-	$thumb_y = 6 * $thumb_x; // dummy multiplier for height to get all thumbs of the same width
+	$thumb_x = 600;
+	$thumb_y = 10 * $thumb_x; // dummy multiplier for height to get all thumbs of the same width
 	$ii = 0;
 	while (next_image(false, $img_per_page)): ?>
 	<?php if ($ii == 0) {
