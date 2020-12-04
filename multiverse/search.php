@@ -165,8 +165,8 @@ if ($pag_tot > 1) {
 	<?php if ($ii == 0) {
 		$ii = 1;
 		if ($numalbums || $numimages > $img_per_page) {
-			$from = ($curr_pag - intval($numalbums/$alb_per_page) - 1) * $img_per_page + 1;
-			$to = min((($curr_pag - intval($numalbums/$alb_per_page)) * $img_per_page), $numimages);
+			$from = ($curr_pag - intval(($numalbums - 1)/$alb_per_page) - 1) * $img_per_page + 1;
+			$to = min(($curr_pag - intval(($numalbums - 1)/$alb_per_page)) * $img_per_page, $numimages);
 			if ($from === $to) {
 				$to = "";
 			} else {
