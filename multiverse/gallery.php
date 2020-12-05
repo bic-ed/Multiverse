@@ -24,8 +24,8 @@ if (!defined('WEBPATH')) die();
 					<p><?php echo truncate_string(getBareAlbumDesc(), 120); ?></p>
 				</div>
 			<?php endwhile; ?>
+			<?php	printPageListWithNav("", "", false, true, 'pagelist gallery', null, true, 5); ?>
 		</div>
-		<?php	printPageListWithNav("", "", false, true, 'pagelist gallery', null, true, 5); ?>
 	</div>
 	<?php include 'footer.php'; ?>
 	<?php	zp_apply_filter('theme_body_close'); ?>
