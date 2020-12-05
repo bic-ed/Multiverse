@@ -317,7 +317,7 @@
 
     /*
     Keyboard navigation adapted for slideshow and changeImage function. (bic-ed)
-		NOTE: Assinging 'kind' parameter to changeImage can be used to slide images instead of fade and warp them.
+		NOTE: Assinging true parameter to changeImage can be used to slide images instead of fade and warp them.
 		Add a theme option for this?
      */
     
@@ -466,32 +466,38 @@
       tap: function() {},
       pinchOut: closeZoom,
       fingers: 2,
-    };
-
+    },
+		oldPosition,
+		startingPoint;
     function panZoom(event, phase, direction, distance) {
       
       // panning start point
       var evt; event.touches ? evt = event.touches[0] : evt = event;
       if (phase == "start") {
-        oldX = $zoomedImg.position().left;
-        oldY = $zoomedImg.position().top;
-        startX = evt.clientX;
-        startY = evt.clientY;
+				oldPosition = {
+					left: $zoomedImg.position().left,
+					top: $zoomedImg.position().top
+				}
+				startingPoint = {
+					x: evt.clientX,
+					y: evt.clientY
+				}
       }
       
       if (phase == "move") {
-        posBigX = oldX + evt.clientX - startX;
-        posBigY = oldY + evt.clientY - startY;
+        zoomCurrentPosition.left = oldPosition.left + evt.clientX - startingPoint.x;
+        zoomCurrentPosition.top = oldPosition.top + evt.clientY - startingPoint.y;
         zoomBounds();
         $zoomedImg.css({
-          'left': posBigX + 'px',
-          'top': posBigY + 'px'
+          'left': zoomCurrentPosition.left,
+          'top': zoomCurrentPosition.top
         })
       }
       
     }
     
-    var imgW, imgH, posX, posY, posBigX, posBigY, imgBigW, imgBigH, winW, winH, $zoomedImg, zoomSpeed = 300;
+    var popImgSize, realImgSize, zoomStartPosition,	zoomCurrentPosition,
+			windowSize,	$zoomedImg, zoomSpeed = 300;
 
     function openZoom(event, target) {
       // IDEA: add a theme option to open real full size image via ajax instead
@@ -499,34 +505,44 @@
         return false;
       }
       var $poptroxImg = $(".pic > img");
-      imgW = $poptroxImg.width();
-      imgH = $poptroxImg.height();
-      imgBigW = $poptroxImg[0].naturalWidth;
-      imgBigH = $poptroxImg[0].naturalHeight;
+			popImgSize = {
+				width: $poptroxImg.width(),
+				height: $poptroxImg.height()
+			}
+			realImgSize = {
+				width: $poptroxImg[0].naturalWidth,
+				height: $poptroxImg[0].naturalHeight
+			}
       // QUESTION: Abort if there is nothing to zoom?
-      // if (imgW == imgBigW && imgH == imgBigH) {
+      // if (popImgSize.width == realImgSize.width && popImgSize.height == realImgSize.height) {
       //   return false;
       // }
       $body.prepend("<span id='zoom'><img src='' /></span>");
       $zoomedImg = $("#zoom > img");
-      winW = $window.width();
-      winH = $(".poptrox-overlay").height();
-      posX = (winW - imgW) / 2;
-      posY = (winH - imgH + parseInt($imgs.css("margin-top"), 10)) / 2;
-      startX = startX - posX;
-      startY = startY - posY;
-      percX = startX / imgW;
-      percY = startY / imgH;
-      posBigX = -imgBigW * percX + winW / 2;
-      posBigY = -imgBigH * percY + winH / 2;
+			windowSize = {
+				width: $window.width(),
+				height: $(".poptrox-overlay").height()
+			}
+			zoomStartPosition = {
+				top: $poptroxImg.offset().top - $window.scrollTop(),
+				left: $poptroxImg.offset().left
+			}
+      var startingRatio = {
+				x: (startingPoint.x - zoomStartPosition.left) / popImgSize.width,
+				y: (startingPoint.y - zoomStartPosition.top) / popImgSize.height
+			}
+			zoomCurrentPosition = {
+				top: -realImgSize.height * startingRatio.y + windowSize.height / 2,
+				left: -realImgSize.width * startingRatio.x + windowSize.width / 2
+			}
 
       $zoomedImg.css({
         "position": "relative",
-        top: posY + "px",
-        left: posX + "px",
+        "top": zoomStartPosition.top,
+        "left": zoomStartPosition.left,
         "z-index": "100003",
-        "width": imgW,
-        "height": imgH,
+        "width": popImgSize.width,
+        "height": popImgSize.height
       });
 
       $zoomedImg.prop("src", $poptroxImg.attr("src"));
@@ -536,10 +552,10 @@
 
       $main.css('filter', 'blur(28px)');
       $zoomedImg.animate({
-        top: posBigY,
-        left: posBigX,
-        "width": imgBigW,
-        "height": imgBigH
+        "top": zoomCurrentPosition.top,
+        "left": zoomCurrentPosition.left,
+        "width": realImgSize.width,
+        "height": realImgSize.height
       }, zoomSpeed, function() {
         $zoomedImg.swipe(panOrCloseZoom);
         $zoomedImg.css({
@@ -555,27 +571,27 @@
       $main.css('filter', '');
       $(".poptrox-overlay").fadeTo(zoomSpeed, 1);
       $zoomedImg.animate({
-        top: posY + "px",
-        left: posX + "px",
-        "width": imgW,
-        "height": imgH
+        "top": zoomStartPosition.top,
+        "left": zoomStartPosition.left,
+        "width": popImgSize.width,
+        "height": popImgSize.height
       }, zoomSpeed, function() {
         $("#zoom").remove();
       });
     };
 
     function zoomBounds() {
-      if (imgBigH > winH) {
-        posBigY = Math.min(0, posBigY);
-        posBigY = Math.max(posBigY, winH - imgBigH);
+      if (realImgSize.height > windowSize.height) {
+        zoomCurrentPosition.top = Math.min(0, zoomCurrentPosition.top);
+        zoomCurrentPosition.top = Math.max(zoomCurrentPosition.top, windowSize.height - realImgSize.height);
       } else {
-        posBigY =  (winH - imgBigH + parseInt($imgs.css("margin-top"), 10)) / 2;
+        zoomCurrentPosition.top =  (windowSize.height - realImgSize.height + parseInt($imgs.css("margin-top"), 10)) / 2;
       }
-      if (imgBigW > winW) {
-        posBigX = Math.max(posBigX, winW - imgBigW);
-        posBigX = Math.min(0, posBigX);
+      if (realImgSize.width > windowSize.width) {
+        zoomCurrentPosition.left = Math.max(zoomCurrentPosition.left, windowSize.width - realImgSize.width);
+        zoomCurrentPosition.left = Math.min(0, zoomCurrentPosition.left);
       } else {
-        posBigX = (winW - imgBigW) / 2;
+        zoomCurrentPosition.left = (windowSize.width - realImgSize.width) / 2;
       }
     }
 
@@ -587,22 +603,25 @@
     var imgSlideAndZoom = {
       triggerOnTouchEnd: true,
       swipeStatus: slideStatusAndZoomOpeningPoint,
-      allowPageScroll: "vertical",
-      threshold: 90,
+      // allowPageScroll: "vertical",
+      threshold: 5, // Fake treshold: "cancel" event delegated to "end" but for long tap
       doubleTap: openZoom,
       doubleTapThreshold: 300,
       tap: function() {},
+			preventDefaultEvents: true,
     };
     
-    var maxDistance;
-    var closePoptroxTimer;
+    var maxDistance,
+		closePoptroxTimer,
+		delta = {};
     function slideStatusAndZoomOpeningPoint(event, phase, direction, distance) {
-      if ($imgs.hasClass("loading")) {
-        return false;
+      if ($imgs.hasClass("loading") || event.touches && $(event.target).is('a, h2, p')) {
+        return;
       }
 
       // detect zoom opening point and close poptrox popup on long tap
-      var evt; event.touches ? evt = event.touches[0] : evt = event;
+      var evt;
+			event.touches ? evt = event.touches[0] : evt = event;
       if (phase == "start") {
         // close poptrox popup
         event.preventDefault();
@@ -610,39 +629,38 @@
           $imgs.trigger('poptrox_close');
         }, 650);
         // zoom opening point
-        startX = evt.clientX;
-        startY = evt.clientY;
+        startingPoint = {
+					x: evt.clientX,
+					y: evt.clientY
+				}
       }
 
       // slide status
       maxDistance = ($window.width() + $imgs.width()) / 2;
+      if (phase == "move") {
+				delta.x = evt.clientX - startingPoint.x;
+				if (distance > 5) {
+					// stop long tap timer (prevent closing poptrox popup)
+					clearTimeout(closePoptroxTimer);
+				}
+				// If we are moving orizzontally for more than 5px then drag.
+				if (Math.abs(delta.x) > 5) {
+					$imgs.addClass('swipe');
+					scrollImages(delta.x - Math.sign(delta.x) * 6, 0);
+				}
 
-      if (phase == "move" && (direction == "left" || direction == "right") && distance > 5) {
-				// If we are moving before swipe and we are going L or R then drag.
-        
-        clearTimeout(closePoptroxTimer);
-        $imgs.addClass('swipe');
-
-        if (direction == "left") {
-          scrollImages(distance, 0);
-        } else if (direction == "right") {
-          scrollImages(0 - distance, 0);
-        }
-
-      } else if (phase == "end") { // on end, change image and reset
+      } else if (phase == "end" && Math.abs(delta.x) > 95) { // on end, change image and reset
+        var speed = swipeSpeed * (1 - Math.abs(delta.x) / maxDistance);
 				
-        var speed = swipeSpeed * (1 - distance / maxDistance);
-        if (direction == "right") {
-          changeImage(-1, 'kind', speed);
-        } else if (direction == "left") {
-          changeImage(1, 'kind', speed);
-        }
-        reset_swipe(speed);
+				changeImage(-Math.sign(delta.x), true, speed);
+        reset_swipe(speed + swipeSpeed);
 				
-      } else if (phase == "cancel") { // on cancel, center image and reset 
-        clearTimeout(closePoptroxTimer);
-        scrollImages(0, swipeSpeed);
-        reset_swipe(swipeSpeed / 2);
+      } else if (phase == "end" && Math.abs(delta.x) < 96) { // on end before treshold, center image and reset 
+        scrollImages(0, swipeSpeed/3);
+        reset_swipe(swipeSpeed/3);
+				
+      } else if (phase == "cancel") {
+				clearTimeout(closePoptroxTimer);
       }
       
     }
@@ -650,25 +668,25 @@
    // Manually update the position of $imgs on drag
    function scrollImages(distance, duration) {
      // Invert the number we set in the css
-     var value = (distance < 0 ? "" : "-") + Math.abs(distance).toString();
+     // var value = (distance < 0 ? "" : "-") + Math.abs(distance).toString();
      $imgs.css({
-       "transform" : "translate(" + value + "px)",
+       "transform" : "translateX(" + distance + "px)",
        "transition-duration" : (duration / 1000).toFixed(1) + "s"
      });
    }
 
-    function changeImage(sign, kind, speed) {
-      if (kind) {
+    function changeImage(sign, sliding, speed) {
+      if (sliding) {
         $main[0]._poptrox.fadeSpeed = 0;
         $main[0]._poptrox.popupSpeed = 0;
         $imgs.css({'transition-timing-function':'ease-in'});
-        scrollImages(sign * maxDistance, speed);
+        scrollImages(-sign * maxDistance, speed);
         setTimeout(function() {
           $imgs.css({'visibility':'hidden','transition-duration':'0s'});
           sign < 0 ? $imgs.trigger('poptrox_previous') : $imgs.trigger('poptrox_next');
           setTimeout(function() {
             maxDistance = ($window.width() + $imgs.width()) / 2;
-            scrollImages(-1 * sign * maxDistance, 0);
+            scrollImages(sign * maxDistance, 0);
             setTimeout(function() {
               $imgs.css({'visibility':'visible','transition-timing-function':'ease-out'});
               scrollImages(0, swipeSpeed);
@@ -699,7 +717,7 @@
         $main[0]._poptrox.fadeSpeed = fadeSpeed;
         $main[0]._poptrox.popupSpeed = popupSpeed;
         $imgs.removeClass('swipe');
-      }, 100 + 2 * time);
+      }, 100 + time);
     }
 
     // Fix style if Zenphoto admin bar is visible...
@@ -717,8 +735,6 @@
       });
 
     }
-
-})(jQuery);
 
 /*********************************************************
  *                                                       *
@@ -925,3 +941,6 @@ Remove border bottom from links with images
 */
 
 $('#page a').has('img').css('border', 'none');
+
+
+})(jQuery);

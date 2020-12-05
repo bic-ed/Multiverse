@@ -1045,6 +1045,12 @@ table.alt tfoot {
 .poptrox-popup.loading:before {
   opacity: 0;
 }
+.pic img {
+  cursor: grab;
+}
+.swipe .pic img {
+  cursor: grabbing;
+}
 
 header > #fullscreen {
 	opacity: 0.5;
