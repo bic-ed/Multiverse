@@ -842,8 +842,8 @@ $('label[for=dataconfirmation]').html(removeasterisk);
 }
 
 // Place recaptcha at the bottom
-$('#mailform .g-recaptcha').parent().appendTo($('#mailform'));
-$('#commentform .g-recaptcha').parent().css('margin-top','2em').appendTo($('#commentform'));
+$('#mailform .g-recaptcha').appendTo($('#mailform'));
+$('#commentform .g-recaptcha').css('margin-top','2em').appendTo($('#commentform'));
 
 // Hide mail subject if defined in theme options
 if (mailsubject !== "") {
