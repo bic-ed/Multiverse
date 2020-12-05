@@ -48,7 +48,7 @@ if (!defined('WEBPATH')) die();
 						<h1><?php if (in_context(ZP_ZENPAGE_NEWS_CATEGORY)) {
 							printCurrentNewsCategory();
 						} else if (is_NewsArchive()) {
-							echo gettext('news archive') . ': ';
+							echo gettext('News archive') . ': ';
 							printCurrentNewsArchive();
 						} else {
 							echo gettext('All news');
