@@ -1045,6 +1045,12 @@ table.alt tfoot {
 .poptrox-popup.loading:before {
   opacity: 0;
 }
+.pic img {
+  cursor: grab;
+}
+.swipe .pic img {
+  cursor: grabbing;
+}
 
 header > #fullscreen {
 	opacity: 0.5;
@@ -1252,7 +1258,6 @@ body.modal-active #main{
           filter: blur(8px);
 }
 #main .thumb {
-  transition: opacity 1.25s ease-in-out;
   -moz-pointer-events: auto;
   -webkit-pointer-events: auto;
   -ms-pointer-events: auto;
@@ -1349,7 +1354,6 @@ body.loading #main > h2 {
   opacity: 0;
 }
 #main .thumb {
-  transition-delay: 2.525s;
   height: calc(40vh - 2em);
   min-height: 20em;
   width: 25%;
@@ -1358,6 +1362,8 @@ body.loading #main > h2 {
 	flex-basis: 100%;
   margin: 2em 0 1.5em;
   padding: 0 0.6em;
+}
+#main > * {
   transition: opacity 1.25s ease-in-out;
   transition-delay: 2.525s;
 }
@@ -1436,7 +1442,7 @@ body.loading #main > h2 {
 }
 #page {
   padding: 1em;
-	margin: 0% 15%;
+  margin: 0% auto;
 	width: 70%;
 	font-size: 1.2em;
   transition: opacity 1.25s ease-in-out;
@@ -1582,12 +1588,14 @@ footer ul li {
 	color: #a0a0a1;
   line-height: 2.75em;
 	padding-right: 38px;
+  user-select: none;
 }
 .drop a::after {
 	font-family: FontAwesome;
 	content: "\f078";
 	position: absolute;
 	right: 15px;
+  transition: transform .7s;
 }
 .drop a:hover {
   cursor: pointer;
@@ -1598,7 +1606,7 @@ footer ul li {
   color: #fff !important;
 }
 .dropped.drop a::after {
-	content: "\f077";
+  transform: rotate(90deg);
 }
 .languageselect {
 	padding-left: 15px !important;
@@ -1733,6 +1741,7 @@ footer ul li {
 	width: 35px;
 	height: 37.5px;
 	outline-color: transparent;
+  background-color: #2c2e33;
 }
 .toggle_searchextrashow img {
 	display: none;
@@ -1744,8 +1753,7 @@ footer ul li {
 	top: -1px;
 	color: #a0a0a1;
 	padding: 0.5em 0;
-	background-color: #2c2e33;
-	transition: color .4s;
+  transition: color .4s, transform .6s;
 	width: 2.375em;
 	text-indent: 0.7em;
 	line-height: 1.65em;
@@ -1754,7 +1762,7 @@ footer ul li {
   color: #fff !important;
 }
 .toggle_searchextrashow.dropped::before {
-	content: "\f077";
+  transform: rotate(-90deg);
 }
 #search_input {
 	padding: 0 3em;
@@ -1866,8 +1874,6 @@ ul.pagelist li:first-child > * {
 ul.pagelist li.current {
 	padding: 0 10px;
 	color: #59a6d5;
-}
-ul.pagelist {
 }
 ul.pagelist .disabledlink {
 	opacity: 0.3;
@@ -1990,7 +1996,6 @@ ul.pagelist.gallery li:first-child > * {
     font-size: 11pt;
   }
   #main .thumb {
-    transition-delay: 2.075s;
     height: calc(40vh - 2em);
     min-height: 20em;
     width: 33.33333%;
@@ -1998,7 +2003,7 @@ ul.pagelist.gallery li:first-child > * {
   #main .album {
   	width: 16.66667%;
   }
-  #main > h2 {
+  #main > * {
     transition-delay: 2.075s;
   }
   #main > *:nth-child(1) {
@@ -2041,7 +2046,6 @@ ul.pagelist.gallery li:first-child > * {
     background-position: 75% 25%;
   }
   #main .thumb {
-    transition-delay: 1.625s;
     height: calc(40vh - 2em);
     min-height: 20em;
     width: 50%;
@@ -2049,7 +2053,7 @@ ul.pagelist.gallery li:first-child > * {
   #main .album {
   	width: 25%;
   }
-  #main > h2 {
+  #main > * {
     transition-delay: 1.625s;
   }
   #main > *:nth-child(1) {
@@ -2072,6 +2076,9 @@ ul.pagelist.gallery li:first-child > * {
   }
 }
 @media screen and (max-width: 980px) {
+  #page {
+    width: 80%;
+  }
   .panel>.inner.split {
     -moz-flex-direction: column;
     flex-direction: column;
@@ -2091,7 +2098,6 @@ ul.pagelist.gallery li:first-child > * {
     background-size: 4em;
   }
   #main .thumb {
-    transition-delay: 2.075s;
     height: calc(28.57143vh - 1.33333em);
     min-height: 18em;
     width: 50%;
@@ -2099,7 +2105,7 @@ ul.pagelist.gallery li:first-child > * {
   #main .album {
   	width: 33.333333%;
   }
-  #main > h2 {
+  #main > * {
     transition-delay: 2.075s;
   }
   #main > *:nth-child(1) {
@@ -2219,8 +2225,8 @@ ul.pagelist.gallery li:first-child > * {
     width: 50%;
   }
   #page {
-    margin: 0;
     width: 100%;
+    /* margin: 0; */
   }
   header > #fullscreen {
     top: 0;
@@ -2261,12 +2267,11 @@ ul.pagelist.gallery li:first-child > * {
   	margin-bottom: 1.2em;
   }
   #main .thumb {
-    transition-delay: 1.175s;
     height: calc(40vh - 2em);
     min-height: 18em;
     width: 100%;
   }
-  #main > h2 {
+  #main > * {
     transition-delay: 1.175s;
   }
   #main > *:nth-child(1) {

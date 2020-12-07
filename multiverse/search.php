@@ -52,7 +52,7 @@ if ($pag_tot > 1) {
 					}
 					$searchwords .= $searchdate;
 				}
-				if (count($_zp_current_search->fieldList) == 1 && $_zp_current_search->fieldList[0] == "tags") {
+				if (isset($_GET['searchfields']) && $_GET['searchfields'] === "tags") {
 					$searchwords = "tag = " . $searchwords;
 				}
 				?>
@@ -155,18 +155,18 @@ if ($pag_tot > 1) {
 <?php } ?>
 <?php if ($numimages) { ?>
 	<?php
-	// Spare some questions to database getting size options before the loop
+	// Get size options before the loops
 	$image_x = getThemeOption('image_size_x');
 	$image_y = getThemeOption('image_size_y');
-	$thumb_x = getThemeOption('thumb_size_x');
-	$thumb_y = 6 * $thumb_x; // dummy multiplier for height to get all thumbs of the same width
+	$thumb_x = 600;
+	$thumb_y = 10 * $thumb_x; // dummy multiplier for height to get all thumbs of the same width
 	$ii = 0;
 	while (next_image(false, $img_per_page)): ?>
 	<?php if ($ii == 0) {
 		$ii = 1;
 		if ($numalbums || $numimages > $img_per_page) {
-			$from = ($curr_pag - intval($numalbums/$alb_per_page) - 1) * $img_per_page + 1;
-			$to = min((($curr_pag - intval($numalbums/$alb_per_page)) * $img_per_page), $numimages);
+			$from = ($curr_pag - intval(($numalbums - 1)/$alb_per_page) - 1) * $img_per_page + 1;
+			$to = min(($curr_pag - intval(($numalbums - 1)/$alb_per_page)) * $img_per_page, $numimages);
 			if ($from === $to) {
 				$to = "";
 			} else {

@@ -124,8 +124,8 @@ class ThemeOptions {
 	}
 }
 
-$social_contacts = getThemeOption('social_contacts');
-$social_content = getThemeOption('social_content');
+$social_contacts = getThemeOption('social_contacts', null, 'multiverse');
+$social_content = getThemeOption('social_content', null, 'multiverse');
 ?>
 <script>
 var socialEnabled = <?php echo $social_contacts ? $social_contacts : 0; ?>,
