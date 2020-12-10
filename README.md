@@ -35,3 +35,6 @@ This theme is based on Multiverse by HTML5 UP, a program licensed under the [Cre
 To run touch events, Matt Brison’s [TouchSwipe](https://github.com/mattbryson/TouchSwipe-Jquery-Plugin) Jquery Plugin has been included. It is dual licensed under the MIT or GPL-2 licenses.
 
 Multiverse also includes [Font Awesome](https://fontawesome.com/v4.7.0/) by Dave Gandy.
+
+### Changelog
+After v1.2 a [changelog](CHANGELOG.md) updated even with still unreleased major changes has been added.

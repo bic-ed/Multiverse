@@ -6,9 +6,11 @@ $see_more_count = $has_search + $has_album_menu + (ZENPAGE_ON && ZP_NEWS_ENABLED
 $has_lang_menu = function_exists('printLanguageSelector');
 $menus_count = $see_more_count + 3 * $has_lang_menu;
 $has_contact = function_exists('printContactForm');
+$has_rss = class_exists('RSS') && (getOption('RSS_album_image') || getOption('RSS_articles'));
+$has_social = getThemeOption('social_contacts');
 
 // Positioning of the social section according to the layout
-if (getThemeOption('social_contacts')) {
+if ($has_social || $has_rss) {
   if ($menus_count > 0 && ($menus_count < 6 || $has_contact && getOption('contactform_captcha'))) {
     $social_section = 3;
   } else if ($has_contact) {
@@ -18,19 +20,45 @@ if (getThemeOption('social_contacts')) {
   }
 
   function printSocialSection() {
-    $icons = explode (",", getThemeOption("social_content"));
-    $icons = array_chunk($icons, 3);
+    global $_zp_current_album, $has_rss, $has_social;
     ?>
     <section class="social">
       <h2><?php echo gettext_th('Follow me on...'); ?></h2>
       <ul class="icons">
-        <?php foreach ($icons as $key) { ?>
-          <li>
-            <a href="<?php echo $key[0]; ?>" target="blank" class="icon <?php echo $key[1]; ?>">
-              <span class="label"><?php echo $key[2]; ?></span>
-            </a>
+        <?php if ($has_rss) { ?>
+          <li class="main-nav rss">
+            <ul class="drop rss">
+              <li>
+                <a class="icon fa-rss">
+                  <span class="label">RSS Feed</span>
+                </a>
+              </li>
+            </ul>
+            <ul>
+              <?php
+              if (!is_null($_zp_current_album)) {
+                printRSSLink('Album', '<li>', 'RSS ' . gettext('Album'), '</li>', false);
+              }
+              printRSSLink('Gallery', '<li>', 'RSS ' . gettext('Gallery'), '</li>', false);
+              if (ZP_NEWS_ENABLED) {
+                printRSSLink("News", "<li>", 'RSS ' . gettext("News"), '</li>', false);
+              }
+              ?>
+            </ul>
           </li>
-        <?php } ?>
+          <?php
+        }
+        if ($has_social) {
+          $icons = explode (",", getThemeOption("social_content"));
+          $icons = array_chunk($icons, 3);
+          foreach ($icons as $key) { ?>
+            <li>
+              <a href="<?php echo $key[0]; ?>" target="blank" class="icon <?php echo $key[1]; ?>">
+                <span class="label"><?php echo $key[2]; ?></span>
+              </a>
+            </li>
+          <?php }
+        } ?>
       </ul>
     </section>
     <?php

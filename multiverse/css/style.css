@@ -1622,6 +1622,38 @@ footer ul li {
 }
 
 
+/* RSS */
+
+.icons {
+  display: flex;
+  margin-bottom: 1.5em;
+  flex-wrap: wrap;
+}
+.icons > li {
+	margin-bottom: 0.5em;
+}
+.main-nav.rss {
+	margin-top: 0;
+  width: 5em;
+}
+.main-nav.rss ul:last-child {
+  margin-bottom: 0;
+  max-width: calc(100vw - 4em);
+  width: 25em;
+}
+.main-nav.rss a.fa-rss {
+  padding: 0 0 0 .7em;
+  /* box-shadow: inset 0px 0px 0px 1px #505051; */
+}
+.main-nav.rss a::after {
+  right: unset;
+  margin-left: .7em;
+}
+.social {
+  overflow-x: hidden;
+}
+
+
 /* Zenphoto menu */
 
 .main-nav form {

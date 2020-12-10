@@ -1,4 +1,8 @@
 # Changelog
+## [Unreleased]
+### Added
+* RSS feed links in footer for Gallery, Album and News
+
 ## [v1.2] - 2020-12-07
 ### Changed
 * Redesigned sliding navigation for poptrox pupup
@@ -30,9 +34,10 @@
 ### Fixed
 * Image page redirection ([acrylian])
 * Proper RSS header link in `gallery.php` ([fretzl])
-* Removed from theme options unnecessary request for `functions.php` ([fretzl]))
+* Removed from theme options unnecessary request for `functions.php` ([fretzl])
 
-[v2.0]: https://github.com/bic-ed/Multiverse/compare/1.2...2.0
+<!-- [v2.0]: https://github.com/bic-ed/Multiverse/compare/1.2...2.0 -->
+[Unreleased]: https://github.com/bic-ed/Multiverse/compare/1.2...master
 [v1.2]: https://github.com/bic-ed/Multiverse/compare/1.1...1.2
 [v1.1]: https://github.com/bic-ed/Multiverse/compare/1.0...1.1
 
