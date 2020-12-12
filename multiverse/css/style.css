@@ -314,7 +314,7 @@ input[type="reset"]:hover:active,
 input[type="button"]:hover:active,
 button:hover:active,
 .button:hover:active {
-  background-color: rgba(52, 165, 142, 0.15);
+  background-color: rgba(89, 166, 213, 0.15);
   color: #59a6d5 !important;
 }
 input[type="submit"].icon,

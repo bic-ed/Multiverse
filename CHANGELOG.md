@@ -3,6 +3,9 @@
 ### Added
 * RSS feed links in footer for Gallery, Album and News
 
+### Fixed
+* Background color for active buttons updated to the proper new color palette from the original Multiverse old one
+
 ## [v1.2] - 2020-12-07
 ### Changed
 * Redesigned sliding navigation for poptrox pupup
