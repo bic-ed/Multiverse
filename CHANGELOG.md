@@ -4,6 +4,7 @@
 * RSS feed links in footer for Gallery, Album and News
 
 ### Fixed
+* Placed the h2 titles for images and albums sections as first children of the `#main` flex container in search results page, where they were supposed to be to break flex rows
 * Background color for active buttons updated to the proper new color palette from the original Multiverse old one
 
 ## [v1.2] - 2020-12-07

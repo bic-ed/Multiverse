@@ -127,6 +127,7 @@ if ($pag_tot > 1) {
 		?>
 	</article>
 	<?php if ($numalbums) {
+		$from = $to = '';
 		$ii = 0;
 		$first_album = getThemeOption('albums_per_page');
 		while (next_album()): ?>
@@ -140,11 +141,10 @@ if ($pag_tot > 1) {
 				} else {
 					$from .= ' - ';
 				}
-				?>
-				<h2><?php echo ngettext_th('album', 'albums', $numalbums) . ' ' . $from . $to; ?></h2>	
-				<?php  
 			}
-		} ?>
+			?>
+			<h2><?php echo ngettext_th('album', 'albums', $numalbums) . ' ' . $from . $to; ?></h2>	
+		<?php } ?>
 		<div class="album thumb">
 			<a href="<?php echo html_encode(getAlbumURL()); ?>" title="<?php echo gettext('View album:'); ?> <?php printAnnotatedAlbumTitle(); ?>"><?php printCustomAlbumThumbImage(getBareAlbumTitle(), NULL, 300, 200, 300, 200); ?></a>
 			<h3><a href="<?php echo html_encode(getAlbumURL()); ?>" title="<?php echo gettext('View album:'); ?> <?php printAnnotatedAlbumTitle(); ?>"><?php printAlbumTitle(); ?></a></h3>
@@ -153,13 +153,13 @@ if ($pag_tot > 1) {
 		</div>
 	<?php endwhile; ?>
 <?php } ?>
-<?php if ($numimages) { ?>
-	<?php
+<?php if ($numimages) {
 	// Get size options before the loops
 	$image_x = getThemeOption('image_size_x');
 	$image_y = getThemeOption('image_size_y');
 	$thumb_x = 600;
 	$thumb_y = 10 * $thumb_x; // dummy multiplier for height to get all thumbs of the same width
+	$from = $to = '';
 	$ii = 0;
 	while (next_image(false, $img_per_page)): ?>
 	<?php if ($ii == 0) {
@@ -172,11 +172,10 @@ if ($pag_tot > 1) {
 			} else {
 				$from .= ' - ';
 			}
-			?>
-			<h2><?php echo ngettext_th('image', 'images', $numimages) . ' ' . $from . $to; ?></h2>	
-			<?php  
 		}
-	} ?>
+		?>
+		<h2><?php echo ngettext_th('image', 'images', $numimages) . ' ' . $from . $to; ?></h2>	
+	<?php	} ?>
 	<div class="thumb">
 		<a class="image" href='<?php echo getCustomSizedImageMaxSpace($image_x, $image_y); ?>' title="<?php printBareImageTitle(); ?>">
 			<?php printCustomSizedImageThumbMaxSpace(getBareImageTitle(), $thumb_x, $thumb_y); ?>
