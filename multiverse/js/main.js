@@ -801,18 +801,28 @@ $('a.toggle_searchextrashow')
   $(this).add('#searchextrashow').toggleClass('dropped');
 });
 
-// Search text as placeholder
-$('#search_input').prop('placeholder', search_placeholder);
-
 // Prepare for using FontAwesome checkbox
 $('#searchextrashow label').each(function() {
   $(this).prop('for', $(this).children().attr('id'));
   $(this).before($(this).children());
 });
-$('#search_submit').val('\uf002');
 
-// Search string required
-$('#search_input').prop('required', 'required');
+// Search input
+$('#search_input')
+// Required, Search text as placeholder
+.prop({'required': 'required', 'placeholder': search_placeholder})
+// Disable autocomplete on focus
+.on('focus', function() {
+	$(this).prop('autocomplete', 'off');
+})
+.on('keydown', function() {
+	var attr = $(this).attr('autocomplete');
+	// Re-enable autocomplete on keydown, unless tag suggest plugin is enabled (next is span)
+	// [not working in Firefox]
+	if (attr === 'off' && !$(this).next().is('span')) {
+		$(this).removeAttr('autocomplete');
+	}
+});
 
 // close all menus by clicking outside them too
 $('footer').on('click', function(e) {
@@ -867,7 +877,7 @@ if (mailsubject !== "") {
 }
 
 // Layout
-$('#commentform br').remove();
+$('#commentcontent br').remove();
 $('#mailform').prev().hide();
 $('#mailform label, #commentform label').not("[for=dataconfirmation], [for=comment_dataconfirmation]").hide();
 $('label[for=dataconfirmation]').before($('label[for=dataconfirmation] input'));

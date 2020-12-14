@@ -3,6 +3,13 @@
 ### Added
 * RSS feed links in footer for Gallery, Album and News
 
+### Changed
+* Restyling of search bar and search options menu
+  * Added a coloured frame on focus to search input field, like the one already present in every other input field
+  * Harmonized search options menu (`searchexstrashow`) appearance and animation with all other menus
+  * Styled _Tag suggest_ plugin elements
+  * Preventing autofill of search input field on focus, allowing it only after the first interaction (unless the above plugin is active)
+
 ### Fixed
 * Placed the h2 titles for images and albums sections as first children of the `#main` flex container in search results page, where they were supposed to be to break flex rows
 * Background color for active buttons updated to the proper new color palette from the original Multiverse old one
