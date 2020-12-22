@@ -4,6 +4,7 @@
 * RSS feed links in footer for Gallery, Album and News
 
 ### Changed
+* Updated Raleway fonts to v18 and filled `src: local()` in @font-face
 * Restyling of search bar and search options menu
   * Added a coloured frame on focus to search input field, like the one already present in every other input field
   * Harmonized search options menu (`searchexstrashow`) appearance and animation with all other menus
