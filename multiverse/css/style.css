@@ -827,6 +827,7 @@ table.alt tfoot {
   z-index: 10001;
 }
 .panel.active {
+  box-shadow: 0 0 .68em 0 rgba(0,0,0,0.45);
   transform: translateY(1px);
 }
 .panel>.inner {
@@ -2282,8 +2283,10 @@ ul.pagelist.gallery li:first-child > * {
     max-width: calc(50% - 1.5em);
     margin-top: 1.78em;
   }
-  header nav > ul > li a {
+  header nav > ul {
     font-size: 0.9em;
+  }
+  header nav > ul > li a {
     padding: 0 1.15em;
   }
   #main .album {

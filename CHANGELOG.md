@@ -1,6 +1,7 @@
 # Changelog
 ## [Unreleased]
 ### Added
+* A light shadow on info panel when active, to better separate it from the main content background
 * RSS feed links in footer for Gallery, Album and News
 
 ### Changed
@@ -12,6 +13,7 @@
   * Preventing autofill of search input field on focus, allowing it only after the first interaction (unless the above plugin is active)
 
 ### Fixed
+* Info button was slightly exceeding header height on small screens
 * Placed the h2 titles for images and albums sections as first children of the `#main` flex container in search results page, where they were supposed to be to break flex rows
 * Background color for active buttons updated to the proper new color palette from the original Multiverse old one
 
