@@ -34,6 +34,13 @@
     		if (browser.name == 'ie')
     			$body.addClass('ie');
     
+      // Define Math.sign if not supported
+        if (!Math.sign) {
+          Math.sign = function(x) {
+            return ((x > 0) - (x < 0)) || + x;
+          }
+        }
+
     	// Touch?
     		if (browser.mobile)
     			$body.addClass('touch');

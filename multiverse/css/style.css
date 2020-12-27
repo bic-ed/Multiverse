@@ -501,8 +501,8 @@ input[type="checkbox"]:focus + label[for="comment_dataconfirmation"]::before {
     display: none;
 }
 #logonstep_challenge_js {
-    white-space: unset;
-    height: unset;
+    white-space: normal;
+    height: auto;
     width: 100%;
 }
 #logon_box fieldset > input {
@@ -1430,8 +1430,8 @@ body.loading #main > h2 {
 	padding: 0 0.6em;
 }
 .album.thumb {
-  min-height: unset !important;
-  height: unset !important;
+  min-height: none !important;
+  height: auto !important;
 }
 #main .album {
 	width: 12.5%;
@@ -1645,7 +1645,7 @@ footer ul li {
   padding: 0 0 0 .7em;
 }
 .main-nav.rss a::after {
-  right: unset;
+  right: auto;
   margin-left: .7em;
 }
 .fa-rss::before {
@@ -1665,11 +1665,11 @@ footer ul li {
 	cursor: pointer;
   background-color: #414141;
 	height: 30px;
-	letter-spacing: unset;
-	text-transform: unset;
+  letter-spacing: normal;
+	text-transform: none;
 	font-weight: normal;
-	box-shadow: unset;
-  color: unset !important;
+	box-shadow: none;
+  color: inherit !important;
   width: auto;
 }
 #zp__admin_link:hover {
@@ -2039,8 +2039,8 @@ div.pagelist {
 }
 ul.pagelist.gallery {
 	text-align: center;
-	margin: unset;
-	line-height: unset;
+	margin: 0;
+	line-height: normal;
 }
 ul.pagelist.gallery li:first-child > * {
 	padding-left: 10px;
@@ -2235,7 +2235,7 @@ ul.pagelist.gallery li:first-child > * {
     	margin-top: 0;
     }
     #passwordform {
-    	max-width: unset;
+    	max-width: none;
     }
     label[for="dataconfirmation"],
     label[for="comment_dataconfirmation"] {
@@ -2296,8 +2296,6 @@ ul.pagelist.gallery li:first-child > * {
     width: 100%;
   }
   header > #fullscreen {
-    top: 0;
-    bottom: unset;
     opacity: .5;
     background-size: 2.6em;
   }
