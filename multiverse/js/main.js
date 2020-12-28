@@ -402,7 +402,7 @@
     function preload() {
       var tmp = [new Image, new Image, new Image];
       tmp[0].src = imgLinks[currentIndex];
-      $(tmp[0]).load(function() {
+      $(tmp[0]).on('load', function() {
         // prevent keybord navigation messing up currentIndex
         setTimeout(function() {
           once = 0;
@@ -414,7 +414,7 @@
           tmp[1].src = imgLinks[0];
         }
       });
-      $(tmp[1]).load(function() {
+      $(tmp[1]).on('load', function() {
         // load prev image
         if (currentIndex > 0) {
           tmp[2].src = imgLinks[currentIndex - 1];

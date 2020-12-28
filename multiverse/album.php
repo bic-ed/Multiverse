@@ -84,7 +84,7 @@ if (!defined('WEBPATH')) die();
 	if (isset($_GET['title'])) {
 		$title = sanitize($_GET['title']); ?>
 		<script>
-		$(window).load(function(){
+		$(window).on('load', function(){
 			$('a.image, a.icon').css("pointer-events", "none");
 			var title = "<?php echo js_encode($title); ?>",
 			$image = $('a.image[title="' + title + '"]');
