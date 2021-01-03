@@ -824,7 +824,7 @@ table.alt tfoot {
   overflow-y: auto;
   position: fixed;
   width: 100%;
-  z-index: 10001;
+  z-index: 9991;
 }
 .panel.active {
   box-shadow: 0 0 .68em 0 rgba(0,0,0,0.45);
@@ -1110,7 +1110,7 @@ body.modal-active #wrapper:after {
   pointer-events: auto;
   opacity: 1;
   visibility: visible;
-  z-index: 10003;
+  z-index: 9993;
 }
 body.modal-active {
   padding: 0;
@@ -1182,7 +1182,7 @@ header {
   position: fixed;
   user-select: none;
   width: 100%;
-  z-index: 10002;
+  z-index: 9992;
 }
 body.modal-active header,
 body.loading header {

@@ -5,6 +5,7 @@
 * RSS feed links in footer for Gallery, Album and News
 
 ### Changed
+* Show the `cookieconsent` banner above the header
 * Updated Raleway fonts to v18 and filled `src: local()` in @font-face
 * Restyling of search bar and search options menu
   * Added a coloured frame on focus to search input field, like the one already present in every other input field
