@@ -1,53 +1,31 @@
 <?php
-$social_section = 0;
+$follow_section = 0;
 $has_search = getThemeOption('search');
 $has_album_menu = function_exists('printAlbumMenu');
 $see_more_count = $has_search + $has_album_menu + (ZENPAGE_ON && ZP_NEWS_ENABLED) + (ZENPAGE_ON && ZP_PAGES_ENABLED);
 $has_lang_menu = function_exists('printLanguageSelector');
 $menus_count = $see_more_count + 3 * $has_lang_menu;
 $has_contact = function_exists('printContactForm');
-$has_rss = class_exists('RSS') && (getOption('RSS_album_image') || getOption('RSS_articles'));
 $has_social = getThemeOption('social_contacts');
 
 // Positioning of the social section according to the layout
-if ($has_social || $has_rss) {
+// $rss_links_enabled is defined in functions.php
+if ($has_social || $rss_links_enabled) {
   if ($menus_count > 0 && ($menus_count < 6 || $has_contact && getOption('contactform_captcha'))) {
-    $social_section = 3;
+    $follow_section = 3;
   } else if ($has_contact) {
-    $social_section = 2;
+    $follow_section = 2;
   } else {
-    $social_section = 1;
+    $follow_section = 1;
   }
 
-  function printSocialSection() {
-    global $_zp_current_album, $has_rss, $has_social;
+  function printFollowSection() {
+    global $has_social;
     ?>
     <section class="social">
       <h2><?php echo gettext_th('Follow me on...'); ?></h2>
       <ul class="icons">
-        <?php if ($has_rss) { ?>
-          <li class="main-nav rss">
-            <ul class="drop rss">
-              <li>
-                <a class="icon fa-rss">
-                  <span class="label">RSS Feed</span>
-                </a>
-              </li>
-            </ul>
-            <ul>
-              <?php
-              if (!is_null($_zp_current_album)) {
-                printRSSLink('Album', '<li>', 'RSS ' . gettext('Album'), '</li>', false);
-              }
-              printRSSLink('Gallery', '<li>', 'RSS ' . gettext('Gallery'), '</li>', false);
-              if (ZP_NEWS_ENABLED) {
-                printRSSLink("News", "<li>", 'RSS ' . gettext("News"), '</li>', false);
-              }
-              ?>
-            </ul>
-          </li>
-          <?php
-        }
+        <?php printFooterRSS(); // RSS links as defined in functions.php
         if ($has_social) {
           $icons = explode (",", getThemeOption("social_content"));
           $icons = array_chunk($icons, 3);
@@ -78,9 +56,7 @@ if ($has_social || $has_rss) {
           <?php printGalleryDesc(); ?>
         <?php } ?>
       </section>
-      <?php if ($social_section == 1) {  ?>
-        <?php printSocialSection(); ?>
-      <?php } ?>
+      <?php if ($follow_section == 1) printFollowSection(); ?>
       <section class="copyright">
         <p>
           <?php if ($copy_text = getOption('copyrigth_text')) { ?>
@@ -108,9 +84,7 @@ if ($has_social || $has_rss) {
           <?php printContactForm($mailsubject); ?>
           <div id="form-result"></div>
         </section>
-        <?php if ($social_section == 2) {  ?>
-          <?php printSocialSection(); ?>
-        <?php } ?>
+        <?php if ($follow_section == 2) printFollowSection(); ?>
       </div>
     <?php } ?>
     <?php if ($menus_count) { ?>
@@ -175,9 +149,7 @@ if ($has_social || $has_rss) {
             </nav>
           </section>
         <?php } ?>
-        <?php if ($social_section == 3) {  ?>
-          <?php printSocialSection(); ?>
-        <?php } ?>
+        <?php if ($follow_section == 3) printFollowSection(); ?>
       </div>
     <?php } ?>
   </div>

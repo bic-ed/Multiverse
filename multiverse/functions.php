@@ -183,4 +183,52 @@ contact = "<?php echo WEBPATH . '/themes/multiverse/ajax/contact.php' ?>",
 mail_sent = '<span>' + '<?php echo get_language_string(getOption("contactform_thankstext")); ?>' + '</span>';
 </script>
 <script src="<?php echo $_zp_themeroot; ?>/js/merged/multi.js"></script>
-<?php } ?>
+<?php }
+
+/**
+ * Detects if there is at least one link to print
+ * for the next function printFooterRSS()
+ * @var boolean
+ */
+$rss_links_enabled = false;
+if (class_exists('RSS')) {
+  // Get needed (here and later) RSS options once for all
+  $_rss_gallery = getOption('RSS_album_image');
+  $_rss_news = getOption('RSS_articles') && ZENPAGE_ON && ZP_NEWS_ENABLED;
+  // Find out if there is any link to print
+  $rss_links_enabled = true;
+  $rss_links_enabled &= $_rss_gallery || $_rss_news;
+}
+/**
+ * Prints RSS links in footer
+ * @author bic-ed
+ */
+function printFooterRSS() {
+  global $_zp_current_album, $rss_links_enabled, $_rss_gallery, $_rss_news;
+  if ($rss_links_enabled) { ?>
+    <li class="main-nav rss">
+      <ul class="drop rss">
+        <li>
+          <a class="icon fa-rss">
+            <span class="label">RSS Feed</span>
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <?php
+        if ($_rss_news) {
+          printRSSLink("News", "<li>", gettext("News"), '</li>', false);
+        }
+        if ($_rss_gallery) {
+          printRSSLink('Gallery', '<li>', gettext('Gallery'), '</li>', false);
+          if (!is_null($_zp_current_album)) {
+            printRSSLink('Album', '<li>', gettext('Album'), '</li>', false);
+          }
+        }
+        ?>
+      </ul>
+    </li>
+    <?php
+  }
+  return;
+}
