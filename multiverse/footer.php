@@ -128,7 +128,7 @@ if ($has_social || $rss_links_enabled) {
                       </a>
                     </li>
                   </ul>
-                  <?php printAllNewsCategories(isset($ishome_news) ? '' : 'All news', $counter = false, $css_id = 'news_menu', $css_class_topactive = 'active-item', $startlist = true, $css_class = 'subalbum', $css_class_active = 'active-item', $option = 'list', $showsubs = false, $limit = NULL); ?>
+                  <?php printNestedMenu('list', 'categories', false, 'news_menu', 'active-item', 'subalbum', 'active-item', gettext('All news')); ?>
                 </nav>
               <?php }?>
             <?php } ?>

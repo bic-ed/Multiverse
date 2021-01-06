@@ -5,6 +5,7 @@
 * RSS feed links in footer for Gallery, Album and News
 
 ### Changed
+* Subcategories, if any, are now shown in News menu when the parent category is the current page
 * Show the `cookieconsent` banner above the header
 * Updated Raleway fonts to v18 and filled `src: local()` in @font-face
 * Restyling of search bar and search options menu
@@ -14,6 +15,7 @@
   * Preventing autofill of search input field on focus, allowing it only after the first interaction (unless the above plugin is active)
 
 ### Fixed
+* Missing translation for `All news` link in News menu
 * Typo preventing line breaks in comments
 * Sliding navigation extended to browsers not supporting `Math.sign`
 * Info button was slightly exceeding header height on small screens
