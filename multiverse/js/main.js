@@ -1,27 +1,25 @@
 /*
-Multiverse by HTML5 UP
-html5up.net | @ajlkn
-Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
-
-/*
-New features and optimization for Zenphoto by bic-ed | www.antonioranesi.it | GPL-2.0 License
-• Fullscreen
-• Slide show
-• Touch swipe on the popup for navigation to previous & next image
-• Preload of two images (prev & next) for the popup
-• Zoom on double tap (or double click) and pan image
-• Zenphoto DOM manipulation
-• Zenphoto ajax contact form
-*/
+ * Multiverse by HTML5 UP
+ * html5up.net | @ajlkn
+ * Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+ *
+ * New features and optimization for Zenphoto by bic-ed | www.antonioranesi.it | GPL-2.0 License
+ * • Fullscreen
+ * • Slide show
+ * • Touch swipe on the popup for navigation to previous & next image
+ * • Preload of two images (prev & next) for the popup
+ * • Zoom on double tap (or double click) and pan image
+ * • Zenphoto DOM manipulation
+ * • Zenphoto ajax contact form
+ */
 
 (function($) {
 
-    var	$window = $(window),
-      $body = $('body'),
-      $wrapper = $('#wrapper');
+  var $window = $(window),
+  $body = $('body'),
+  $wrapper = $('#wrapper');
 
-// Breakpoints.
+  // Breakpoints.
   breakpoints({
     xlarge:  [ '1281px',  '1680px' ],
     large:   [ '981px',   '1280px' ],
@@ -30,23 +28,23 @@ New features and optimization for Zenphoto by bic-ed | www.antonioranesi.it | GP
     xsmall:  [ null,      '480px'  ]
   });
 
-// Hack: Enable IE workarounds.
-      if (browser.name == 'ie')
-        $body.addClass('ie');
+  // Hack: Enable IE workarounds.
+  if (browser.name == 'ie')
+  $body.addClass('ie');
 
-      // Define Math.sign if not supported
-      if (!Math.sign) {
-        Math.sign = function(x) {
-            return ((x > 0) - (x < 0)) || + x;
-          }
-      }
+  // Define Math.sign if not supported
+  if (!Math.sign) {
+    Math.sign = function(x) {
+      return ((x > 0) - (x < 0)) || + x;
+    }
+  }
 
-    // Touch?
-      if (browser.mobile)
-        $body.addClass('touch');
+  // Touch?
+  if (browser.mobile)
+  $body.addClass('touch');
 
-    // Transitions supported?
-      if (browser.canUse('transition')) {
+  // Transitions supported?
+  if (browser.canUse('transition')) {
 
     // On load remove "loading" class.
 
@@ -74,7 +72,7 @@ New features and optimization for Zenphoto by bic-ed | www.antonioranesi.it | GP
   }
 
   // Scroll back to top.
-  // 	$window.scrollTop(0);
+  //  $window.scrollTop(0);
 
   // Fix: Placeholder polyfill.
   $('form').placeholder();
@@ -83,95 +81,95 @@ New features and optimization for Zenphoto by bic-ed | www.antonioranesi.it | GP
   var $panels = $('.panel');
 
 
-      $toggle = $('header > nav a'),
-      $closer = $('<span class="closer" />').appendTo($panels);
+  $toggle = $('header > nav a'),
+  $closer = $('<span class="closer" />').appendTo($panels);
 
-    // Closer.
-    $closer
-      .on('click', function(event) {
-        $panels.trigger('---hide');
-      });
+  // Closer.
+  $closer
+  .on('click', function(event) {
+    $panels.trigger('---hide');
+  });
 
-    // Events.
-    $panels
-      .on('click', function(event) {
-        event.stopPropagation();
-      })
-      .on('---toggle', function() {
+  // Events.
+  $panels
+  .on('click', function(event) {
+    event.stopPropagation();
+  })
+  .on('---toggle', function() {
 
-        if ($panels.hasClass('active'))
-          $panels.triggerHandler('---hide');
-        else
-          $panels.triggerHandler('---show');
+    if ($panels.hasClass('active'))
+    $panels.triggerHandler('---hide');
+    else
+    $panels.triggerHandler('---show');
 
-      })
-      .on('---show', function() {
+  })
+  .on('---show', function() {
 
-        // Hide other content.
-        if ($body.hasClass('content-active'))
-          $panels.trigger('---hide');
+    // Hide other content.
+    if ($body.hasClass('content-active'))
+    $panels.trigger('---hide');
 
-        // Activate content & toggle.
-        $panels.addClass('active');
-        $toggle.addClass('active');
+    // Activate content & toggle.
+    $panels.addClass('active');
+    $toggle.addClass('active');
 
-        // Activate body.
-        $body.addClass('content-active');
+    // Activate body.
+    $body.addClass('content-active');
 
-      })
-      .on('---hide', function() {
+  })
+  .on('---hide', function() {
 
-        // Deactivate content & toggle.
-        $panels.removeClass('active');
-        $toggle.removeClass('active');
+    // Deactivate content & toggle.
+    $panels.removeClass('active');
+    $toggle.removeClass('active');
 
-        // Deactivate body.
-        $body.removeClass('content-active');
+    // Deactivate body.
+    $body.removeClass('content-active');
 
-      });
+  });
 
-    // Toggle.
-    $toggle
-      .removeAttr('href')
-      .css('cursor', 'pointer')
-      .on('click', function(event) {
+  // Toggle.
+  $toggle
+  .removeAttr('href')
+  .css('cursor', 'pointer')
+  .on('click', function(event) {
 
-        event.preventDefault();
-        event.stopPropagation();
+    event.preventDefault();
+    event.stopPropagation();
 
-        $panels.trigger('---toggle');
+    $panels.trigger('---toggle');
 
-      });
+  });
 
 
   // Global events.
   $body
-    .on('click', function(event) {
+  .on('click', function(event) {
 
-      // disable closing panels for Zenphoto admin and fullscreen buttons (bic-ed)
-      if ($body.hasClass('content-active') && !$(event.target).is('#zp__admin_link, #zp__admin_data a, #fullscreen')) {
+    // disable closing panels for Zenphoto admin and fullscreen buttons (bic-ed)
+    if ($body.hasClass('content-active') && !$(event.target).is('#zp__admin_link, #zp__admin_data a, #fullscreen')) {
 
-        event.preventDefault();
-        event.stopPropagation();
+      event.preventDefault();
+      event.stopPropagation();
 
-        $panels.trigger('---hide');
+      $panels.trigger('---hide');
 
-      }
+    }
 
-    });
+  });
 
   $window
-    .on('keyup', function(event) {
+  .on('keyup', function(event) {
 
-      if (event.keyCode == 27 && $body.hasClass('content-active')) {
-        event.preventDefault();
-        event.stopPropagation();
+    if (event.keyCode == 27 && $body.hasClass('content-active')) {
+      event.preventDefault();
+      event.stopPropagation();
 
-        $panels.trigger('---hide');
+      $panels.trigger('---hide');
 
-      }
+    }
 
-    });
+  });
 
   // Header.
   var $header = $('header');
@@ -180,44 +178,44 @@ New features and optimization for Zenphoto by bic-ed | www.antonioranesi.it | GP
   $header.find('a').each(function() {
 
     var $this = $(this),
-      href = $this.attr('href');
+    href = $this.attr('href');
 
     // Internal link? Skip.
     if (!href || href.charAt(0) == '#')
-      return;
+    return;
 
     // Redirect on click.
     $this
-      .removeAttr('href')
-      .css('cursor', 'pointer')
-      .on('click', function(event) {
+    .removeAttr('href')
+    .css('cursor', 'pointer')
+    .on('click', function(event) {
 
-        event.preventDefault();
-        event.stopPropagation();
+      event.preventDefault();
+      event.stopPropagation();
 
-        window.location.href = href;
+      window.location.href = href;
 
-      });
+    });
 
   });
 
   // Footer.
 
   /*
-   Move menus, social & copyright when the "medium" breakpoint activates (bic-ed)
-   */
+  Move menus, social & copyright when the "medium" breakpoint activates (bic-ed)
+  */
 
   var $social_placeolder = $('.social').prev();
   breakpoints.on('<=medium', function() {
-      $('.menu_group').insertAfter($('.inner.split').children().first());
-      $('.social').appendTo($('.inner.split').children().last());
-      $('.copyright').appendTo($('.inner.split').children().last());
-    });
+    $('.menu_group').insertAfter($('.inner.split').children().first());
+    $('.social').appendTo($('.inner.split').children().last());
+    $('.copyright').appendTo($('.inner.split').children().last());
+  });
   breakpoints.on('>medium', function() {
-      $('.menu_group').appendTo($('.inner.split'));
-      $('.social').insertAfter($social_placeolder);
-      $('.copyright').appendTo($('.inner.split').children().first());
-    });
+    $('.menu_group').appendTo($('.inner.split'));
+    $('.social').insertAfter($social_placeolder);
+    $('.copyright').appendTo($('.inner.split').children().first());
+  });
 
   // Main.
   var $main = $('#main');
@@ -225,13 +223,13 @@ New features and optimization for Zenphoto by bic-ed | www.antonioranesi.it | GP
   // Thumbs.
   $main.children('.thumb').each(function() {
 
-    var	$this = $(this),
-      $image = $this.find('.image'), $image_img = $image.children('img'),
-      x;
+    var $this = $(this),
+    $image = $this.find('.image'), $image_img = $image.children('img'),
+    x;
 
     // No image? Bail.
     if ($image.length == 0)
-      return;
+    return;
 
     // Image.
     // This sets the background of the "image" <span> to the image pointed to by its child
@@ -242,7 +240,7 @@ New features and optimization for Zenphoto by bic-ed | www.antonioranesi.it | GP
 
     // Set background position.
     if (x = $image_img.data('position'))
-      $image.css('background-position', x);
+    $image.css('background-position', x);
 
     // Hide original img.
     $image_img.hide();
@@ -256,21 +254,21 @@ New features and optimization for Zenphoto by bic-ed | www.antonioranesi.it | GP
   */
 
   var currentIndex = 0,
-    selector = '.thumb > a.image',
-    imgLinks = new Array();
+  selector = '.thumb > a.image',
+  imgLinks = new Array();
   $(selector).each(function() {
     imgLinks.push($(this).attr('href'));
   });
 
   // Swipe - Set some options for poptrox-popup as variables to change them later (bic-ed)
   var fadeSpeed = 200,
-    popupSpeed = 200;
+  popupSpeed = 200;
 
   // Define $imgs outside onPopupOpen function to use it in other functios too (bic-ed)
   var $imgs = "",
 
   // Define once as a variable that will be used to avoid currentIndex mess up on keyboard navigation and more (bic-ed)
-    once = 0;
+  once = 0;
 
   // Poptrox.
   $main.poptrox({
@@ -326,34 +324,34 @@ New features and optimization for Zenphoto by bic-ed | www.antonioranesi.it | GP
   Keyboard navigation adapted for slideshow and changeImage function. (bic-ed)
   NOTE: Assinging true parameter to changeImage can be used to slide images instead of fade and warp them.
   Add a theme option for this?
-   */
+  */
 
   $window.keyup(function(e) {
-      if ($imgs.length && !$('#zoom').length) {
-        switch (e.keyCode) {
+    if ($imgs.length && !$('#zoom').length) {
+      switch (e.keyCode) {
 
-          case 37:
-          if (once) {
-            return false;
-          }
-          once = 1;
-          changeImage(-1);
-          break;
-
-          case 39:
-          if (once) {
-            return false;
-          }
-          once = 1;
-          changeImage(1);
-          break;
-
-          case 32:
-          slide();
-          break;
+        case 37:
+        if (once) {
+          return false;
         }
+        once = 1;
+        changeImage(-1);
+        break;
+
+        case 39:
+        if (once) {
+          return false;
+        }
+        once = 1;
+        changeImage(1);
+        break;
+
+        case 32:
+        slide();
+        break;
       }
-    });
+    }
+  });
 
 
   /*
@@ -463,7 +461,7 @@ New features and optimization for Zenphoto by bic-ed | www.antonioranesi.it | GP
 
   /*
   Zoom & Pan (bic-ed)
- */
+  */
 
   var panOrCloseZoom = {
     swipeStatus: panZoom,
@@ -503,8 +501,8 @@ New features and optimization for Zenphoto by bic-ed | www.antonioranesi.it | GP
 
   }
 
-  var popImgSize, realImgSize, zoomStartPosition,	zoomCurrentPosition,
-    windowSize,	$zoomedImg, zoomSpeed = 300;
+  var popImgSize, realImgSize, zoomStartPosition, zoomCurrentPosition,
+  windowSize, $zoomedImg, zoomSpeed = 300;
 
   function openZoom(event, target) {
     // IDEA: add a theme option to open real full size image via ajax instead
@@ -674,15 +672,15 @@ New features and optimization for Zenphoto by bic-ed | www.antonioranesi.it | GP
 
   }
 
- // Manually update the position of $imgs on drag
- function scrollImages(distance, duration) {
-   // Invert the number we set in the css
-   // var value = (distance < 0 ? "" : "-") + Math.abs(distance).toString();
-   $imgs.css({
-     "transform" : "translateX(" + distance + "px)",
-     "transition-duration" : (duration / 1000).toFixed(1) + "s"
-   });
- }
+  // Manually update the position of $imgs on drag
+  function scrollImages(distance, duration) {
+    // Invert the number we set in the css
+    // var value = (distance < 0 ? "" : "-") + Math.abs(distance).toString();
+    $imgs.css({
+      "transform" : "translateX(" + distance + "px)",
+      "transition-duration" : (duration / 1000).toFixed(1) + "s"
+    });
+  }
 
   function changeImage(sign, sliding, speed) {
     if (sliding) {
@@ -709,7 +707,7 @@ New features and optimization for Zenphoto by bic-ed | www.antonioranesi.it | GP
     /*
     Preload (3/3)
     Get prev & next index [recursive] (bic-ed)
-     */
+    */
 
     currentIndex += 1 * sign;
     if (currentIndex < 0) {
@@ -746,225 +744,225 @@ New features and optimization for Zenphoto by bic-ed | www.antonioranesi.it | GP
 
   }
 
-/*********************************************************
-*                                                       *
-* Below this line, Zenphoto specific code only (bic-ed) *
-*                                                       *
-*********************************************************/
+  /*********************************************************
+  *                                                       *
+  * Below this line, Zenphoto specific code only (bic-ed) *
+  *                                                       *
+  *********************************************************/
 
 
-/*
-Language menu (flags)
-*/
+  /*
+  Language menu (flags)
+  */
 
-// Conform language menu style to album menu style
-$('.flags .currentLanguage img').wrap('<a />');
-$('.flags img').each(function() {
-$(this).replaceWith($(this).attr('alt'));
-});
-$('.flags').prev().find('a').text($('.currentLanguage a').text());
-$('.flags').removeClass('flags');
-$('.currentLanguage a').addClass('active-item');
-$('.currentLanguage').removeClass('currentLanguage');
-
-
-/*
-Album, page and news menu
-*/
-
-// Conform news menu style to album menu style
-if (!$('#news_menu .active-item a').length > 0 ) {
-$('#news_menu .active-item').not('a').removeClass('active-item').contents().wrap('<a class="active-item"></a>');
-}
-
-// Add active-item class if we are on news loop or gallery loop
-if (typeof isNewsLoop == 'number') {
-$('#news_menu > li:first-child > a').addClass('active-item');
-}
-if (typeof isGalleryLoop == 'number') {
-$('#album_menu > li:first-child > a').addClass('active-item');
-}
-
-// Add a class to albums with subalbums
-$('.subalbum').parent().addClass('has_sub');
-
-// Deactivate self-link for the active item
-$("a.active-item").removeAttr("href");
-
-// open/close menu on click
-$('.drop').on('click',function() {
-$(this).toggleClass('dropped');
-$(this).next().toggleClass('dropped');
-});
+  // Conform language menu style to album menu style
+  $('.flags .currentLanguage img').wrap('<a />');
+  $('.flags img').each(function() {
+    $(this).replaceWith($(this).attr('alt'));
+  });
+  $('.flags').prev().find('a').text($('.currentLanguage a').text());
+  $('.flags').removeClass('flags');
+  $('.currentLanguage a').addClass('active-item');
+  $('.currentLanguage').removeClass('currentLanguage');
 
 
-/*
-Search bar
-*/
+  /*
+  Album, page and news menu
+  */
 
-$('#search br').remove();
-
-// Set title for search options menu opener and open/close the menu
-$('a.toggle_searchextrashow')
-.prop('title', $('img#searchfields_icon').attr('title'))
-.on('click', function() {
-$(this).add('#searchextrashow').toggleClass('dropped');
-});
-
-// Prepare for using FontAwesome checkbox
-$('#searchextrashow label').each(function() {
-$(this).prop('for', $(this).children().attr('id'));
-$(this).before($(this).children());
-});
-
-// Search input
-$('#search_input')
-// Required, Search text as placeholder
-.prop({
-  'required': 'required',
-  'placeholder': search_placeholder
-})
-// Disable autocomplete on focus
-.on('focus', function() {
-  if (browser.name !== 'firefox' || $(this).next().is('span')) {
-    $(this).prop('autocomplete', 'off');
+  // Conform news menu style to album menu style
+  if (!$('#news_menu .active-item a').length > 0 ) {
+    $('#news_menu .active-item').not('a').removeClass('active-item').contents().wrap('<a class="active-item"></a>');
   }
-})
-.on('keydown', function() {
-  var attr = $(this).attr('autocomplete');
-  // Re-enable autocomplete on keydown, unless tag suggest plugin is enabled (next is span)
-  if (attr === 'off' && !$(this).next().is('span')) {
-    $(this).removeAttr('autocomplete');
+
+  // Add active-item class if we are on news loop or gallery loop
+  if (typeof isNewsLoop == 'number') {
+    $('#news_menu > li:first-child > a').addClass('active-item');
   }
-});
+  if (typeof isGalleryLoop == 'number') {
+    $('#album_menu > li:first-child > a').addClass('active-item');
+  }
 
-// close all menus by clicking outside them too
-$('footer').on('click', function(e) {
-if (!$(e.target).is('.main-nav *, #search_form *')) {
-  $('ul, .toggle_searchextrashow, #searchextrashow').removeClass('dropped');
-}
-});
+  // Add a class to albums with subalbums
+  $('.subalbum').parent().addClass('has_sub');
+
+  // Deactivate self-link for the active item
+  $("a.active-item").removeAttr("href");
+
+  // open/close menu on click
+  $('.drop').on('click',function() {
+    $(this).toggleClass('dropped');
+    $(this).next().toggleClass('dropped');
+  });
 
 
-/*
-Forms
-*/
+  /*
+  Search bar
+  */
 
-// Layout
-$('#commentform .button').before($("label[for=comment_dataconfirmation]").parent());
-$('#commentform').prepend($("#commentform p:not(:has(input, span))"));
+  $('#search br').remove();
 
-// Set placeholders and strip unwanted html tags
-$('#commentform .textarea_inputbox').prop({placeholder:comment_placeholder, rows:4});
-$("#mailform :input, #commentform :input").each(function(index, elem) {
-  var eId = $(elem).attr("id");
-  var label = null;
-  if (eId && eId != 'dataconfirmation' && (label = $(elem).parents("form").find("label[for="+eId+"]")).length == 1) {
+  // Set title for search options menu opener and open/close the menu
+  $('a.toggle_searchextrashow')
+  .prop('title', $('img#searchfields_icon').attr('title'))
+  .on('click', function() {
+    $(this).add('#searchextrashow').toggleClass('dropped');
+  });
+
+  // Prepare for using FontAwesome checkbox
+  $('#searchextrashow label').each(function() {
+    $(this).prop('for', $(this).children().attr('id'));
+    $(this).before($(this).children());
+  });
+
+  // Search input
+  $('#search_input')
+  // Required, Search text as placeholder
+  .prop({
+    'required': 'required',
+    'placeholder': search_placeholder
+  })
+  // Disable autocomplete on focus
+  .on('focus', function() {
+    if (browser.name !== 'firefox' || $(this).next().is('span')) {
+      $(this).prop('autocomplete', 'off');
+    }
+  })
+  .on('keydown', function() {
+    var attr = $(this).attr('autocomplete');
+    // Re-enable autocomplete on keydown, unless tag suggest plugin is enabled (next is span)
+    if (attr === 'off' && !$(this).next().is('span')) {
+      $(this).removeAttr('autocomplete');
+    }
+  });
+
+  // close all menus by clicking outside them too
+  $('footer').on('click', function(e) {
+    if (!$(e.target).is('.main-nav *, #search_form *')) {
+      $('ul, .toggle_searchextrashow, #searchextrashow').removeClass('dropped');
+    }
+  });
+
+
+  /*
+  Forms
+  */
+
+  // Layout
+  $('#commentform .button').before($("label[for=comment_dataconfirmation]").parent());
+  $('#commentform').prepend($("#commentform p:not(:has(input, span))"));
+
+  // Set placeholders and strip unwanted html tags
+  $('#commentform .textarea_inputbox').prop({placeholder:comment_placeholder, rows:4});
+  $("#mailform :input, #commentform :input").each(function(index, elem) {
+    var eId = $(elem).attr("id");
+    var label = null;
+    if (eId && eId != 'dataconfirmation' && (label = $(elem).parents("form").find("label[for="+eId+"]")).length == 1) {
       $(elem).prop("placeholder", $(label).html().replace(/(<([^>]+)>)/ig,""));
       if ($(elem).is($('#mailform #'+eId))) {
         $(elem).prop("placeholder", $(elem).attr('placeholder').replace("*",""));
       }
-  }
-});
-$("#loginform :input").each(function(index, elem) {
-  var eId = $(elem).attr("id");
-  var legend = null;
-  if (eId && (legend = $(elem).prev()).length == 1) {
+    }
+  });
+  $("#loginform :input").each(function(index, elem) {
+    var eId = $(elem).attr("id");
+    var legend = null;
+    if (eId && (legend = $(elem).prev()).length == 1) {
       $(elem).prop("placeholder", $(legend).html().replace(/(<([^>]+)>)/ig,""));
       $(elem).prev().hide();
-  }
-});
-
-// Remove '*' from data confirmation (all fields are required here)
-if ($('label[for=dataconfirmation]').length) {
-var removeasterisk = $('label[for=dataconfirmation]').html().replace(/\*/g, '&nbsp;');
-$('label[for=dataconfirmation]').html(removeasterisk);
-}
-
-// Place recaptcha at the bottom
-$('#mailform .g-recaptcha').appendTo($('#mailform'));
-$('#commentform .g-recaptcha').css('margin-top','2em').appendTo($('#commentform'));
-
-// Hide mail subject if defined in theme options
-if (mailsubject !== "") {
-$('#mailform #subject').hide();
-}
-
-// Layout
-$('#commentcontent > br').remove();
-$('#mailform').prev().hide();
-$('#mailform label, #commentform label').not("[for=dataconfirmation], [for=comment_dataconfirmation]").hide();
-$('label[for=dataconfirmation]').before($('label[for=dataconfirmation] input'));
-$('label[for=comment_dataconfirmation]').before($('label[for=comment_dataconfirmation] input'));
-$('#mailform .button[type=submit], #commentform .button[type=submit], #loginform button[type=submit]').addClass('special');
-$('label[for=dataconfirmation] a, label[for=comment_dataconfirmation] a').prop('target','blank');
-
-// Loginform display a checkmark if show password is active
-$('#disclose_password').on('click', function() {
-$(this).parent().toggleClass('showpw');
-});
-
-
-/*
-Submit mail form via ajax
-*/
-
-// Mail form browser validation
-$('#mailform #email').prop('type','email');
-$('#mailform #name, #mailform #email, #mailform #subject, #mailform #message, #mailform #dataconfirmation').prop('required', true);
-
-$('#mailform').on('submit', function(e) {
-e.preventDefault();
-
-var $submit = $(this).find('input[type="submit"]'), message;
-
-// Disable buttons during ajax request
-$submit.prop('disabled', 'disabled');
-$submit.next().prop('disabled', 'disabled');
-
-// Reposition container for feedback message and insert container for waiting icon spinner
-$submit.parent().after($('#form-result'));
-$submit.parent().after('<p class="idle"></p>');
-$submit.parent().next().slideDown();
-
-$.ajax({
-  type: 'POST',
-  cache: false,
-  data: $(this).serialize(),
-  url: contact,
-  error: function(xhr) {
-    message = '<div class="errorbox">Ajax error ' + xhr.status + ': ' + xhr.statusText + '</div>';
-  },
-  success: function(res) {
-    message = $(res).filter('.errorbox');
-    if (!$(res).filter('#mailform').length && !$(res).find('a[href*="again"]').length) {
-      message = '<div class="errorbox">' + $(res).text() + '</div>';
-    } else if (!message.length) {
-      message = mail_sent;
     }
-  },
-  complete: function() {
-    $submit.next().removeAttr('disabled');
-    $submit.parent().next().slideUp(500, function() {
-      $(this).remove();
-    });
-    $submit.next().one('click', function() {
-      $submit.removeAttr('disabled');
-      $('#form-result').slideUp(500, function() {
-        $(this).children().remove();
-      });
-    });
-    $('#form-result').html(message).slideDown();
+  });
+
+  // Remove '*' from data confirmation (all fields are required here)
+  if ($('label[for=dataconfirmation]').length) {
+    var removeasterisk = $('label[for=dataconfirmation]').html().replace(/\*/g, '&nbsp;');
+    $('label[for=dataconfirmation]').html(removeasterisk);
   }
-});
-});
+
+  // Place recaptcha at the bottom
+  $('#mailform .g-recaptcha').appendTo($('#mailform'));
+  $('#commentform .g-recaptcha').css('margin-top','2em').appendTo($('#commentform'));
+
+  // Hide mail subject if defined in theme options
+  if (mailsubject !== "") {
+    $('#mailform #subject').hide();
+  }
+
+  // Layout
+  $('#commentcontent > br').remove();
+  $('#mailform').prev().hide();
+  $('#mailform label, #commentform label').not("[for=dataconfirmation], [for=comment_dataconfirmation]").hide();
+  $('label[for=dataconfirmation]').before($('label[for=dataconfirmation] input'));
+  $('label[for=comment_dataconfirmation]').before($('label[for=comment_dataconfirmation] input'));
+  $('#mailform .button[type=submit], #commentform .button[type=submit], #loginform button[type=submit]').addClass('special');
+  $('label[for=dataconfirmation] a, label[for=comment_dataconfirmation] a').prop('target','blank');
+
+  // Loginform display a checkmark if show password is active
+  $('#disclose_password').on('click', function() {
+    $(this).parent().toggleClass('showpw');
+  });
 
 
-/*
-Remove border bottom from links with images
-*/
+  /*
+  Submit mail form via ajax
+  */
 
-$('#page a').has('img').css('border', 'none');
+  // Mail form browser validation
+  $('#mailform #email').prop('type','email');
+  $('#mailform #name, #mailform #email, #mailform #subject, #mailform #message, #mailform #dataconfirmation').prop('required', true);
+
+  $('#mailform').on('submit', function(e) {
+    e.preventDefault();
+
+    var $submit = $(this).find('input[type="submit"]'), message;
+
+    // Disable buttons during ajax request
+    $submit.prop('disabled', 'disabled');
+    $submit.next().prop('disabled', 'disabled');
+
+    // Reposition container for feedback message and insert container for waiting icon spinner
+    $submit.parent().after($('#form-result'));
+    $submit.parent().after('<p class="idle"></p>');
+    $submit.parent().next().slideDown();
+
+    $.ajax({
+      type: 'POST',
+      cache: false,
+      data: $(this).serialize(),
+      url: contact,
+      error: function(xhr) {
+        message = '<div class="errorbox">Ajax error ' + xhr.status + ': ' + xhr.statusText + '</div>';
+      },
+      success: function(res) {
+        message = $(res).filter('.errorbox');
+        if (!$(res).filter('#mailform').length && !$(res).find('a[href*="again"]').length) {
+          message = '<div class="errorbox">' + $(res).text() + '</div>';
+        } else if (!message.length) {
+          message = mail_sent;
+        }
+      },
+      complete: function() {
+        $submit.next().removeAttr('disabled');
+        $submit.parent().next().slideUp(500, function() {
+          $(this).remove();
+        });
+        $submit.next().one('click', function() {
+          $submit.removeAttr('disabled');
+          $('#form-result').slideUp(500, function() {
+            $(this).children().remove();
+          });
+        });
+        $('#form-result').html(message).slideDown();
+      }
+    });
+  });
+
+
+  /*
+  Remove border bottom from links with images
+  */
+
+  $('#page a').has('img').css('border', 'none');
 
 
 })(jQuery);

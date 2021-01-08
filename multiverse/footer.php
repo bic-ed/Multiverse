@@ -77,7 +77,7 @@ if ($has_social || $rss_links_enabled) {
         </p>
       </section>
     </div>
-    <?php if ($has_contact) { ?> 
+    <?php if ($has_contact) { ?>
       <div>
         <section>
           <h2><?php echo gettext_th('Get in touch'); ?></h2>
@@ -104,7 +104,7 @@ if ($has_social || $rss_links_enabled) {
                     </a>
                   </li>
                 </ul>
-                <?php printAlbumMenuList('list', false, 'album_menu', 'active-item', 'subalbum', 'active-item', gettext("Gallery Index"), NULL, false, false, true, NULL); ?>
+                <?php printAlbumMenuList('list', false, 'album_menu', 'active-item', 'subalbum', 'active-item', gettext("Gallery Index"), null, false, false, true, null); ?>
               </nav>
             <?php } ?>
             <?php if (ZENPAGE_ON) { ?>

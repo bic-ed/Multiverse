@@ -4,21 +4,21 @@
  *
  */
 function printZDSearchToggleJS() {
-	?>
-	<script>
-		function toggleExtraElements(category, show) {
-			if (show) {
-				jQuery('.' + category + '_showless').show();
-				jQuery('.' + category + '_showmore').hide();
-				jQuery('.' + category + '_extrashow').show();
-			} else {
-				jQuery('.' + category + '_showless').hide();
-				jQuery('.' + category + '_showmore').show();
-				jQuery('.' + category + '_extrashow').hide();
-			}
-		}
-	</script>
-	<?php
+  ?>
+  <script>
+  function toggleExtraElements(category, show) {
+    if (show) {
+      jQuery('.' + category + '_showless').show();
+      jQuery('.' + category + '_showmore').hide();
+      jQuery('.' + category + '_extrashow').show();
+    } else {
+      jQuery('.' + category + '_showless').hide();
+      jQuery('.' + category + '_showmore').show();
+      jQuery('.' + category + '_extrashow').hide();
+    }
+  }
+  </script>
+  <?php
 }
 
 /**
@@ -28,21 +28,21 @@ function printZDSearchToggleJS() {
  * @param int $number_to_show how many search results should be shown initially
  */
 function printZDSearchShowMoreLink($option, $number_to_show) {
-	$option = strtolower($option);
-	switch ($option) {
-		case "news":
-			$num = getNumNews();
-			break;
-		case "pages":
-			$num = getNumPages();
-			break;
-	}
-	if ($num > $number_to_show) {
-		?>
-		<a class="<?php echo $option; ?>_showmore"href="javascript:toggleExtraElements('<?php echo $option; ?>',true);"><?php echo gettext('Show more results'); ?></a>
-		<a class="<?php echo $option; ?>_showless" style="display: none;"	href="javascript:toggleExtraElements('<?php echo $option; ?>',false);"><?php echo gettext('Show fewer results'); ?></a>
-		<?php
-	}
+  $option = strtolower($option);
+  switch ($option) {
+    case "news":
+    $num = getNumNews();
+    break;
+    case "pages":
+    $num = getNumPages();
+    break;
+  }
+  if ($num > $number_to_show) {
+    ?>
+    <a class="<?php echo $option; ?>_showmore"href="javascript:toggleExtraElements('<?php echo $option; ?>',true);"><?php echo gettext('Show more results'); ?></a>
+    <a class="<?php echo $option; ?>_showless" style="display: none;" href="javascript:toggleExtraElements('<?php echo $option; ?>',false);"><?php echo gettext('Show fewer results'); ?></a>
+    <?php
+  }
 }
 
 /**
@@ -52,11 +52,11 @@ function printZDSearchShowMoreLink($option, $number_to_show) {
  * @param string $c After which result item the toggling should begin. Here to be passed from the results loop.
  */
 function printZDToggleClass($option, $c, $number_to_show) {
-	$option = strtolower($option);
-	$c = sanitize_numeric($c);
-	if ($c > $number_to_show) {
-		echo ' class="' . $option . '_extrashow" style="display:none;"';
-	}
+  $option = strtolower($option);
+  $c = sanitize_numeric($c);
+  if ($c > $number_to_show) {
+    echo ' class="' . $option . '_extrashow" style="display:none;"';
+  }
 }
 
 
@@ -64,45 +64,45 @@ zp_register_filter('theme_head', 'css_head', 500);
 zp_register_filter('theme_body_close', 'multiverse');
 
 /**
- * 
+ *
  * Set viewport & load CSS
  * @author bic-ed
- * 
+ *
  */
 function css_head() {
-	global $_zp_themeroot;
-	?>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="<?php echo pathurlencode($_zp_themeroot . '/css/multi.css') ?>">
-<?php
+  global $_zp_themeroot;
+  ?>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="<?php echo pathurlencode($_zp_themeroot . '/css/multi.css') ?>">
+  <?php
 }
 
 function my_checkPageValidity($request, $gallery_page, $page) {
-	switch ($gallery_page) {
-		case 'gallery.php':
-			$gallery_page = 'index.php'; //	same as an album gallery index
-			break;
-		case 'index.php':
-			if (ZENPAGE_ON) {
-				if (NEWS_IS_HOME) {
-					$gallery_page = 'news.php'; //	really a news page
-					break;
-				}
-				if (PAGE_IS_HOME) {
-					return $page == 1; // only one page if zenpage enabled.
-				}
-			}
-			break;
-		case 'news.php':
-		case 'album.php':
-		case 'search.php':
-			break;
-		default:
-			if ($page != 1) {
-				return false;
-			}
-	}
-	return checkPageValidity($request, $gallery_page, $page);
+  switch ($gallery_page) {
+    case 'gallery.php':
+    $gallery_page = 'index.php'; // same as an album gallery index
+    break;
+    case 'index.php':
+    if (ZENPAGE_ON) {
+      if (NEWS_IS_HOME) {
+        $gallery_page = 'news.php'; // really a news page
+        break;
+      }
+      if (PAGE_IS_HOME) {
+        return $page == 1; // only one page if zenpage enabled.
+      }
+    }
+    break;
+    case 'news.php':
+    case 'album.php':
+    case 'search.php':
+    break;
+    default:
+    if ($page != 1) {
+      return false;
+    }
+  }
+  return checkPageValidity($request, $gallery_page, $page);
 }
 
 /**
@@ -112,34 +112,34 @@ function my_checkPageValidity($request, $gallery_page, $page) {
  * @param type $page
  */
 function newsOnIndex($link, $obj, $page) {
-	if (is_string($obj) && $obj == 'news.php') {
-		if (MOD_REWRITE) {
-			if (preg_match('~' . _NEWS_ . '[/\d/]*$~', $link)) {
-				$link = WEBPATH . '/';
-				if ($page > 1)
-					$link .=  _PAGE_ . '/' . $page;
-			}
-		} else {
-			if (strpos($link, 'category=') === false && strpos($link, 'title=') === false) {
-				$link = str_replace('?&', '?', rtrim(str_replace('p=news', '', $link), '?'));
-			}
-		}
-	}
-	return $link;
+  if (is_string($obj) && $obj == 'news.php') {
+    if (MOD_REWRITE) {
+      if (preg_match('~' . _NEWS_ . '[/\d/]*$~', $link)) {
+        $link = WEBPATH . '/';
+        if ($page > 1)
+        $link .=  _PAGE_ . '/' . $page;
+      }
+    } else {
+      if (strpos($link, 'category=') === false && strpos($link, 'title=') === false) {
+        $link = str_replace('?&', '?', rtrim(str_replace('p=news', '', $link), '?'));
+      }
+    }
+  }
+  return $link;
 }
 
 if (!OFFSET_PATH) {
-	enableExtension('print_album_menu', 1 | THEME_PLUGIN, false);
-	setOption('user_logout_login_form', 2, false);
-	define('ZENPAGE_ON', extensionEnabled('zenpage'));
-	$_zp_page_check = 'my_checkPageValidity';
-	if (ZENPAGE_ON) {
-		define('PAGE_IS_HOME', getOption('zenpage_homepage'));
-		define('NEWS_IS_HOME', getOption('zenpage_zp_index_news'));
-		if (NEWS_IS_HOME) {  // only one index page if zenpage plugin is enabled & displaying
-			zp_register_filter('getLink', 'newsOnIndex');
-		}
-	}
+  enableExtension('print_album_menu', 1 | THEME_PLUGIN, false);
+  setOption('user_logout_login_form', 2, false);
+  define('ZENPAGE_ON', extensionEnabled('zenpage'));
+  $_zp_page_check = 'my_checkPageValidity';
+  if (ZENPAGE_ON) {
+    define('PAGE_IS_HOME', getOption('zenpage_homepage'));
+    define('NEWS_IS_HOME', getOption('zenpage_zp_index_news'));
+    if (NEWS_IS_HOME) {  // only one index page if zenpage plugin is enabled & displaying
+      zp_register_filter('getLink', 'newsOnIndex');
+    }
+  }
 }
 
 
@@ -161,24 +161,24 @@ setOption('contactform_name','required',false);
 $mailsubject = ($mailsubject = getThemeOption('email_subject')) ? $mailsubject : "";
 
 /**
- * 
- * Defines variables and loads javascript file  
+ *
+ * Defines variables and loads javascript file
  * @author bic-ed
- * 
+ *
  */
 function multiverse() {
-	global $mailsubject, $_zp_themeroot, $_zp_gallery_page;
+  global $mailsubject, $_zp_themeroot, $_zp_gallery_page;
 ?>
 <script>
 var search_placeholder = "<?php echo strtoupper(gettext("search")) ?>",
 comment_placeholder = "<?php echo gettext('Comment') ?>*",
 mailsubject = "<?php echo $mailsubject; ?>",
-<?php if ($_zp_gallery_page == 'index.php' && ZENPAGE_ON && NEWS_IS_HOME) {	?>
+<?php if ($_zp_gallery_page == 'index.php' && ZENPAGE_ON && NEWS_IS_HOME) { ?>
 isNewsLoop = 1,
-<?php	} ?>
-<?php if (($_zp_gallery_page == 'index.php' && ((ZENPAGE_ON && !NEWS_IS_HOME && !PAGE_IS_HOME) || !ZENPAGE_ON)) || $_zp_gallery_page == 'gallery.php') {	?>
+<?php } ?>
+<?php if (($_zp_gallery_page == 'index.php' && ((ZENPAGE_ON && !NEWS_IS_HOME && !PAGE_IS_HOME) || !ZENPAGE_ON)) || $_zp_gallery_page == 'gallery.php') { ?>
 isGalleryLoop = 1,
-<?php	} ?>
+<?php } ?>
 contact = "<?php echo WEBPATH . '/themes/multiverse/ajax/contact.php' ?>",
 mail_sent = '<span>' + '<?php echo get_language_string(getOption("contactform_thankstext")); ?>' + '</span>';
 </script>
