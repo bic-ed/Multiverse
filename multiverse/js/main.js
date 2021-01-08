@@ -17,7 +17,8 @@
 
   var $window = $(window),
   $body = $('body'),
-  $wrapper = $('#wrapper');
+  $wrapper = $('#wrapper'),
+  received = phpToJS;
 
   // Breakpoints.
   breakpoints({
@@ -775,11 +776,11 @@
     $('#news_menu .active-item').not('a').removeClass('active-item').contents().wrap('<a class="active-item"></a>');
   }
 
-  // Add active-item class if we are on news loop or gallery loop
-  if (typeof isNewsLoop == 'number') {
+  // Add active-item class if we are on news loop or gallery loop in home page
+  if (received.newsActive) {
     $('#news_menu > li:first-child > a').addClass('active-item');
   }
-  if (typeof isGalleryLoop == 'number') {
+  if (received.galleryActive) {
     $('#album_menu > li:first-child > a').addClass('active-item');
   }
 
@@ -820,7 +821,7 @@
   // Required, Search text as placeholder
   .prop({
     'required': 'required',
-    'placeholder': search_placeholder
+    'placeholder': received.searchPlaceholder
   })
   // Disable autocomplete on focus
   .on('focus', function() {
@@ -853,7 +854,10 @@
   $('#commentform').prepend($("#commentform p:not(:has(input, span))"));
 
   // Set placeholders and strip unwanted html tags
-  $('#commentform .textarea_inputbox').prop({placeholder:comment_placeholder, rows:4});
+  $('#commentform .textarea_inputbox').prop({
+    "placeholder": received.commentPlaceholder,
+    "rows": 4}
+  );
   $("#mailform :input, #commentform :input").each(function(index, elem) {
     var eId = $(elem).attr("id");
     var label = null;
@@ -884,12 +888,12 @@
   $('#commentform .g-recaptcha').css('margin-top','2em').appendTo($('#commentform'));
 
   // Hide mail subject if defined in theme options
-  if (mailsubject !== "") {
+  if (received.mailSubject !== "") {
     $('#mailform #subject').hide();
   }
 
   // Layout
-  $('#commentcontent > br').remove();
+  $('#commentcontent > br, #commentform > br').remove();
   $('#mailform').prev().hide();
   $('#mailform label, #commentform label').not("[for=dataconfirmation], [for=comment_dataconfirmation]").hide();
   $('label[for=dataconfirmation]').before($('label[for=dataconfirmation] input'));
@@ -929,7 +933,7 @@
       type: 'POST',
       cache: false,
       data: $(this).serialize(),
-      url: contact,
+      url: received.contactURL,
       error: function(xhr) {
         message = '<div class="errorbox">Ajax error ' + xhr.status + ': ' + xhr.statusText + '</div>';
       },
@@ -938,7 +942,7 @@
         if (!$(res).filter('#mailform').length && !$(res).find('a[href*="again"]').length) {
           message = '<div class="errorbox">' + $(res).text() + '</div>';
         } else if (!message.length) {
-          message = mail_sent;
+          message = "<span>" + received.mailSent + "</span>";
         }
       },
       complete: function() {

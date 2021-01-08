@@ -131,7 +131,7 @@ function newsOnIndex($link, $obj, $page) {
 if (!OFFSET_PATH) {
   enableExtension('print_album_menu', 1 | THEME_PLUGIN, false);
   setOption('user_logout_login_form', 2, false);
-  define('ZENPAGE_ON', extensionEnabled('zenpage'));
+  define('ZENPAGE_ON', ZP_PAGES_ENABLED || ZP_NEWS_ENABLED);
   $_zp_page_check = 'my_checkPageValidity';
   if (ZENPAGE_ON) {
     define('PAGE_IS_HOME', getOption('zenpage_homepage'));
@@ -168,22 +168,45 @@ $mailsubject = ($mailsubject = getThemeOption('email_subject')) ? $mailsubject :
  */
 function multiverse() {
   global $mailsubject, $_zp_themeroot, $_zp_gallery_page;
+
+  // Some missing context sensitive menu behavior to be added via JavaScript:
+  // $news_active = 1 -> Disable "All news" link in NewsCategories menu
+  // $gallery_active = 1 -> Disable "Gallery index" link in Album menu
+  $news_active = $gallery_active = 0;
+  if (ZENPAGE_ON) {
+    switch ($_zp_gallery_page) {
+      case 'index.php':
+      if (NEWS_IS_HOME) {
+        $news_active = 1;
+      } elseif (!PAGE_IS_HOME) {
+        $gallery_active = 1;
+      }
+      break;
+      case 'gallery.php':
+      $gallery_active = 1;
+      break;
+    }
+  } else {
+    $gallery_active = 1;
+  }
+
+  $javas = array(
+    'searchPlaceholder' => strtoupper(gettext("search")),
+    'commentPlaceholder' => gettext('Comment') . "*",
+    'newsActive' => ($news_active ? 1 : 0),
+    'galleryActive' => ($gallery_active ? 1 : 0),
+    'contactURL' => WEBPATH . '/themes/multiverse/ajax/contact.php',
+    'mailSubject' => $mailsubject,
+    'mailSent' => get_language_string(getOption('contactform_thankstext')),
+  );
 ?>
 <script>
-var search_placeholder = "<?php echo strtoupper(gettext("search")) ?>",
-comment_placeholder = "<?php echo gettext('Comment') ?>*",
-mailsubject = "<?php echo $mailsubject; ?>",
-<?php if ($_zp_gallery_page == 'index.php' && ZENPAGE_ON && NEWS_IS_HOME) { ?>
-isNewsLoop = 1,
-<?php } ?>
-<?php if (($_zp_gallery_page == 'index.php' && ((ZENPAGE_ON && !NEWS_IS_HOME && !PAGE_IS_HOME) || !ZENPAGE_ON)) || $_zp_gallery_page == 'gallery.php') { ?>
-isGalleryLoop = 1,
-<?php } ?>
-contact = "<?php echo WEBPATH . '/themes/multiverse/ajax/contact.php' ?>",
-mail_sent = '<span>' + '<?php echo get_language_string(getOption("contactform_thankstext")); ?>' + '</span>';
+var phpToJS = <?php echo json_encode($javas) ?>;
 </script>
 <script src="<?php echo $_zp_themeroot; ?>/js/merged/multi.js"></script>
-<?php }
+<?php
+return;
+}
 
 /**
  * Detects if there is at least one link to print
@@ -192,12 +215,10 @@ mail_sent = '<span>' + '<?php echo get_language_string(getOption("contactform_th
  */
 $rss_links_enabled = false;
 if (class_exists('RSS')) {
-  // Get needed (here and later) RSS options once for all
+  // Get needed (here and later) RSS options
   $_rss_gallery = getOption('RSS_album_image');
-  $_rss_news = getOption('RSS_articles') && ZENPAGE_ON && ZP_NEWS_ENABLED;
-  // Find out if there is any link to print
-  $rss_links_enabled = true;
-  $rss_links_enabled &= $_rss_gallery || $_rss_news;
+  $_rss_news = ZP_NEWS_ENABLED && getOption('RSS_articles');
+  $rss_links_enabled = $_rss_gallery || $_rss_news;
 }
 /**
  * Prints RSS links in footer
