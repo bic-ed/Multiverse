@@ -2,13 +2,15 @@
 $follow_section = 0;
 $has_search = getThemeOption('search');
 $has_album_menu = function_exists('printAlbumMenu');
-$see_more_count = $has_search + $has_album_menu + (ZENPAGE_ON && ZP_NEWS_ENABLED) + (ZENPAGE_ON && ZP_PAGES_ENABLED);
+$has_news = ZP_NEWS_ENABLED && !empty($_zp_zenpage->getArticles(1));
+$has_pages = ZP_PAGES_ENABLED && !empty($_zp_zenpage->getPages(true, true, 1));
+$see_more_count = $has_search + $has_album_menu + $has_news + $has_pages;
 $has_lang_menu = function_exists('printLanguageSelector');
 $menus_count = $see_more_count + 3 * $has_lang_menu;
 $has_contact = function_exists('printContactForm');
 $has_social = getThemeOption('social_contacts');
 
-// Positioning of the social section according to the layout
+// Positioning the "follow" section according to the layout
 // $rss_links_enabled is defined in functions.php
 if ($has_social || $rss_links_enabled) {
   if ($menus_count > 0 && ($menus_count < 6 || $has_contact && getOption('contactform_captcha'))) {
@@ -107,31 +109,29 @@ if ($has_social || $rss_links_enabled) {
                 <?php printAlbumMenuList('list', false, 'album_menu', 'active-item', 'subalbum', 'active-item', gettext("Gallery Index"), null, false, false, true, null); ?>
               </nav>
             <?php } ?>
-            <?php if (ZENPAGE_ON) { ?>
-              <?php if (ZP_PAGES_ENABLED) { ?>
-                <nav class="main-nav">
-                  <ul class="drop">
-                    <li>
-                      <a>
-                        <?php echo gettext('Pages') ?>
-                      </a>
-                    </li>
-                  </ul>
-                  <?php printPageMenu('list', 'page_menu', 'active-item', 'subalbum', 'active-item', null, 0); ?>
-                </nav>
-              <?php } if (ZP_NEWS_ENABLED) { ?>
-                <nav class="main-nav">
-                  <ul class="drop">
-                    <li>
-                      <a>
-                        <?php echo gettext('News') ?>
-                      </a>
-                    </li>
-                  </ul>
-                  <?php printNestedMenu('list', 'categories', false, 'news_menu', 'active-item', 'subalbum', 'active-item', gettext('All news')); ?>
-                </nav>
-              <?php }?>
-            <?php } ?>
+            <?php if ($has_pages) { ?>
+              <nav class="main-nav">
+                <ul class="drop">
+                  <li>
+                    <a>
+                      <?php echo gettext('Pages') ?>
+                    </a>
+                  </li>
+                </ul>
+                <?php printPageMenu('list', 'page_menu', 'active-item', 'subalbum', 'active-item', null, 0); ?>
+              </nav>
+            <?php } if ($has_news) { ?>
+              <nav class="main-nav">
+                <ul class="drop">
+                  <li>
+                    <a>
+                      <?php echo gettext('News') ?>
+                    </a>
+                  </li>
+                </ul>
+                <?php printNestedMenu('list', 'categories', false, 'news_menu', 'active-item', 'subalbum', 'active-item', gettext('All news')); ?>
+              </nav>
+            <?php }?>
           </section>
         <?php } ?>
         <?php if ($has_lang_menu) { ?>

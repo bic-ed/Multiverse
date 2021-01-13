@@ -5,6 +5,7 @@
 * RSS feed links in footer for Gallery, Album and News
 
 ### Changed
+* No more showing News menu when there are no published news article 
 * Subcategories, if any, are now shown in News menu when the parent category is the current page
 * Show the `cookieconsent` banner above the header
 * Updated Raleway fonts to v18 and filled `src: local()` in @font-face
