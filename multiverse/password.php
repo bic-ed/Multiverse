@@ -17,7 +17,7 @@ die();
     <div id="main">
       <article id="page">
         <h1><?php echo gettext("Password required"); ?></h1>
-        <?php printPasswordForm($hint, true); ?>
+        <?php printPasswordForm('', true, false); ?>
       </article>
     </div>
   </div>

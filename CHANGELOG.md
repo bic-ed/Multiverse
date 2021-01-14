@@ -1,10 +1,13 @@
 # Changelog
 ## [Unreleased]
 ### Added
+* Custom forms for comments and contact, to get rid of duplicate IDs in pages where comments are enabled (i.e. where both form are present)
+  * During data entry, required fields are marked in red if not filled in properly
 * A light shadow on info panel when active, to better separate it from the main content background
 * RSS feed links in footer for Gallery, Album and News
 
 ### Changed
+* Hidden labels in forms and hidden texts for links (social) are now compliant with accessibility requirements (dropped CSS "display: none")
 * No more showing News menu when there are no published news article 
 * Subcategories, if any, are now shown in News menu when the parent category is the current page
 * Show the `cookieconsent` banner above the header

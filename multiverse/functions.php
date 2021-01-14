@@ -156,6 +156,7 @@ setOption('contactform_phone','omitted',false);
 setOption('contactform_confirm','0',false);
 setOption('contactform_email','required',false);
 setOption('contactform_name','required',false);
+setOption('tinymce4_comments',null,false);
 
 // Set email subject if the theme option is filled
 $mailsubject = ($mailsubject = getThemeOption('email_subject')) ? $mailsubject : "";
@@ -192,7 +193,6 @@ function multiverse() {
 
   $javas = array(
     'searchPlaceholder' => strtoupper(gettext("search")),
-    'commentPlaceholder' => gettext('Comment') . "*",
     'newsActive' => ($news_active ? 1 : 0),
     'galleryActive' => ($gallery_active ? 1 : 0),
     'contactURL' => WEBPATH . '/themes/multiverse/ajax/contact.php',
@@ -231,7 +231,7 @@ function printFooterRSS() {
       <ul class="drop rss">
         <li>
           <a class="icon fa-rss">
-            <span class="label">RSS Feed</span>
+            <span class="hide">RSS Feed</span>
           </a>
         </li>
       </ul>

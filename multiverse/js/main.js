@@ -621,7 +621,6 @@
   closePoptroxTimer,
   delta = {};
   function slideStatusAndZoomOpeningPoint(event, phase, direction, distance) {
-    // console.log($(event.target));
     if ($imgs.hasClass("loading") || event.touches && $(event.target).is('a, h2, p')) {
       return;
     }
@@ -630,7 +629,6 @@
     var evt;
     event.touches ? evt = event.touches[0] : evt = event;
     if (phase == "start") {
-      console.log(phase);
       // close poptrox popup
       event.preventDefault();
       closePoptroxTimer  = setTimeout(function() {
@@ -721,7 +719,6 @@
 
   function reset_swipe(time) {
     setTimeout(function() {
-      // console.log(time, swipeSpeed);
       $imgs.css({'transition-timing-function':'', "transform" : "translate(0px)"});
       $main[0]._poptrox.fadeSpeed = fadeSpeed;
       $main[0]._poptrox.popupSpeed = popupSpeed;
@@ -849,71 +846,40 @@
   Forms
   */
 
-  // Layout
-  $('#commentform .button').before($("label[for=comment_dataconfirmation]").parent());
-  $('#commentform').prepend($("#commentform p:not(:has(input, span))"));
+  // Hide mail subject if defined in theme options
+  if (received.mailSubject !== "") {
+    $('#mailform').children('#mailform-subject').hide().prev().hide();
+  }
 
-  // Set placeholders and strip unwanted html tags
-  $('#commentform .textarea_inputbox').prop({
-    "placeholder": received.commentPlaceholder,
-    "rows": 4}
-  );
-  $("#mailform :input, #commentform :input").each(function(index, elem) {
-    var eId = $(elem).attr("id");
-    var label = null;
-    if (eId && eId != 'dataconfirmation' && (label = $(elem).parents("form").find("label[for="+eId+"]")).length == 1) {
-      $(elem).prop("placeholder", $(label).html().replace(/(<([^>]+)>)/ig,""));
-      if ($(elem).is($('#mailform #'+eId))) {
-        $(elem).prop("placeholder", $(elem).attr('placeholder').replace("*",""));
-      }
-    }
-  });
+  // Layout
+  $('#commentcontent > br').remove();
+  $('#mailform').prev().hide();
+  $('#mailform > label, #commentform > label').addClass("hide");
+  $('#loginform button[type=submit]').addClass('special');
+
+  // Zenphoto PasswordForm layout adaptation
   $("#loginform :input").each(function(index, elem) {
     var eId = $(elem).attr("id");
     var legend = null;
     if (eId && (legend = $(elem).prev()).length == 1) {
-      $(elem).prop("placeholder", $(legend).html().replace(/(<([^>]+)>)/ig,""));
-      $(elem).prev().hide();
+      $(elem).prop({
+        "placeholder": $(legend).text(),
+        "required": true
+      })
+      .removeClass("textfield")
+      // .addClass("field")
+      .prev().addClass("hide");
     }
   });
-
-  // Remove '*' from data confirmation (all fields are required here)
-  if ($('label[for=dataconfirmation]').length) {
-    var removeasterisk = $('label[for=dataconfirmation]').html().replace(/\*/g, '&nbsp;');
-    $('label[for=dataconfirmation]').html(removeasterisk);
-  }
-
-  // Place recaptcha at the bottom
-  $('#mailform .g-recaptcha').appendTo($('#mailform'));
-  $('#commentform .g-recaptcha').css('margin-top','2em').appendTo($('#commentform'));
-
-  // Hide mail subject if defined in theme options
-  if (received.mailSubject !== "") {
-    $('#mailform #subject').hide();
-  }
-
-  // Layout
-  $('#commentcontent > br, #commentform > br').remove();
-  $('#mailform').prev().hide();
-  $('#mailform label, #commentform label').not("[for=dataconfirmation], [for=comment_dataconfirmation]").hide();
-  $('label[for=dataconfirmation]').before($('label[for=dataconfirmation] input'));
-  $('label[for=comment_dataconfirmation]').before($('label[for=comment_dataconfirmation] input'));
-  $('#mailform .button[type=submit], #commentform .button[type=submit], #loginform button[type=submit]').addClass('special');
-  $('label[for=dataconfirmation] a, label[for=comment_dataconfirmation] a').prop('target','blank');
-
-  // Loginform display a checkmark if show password is active
-  $('#disclose_password').on('click', function() {
-    $(this).parent().toggleClass('showpw');
+  $('#disclose_password').each(function() {
+    $(this).insertBefore($(this).parent())
+    .next().prop('for', 'disclose_password');
   });
 
 
   /*
   Submit mail form via ajax
   */
-
-  // Mail form browser validation
-  $('#mailform #email').prop('type','email');
-  $('#mailform #name, #mailform #email, #mailform #subject, #mailform #message, #mailform #dataconfirmation').prop('required', true);
 
   $('#mailform').on('submit', function(e) {
     e.preventDefault();

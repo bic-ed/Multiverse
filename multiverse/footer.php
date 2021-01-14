@@ -33,8 +33,8 @@ if ($has_social || $rss_links_enabled) {
           $icons = array_chunk($icons, 3);
           foreach ($icons as $key) { ?>
             <li>
-              <a href="<?php echo $key[0]; ?>" target="blank" class="icon <?php echo $key[1]; ?>">
-                <span class="label"><?php echo $key[2]; ?></span>
+              <a href="<?php echo $key[0]; ?>" target="_blank" rel="noopener" class="icon <?php echo $key[1]; ?>">
+                <span class="hide"><?php echo $key[2]; ?></span>
               </a>
             </li>
           <?php }
@@ -73,9 +73,9 @@ if ($has_social || $rss_links_enabled) {
             }
             echo $archive_link . $copy_text . '<br>';
           } ?>
-          <i class="icon big fa-code" aria-hidden="true"></i>&nbsp;<a href="https://www.zenphoto.org/" title="Zenphoto CMS" target="blank"><span class="big">zen</span><span class="small">PHOTO</span></a>
-          + <a href="https://html5up.net" title="HTML5 UP" target="blank">HTML5 UP</a>
-          + <a class="small" href="https://www.antonioranesi.it" title="Antonio Ranesi <?php echo gettext_th('Photographer'); ?>" target="blank"><i class="icon fa-heart-o" aria-hidden="true"></i> bic-ed</a>
+          <i class="icon big fa-code" aria-hidden="true"></i>&nbsp;<a href="https://www.zenphoto.org/" title="Zenphoto CMS" target="_blank" rel="noopener"><span class="big">zen</span><span class="small">PHOTO</span></a>
+          + <a href="https://html5up.net" title="HTML5 UP" target="_blank" rel="noopener">HTML5 UP</a>
+          + <a class="small" href="https://www.antonioranesi.it" title="Antonio Ranesi <?php echo gettext_th('Photographer'); ?>" target="_blank" rel="noopener"><i class="icon fa-heart-o" aria-hidden="true"></i> bic-ed</a>
         </p>
       </section>
     </div>
@@ -94,7 +94,9 @@ if ($has_social || $rss_links_enabled) {
         <?php if ($see_more_count) { ?>
           <section>
             <h2><?php echo gettext_th("See more"); ?></h2>
-            <?php if ($has_search) {
+            <?php if ($has_search) { ?>
+              <label for="search_input" class="hide"><?php echo gettext('Search') ?></label>
+              <?php
               printSearchForm("","search", "","");
             } ?>
             <?php if ($has_album_menu) { ?>
