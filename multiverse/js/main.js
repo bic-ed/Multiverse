@@ -726,23 +726,8 @@
     }, 100 + time);
   }
 
-  // Fix style if Zenphoto admin bar is visible...
-  if ($('#zp__admin_module').is(":visible")) {
 
-    $wrapper.css('margin-top','-2px');
-    // ...with rules depending on screen size (bic-ed)
-    breakpoints.on('>small', function() {
-      $('header').css('top','');
-      $('.poptrox-overlay').css('z-index', 20000);
-    });
-    breakpoints.on('<=small', function() {
-      $('header').css('top','30px');
-      $('.poptrox-overlay').css('z-index', 100002);
-    });
-
-  }
-
-  /*********************************************************
+  /********************************************************
   *                                                       *
   * Below this line, Zenphoto specific code only (bic-ed) *
   *                                                       *

@@ -168,7 +168,7 @@ $mailsubject = ($mailsubject = getThemeOption('email_subject')) ? $mailsubject :
  *
  */
 function multiverse() {
-  global $mailsubject, $_zp_themeroot, $_zp_gallery_page;
+  global $mailsubject, $_zp_themeroot, $_zp_gallery_page, $_zp_loggedin;
 
   // Some missing context sensitive menu behavior to be added via JavaScript:
   // $news_active = 1 -> Disable "All news" link in NewsCategories menu
@@ -199,7 +199,9 @@ function multiverse() {
     'mailSubject' => $mailsubject,
     'mailSent' => get_language_string(getOption('contactform_thankstext')),
   );
-?>
+if ($_zp_loggedin) { ?>
+<link rel="stylesheet" href="<?php echo $_zp_themeroot . '/css/mv_ad_tb.min.css' ?>">
+<?php } ?>
 <script>
 var phpToJS = <?php echo json_encode($javas) ?>;
 </script>

@@ -1613,43 +1613,7 @@ footer ul li {
 }
 
 
-/* Zenphoto admin bar */
 
-#zp__admin_module {
-  background-color: #1f2224;
-}
-#zp__admin_link {
-  cursor: pointer;
-  background-color: #414141;
-  height: 30px;
-  letter-spacing: normal;
-  text-transform: none;
-  font-weight: normal;
-  box-shadow: none;
-  color: inherit !important;
-  width: auto;
-}
-#zp__admin_link:hover {
-  color: #fff !important;
-  background-color: grey;
-}
-#zp__admin_data {
-  background-color: inherit;
-}
-#zp__admin_data li {
-  border-top: 1px solid #3e3e3e;
-}
-#zp__admin_data a {
-  color: #cacaca;
-}
-#zp__admin_data a:hover {
-  color: #FFF !important;
-  background-color: #58595B;
-}
-#zp__admin_data ul {
-  overflow-y: auto;
-  max-height: calc(100vh - 30px);
-}
 
 #page img {
   max-width: 100%;
