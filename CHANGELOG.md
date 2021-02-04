@@ -19,6 +19,7 @@
   * Preventing autofill of search input field on focus, allowing it only after the first interaction (unless the above plugin is active)
 
 ### Fixed
+* Fixed an issue with the index for preloading popup images in search.php page
 * Missing translation for `All news` link in News menu
 * Typo preventing line breaks in comments
 * Sliding navigation extended to browsers not supporting `Math.sign`

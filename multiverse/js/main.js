@@ -393,8 +393,8 @@
 
   var totalImages = $(selector).length - 1;
 
-  $(selector).click(function() {
-    currentIndex = $(this).parent().index();
+  $(selector).on('click', function() {
+    currentIndex = $(this).parent().index('div.thumb:not(.album)');
     preload();
   });
 
