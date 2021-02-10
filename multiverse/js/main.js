@@ -15,7 +15,8 @@
 
 (function($) {
 
-  var $window = $(window),
+  var objWindow = window,
+  $window = $(objWindow),
   $body = $('body'),
   $wrapper = $('#wrapper'),
   received = phpToJS;
@@ -50,7 +51,7 @@
     // On load remove "loading" class.
 
     $window.on('load', function() {
-      window.setTimeout(function() {
+      objWindow.setTimeout(function() {
         $body.removeClass('loading');
       }, 100);
     });
@@ -60,11 +61,11 @@
 
     $window.on('resize', function() {
 
-      window.clearTimeout(resizeTimeout);
+      objWindow.clearTimeout(resizeTimeout);
 
       $body.addClass('resizing');
 
-      resizeTimeout = window.setTimeout(function() {
+      resizeTimeout = objWindow.setTimeout(function() {
         $body.removeClass('resizing');
       }, 100);
 
@@ -79,10 +80,10 @@
   $('form').placeholder();
 
   // Panels.
+  var $header = $('header');
   var $panels = $('.panel');
 
-
-  $toggle = $('header > nav a'),
+  var $toggle = $header.children('nav').has('a'),
   $closer = $('<span class="closer" />').appendTo($panels);
 
   // Closer.
@@ -144,11 +145,16 @@
 
 
   // Global events.
+  var $fullscreen = $('#fullscreen');
   $body
   .on('click', function(event) {
 
     // disable closing panels for Zenphoto admin and fullscreen buttons (bic-ed)
-    if ($body.hasClass('content-active') && !$(event.target).is('#zp__admin_link, #zp__admin_data a, #fullscreen')) {
+    if ($body.hasClass('content-active') && !$(event.target).is(
+      $('#zp__admin_link, #zp__admin_data a')
+      .add($fullscreen)
+      .add($fullscreen.children()))
+    ) {
 
       event.preventDefault();
       event.stopPropagation();
@@ -173,7 +179,6 @@
   });
 
   // Header.
-  var $header = $('header');
 
   // Links.
   $header.find('a').each(function() {
@@ -194,7 +199,7 @@
       event.preventDefault();
       event.stopPropagation();
 
-      window.location.href = href;
+      objWindow.location.href = href;
 
     });
 
@@ -206,16 +211,20 @@
   Move menus, social & copyright when the "medium" breakpoint activates (bic-ed)
   */
 
-  var $social_placeolder = $('.social').prev();
+  var $social = $('.social');
+  var $innerSplit = $('.inner.split');
+  var $menuGroup = $('.menu_group');
+  var $copyright = $('.copyright');
+  // var $social_placeolder = $social.prev();
   breakpoints.on('<=medium', function() {
-    $('.menu_group').insertAfter($('.inner.split').children().first());
-    $('.social').appendTo($('.inner.split').children().last());
-    $('.copyright').appendTo($('.inner.split').children().last());
+    $menuGroup.insertAfter($innerSplit.children().first());
+    $social.appendTo($innerSplit.children().last());
+    $copyright.appendTo($innerSplit.children().last());
   });
   breakpoints.on('>medium', function() {
-    $('.menu_group').appendTo($('.inner.split'));
-    $('.social').insertAfter($social_placeolder);
-    $('.copyright').appendTo($('.inner.split').children().first());
+    $menuGroup.appendTo($innerSplit);
+    $social.insertAfter($social.prev());
+    $copyright.appendTo($innerSplit.children().first());
   });
 
   // Main.
@@ -224,9 +233,9 @@
   // Thumbs.
   $main.children('.thumb').each(function() {
 
-    var $this = $(this),
-    $image = $this.find('.image'), $image_img = $image.children('img'),
-    x;
+    var $image = $(this).find('.image'),
+      $image_img = $image.children('img'),
+      x;
 
     // No image? Bail.
     if ($image.length == 0)
@@ -256,8 +265,9 @@
 
   var currentIndex = 0,
   selector = '.thumb > a.image',
+  $selector = $(selector),
   imgLinks = new Array();
-  $(selector).each(function() {
+  $selector.each(function() {
     imgLinks.push($(this).attr('href'));
   });
 
@@ -265,11 +275,11 @@
   var fadeSpeed = 200,
   popupSpeed = 200;
 
-  // Define $imgs outside onPopupOpen function to use it in other functios too (bic-ed)
-  var $imgs = "",
+  // Define $imgs and $play outside onPopupOpen function, to use them in other functios too (bic-ed)
+  var $imgs, $play;
 
   // Define once as a variable that will be used to avoid currentIndex mess up on keyboard navigation and more (bic-ed)
-  once = 0;
+  var once = 0;
 
   // Poptrox.
   $main.poptrox({
@@ -290,18 +300,35 @@
       // Reset all when popup has been closed (bic-ed)
       clearInterval(slideShow);
       reset_swipe(0);
-      $("#play").removeClass("playing");
+      $play.removeClass("playing");
       slideShow = null;
-      $imgs.swipe("destroy");
-      $('#fullscreen').insertAfter('header > h1');
+      // $imgs.swipe("destroy");
+      $fullscreen.insertAfter($header.children('h1'));
     },
     onPopupOpen: function() {
       $body.addClass('modal-active');
-      // Initialize swipe and move fullscreen icon on the image when popup has been opened (bic-ed)
-      $imgs = $(".poptrox-popup");
-      $imgs.swipe(imgSlideAndZoom);
+      // Initialize all (bic-ed)
+      if (!$imgs) { // Only once
+        $imgs = $(".poptrox-popup").append('<span id="play" />', '<span class="nav-previous" />', '<span class="nav-next" />');
+        //  Swipe navigation
+        $imgs.swipe(imgSlideAndZoom)
+        // Standard navigation
+        .children(
+          $('.nav-next').on('click', function() {
+            changeImage(1);
+          }),
+          $('.nav-previous').on('click', function() {
+            changeImage(-1);
+          })
+        );
+        // Sideshow
+        $play = $('#play');
+        $play.on('click', slide);
+      }
+
+      // Move fullscreen icon on the image when popup has been opened
       setTimeout(function() {
-        $('#fullscreen').appendTo('.poptrox-popup');
+        $fullscreen.appendTo($imgs);
       }, fadeSpeed + popupSpeed);
     },
     overlayOpacity: 0,
@@ -328,7 +355,7 @@
   */
 
   $window.keyup(function(e) {
-    if ($imgs.length && !$('#zoom').length) {
+    if ($imgs && !$zoom) {
       switch (e.keyCode) {
 
         case 37:
@@ -359,15 +386,12 @@
   Slide show (bic-ed)
   */
 
-  $(".poptrox-popup").append('<span id="play"></span>', '<span class="nav-previous"></span>', '<span class="nav-next"></span>');
-
   var slideShow;
-  $("#play").click(slide);
 
   function slide() {
-    $("#play").addClass("start");
+    $play.addClass("start");
     setTimeout(function() {
-      $("#play").removeClass("start");
+      $play.removeClass("start");
       if (!slideShow) {
         if (once) {
           return false;
@@ -380,7 +404,7 @@
         slideShow = null;
       }
       setTimeout(function() {
-        $("#play").toggleClass("playing");
+        $play.toggleClass("playing");
       }, 200)
     }, 350)
   };
@@ -391,9 +415,9 @@
   Set total images number and get index of current image on open popup. (bic-ed)
   */
 
-  var totalImages = $(selector).length - 1;
+  var totalImages = $selector.length - 1;
 
-  $(selector).on('click', function() {
+  $selector.on('click', function() {
     currentIndex = $(this).parent().index('div.thumb:not(.album)');
     preload();
   });
@@ -423,17 +447,9 @@
     });
   };
 
-
-  // standard navigation
-  $('.poptrox-popup .nav-next').click(function() {
-    changeImage(1);
-  });
-  $('.poptrox-popup .nav-previous').click(function() {
-    changeImage(-1);
-  });
-
+  var $poptroxOverlay = $('.poptrox-overlay');
   // Hack: Set margins to 0 when 'small' activates.
-  if ( $(".poptrox-overlay").length>0) {
+  if ($poptroxOverlay.length > 0) {
     breakpoints.on('>small', function() {
       $main[0]._poptrox.windowMargin = 50;
     });
@@ -446,8 +462,8 @@
   Fullscreen (bic_ed)
   */
 
-  $("#fullscreen").on('click', function(e) {
-    var doc = window.document;
+  $fullscreen.on('click', function(e) {
+    var doc = objWindow.document;
     var docEl = doc.documentElement;
     var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
     var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
@@ -503,7 +519,7 @@
   }
 
   var popImgSize, realImgSize, zoomStartPosition, zoomCurrentPosition,
-  windowSize, $zoomedImg, zoomSpeed = 300;
+  windowSize, $zoomedImg, zoomSpeed = 300, $zoom;
 
   function openZoom(event, target) {
     // IDEA: add a theme option to open real full size image via ajax instead
@@ -524,10 +540,11 @@
     //   return false;
     // }
     $body.prepend("<span id='zoom'><img src='' /></span>");
-    $zoomedImg = $("#zoom > img");
+    $zoom = $("#zoom");
+    $zoomedImg = $zoom.children("img");
     windowSize = {
       width: $window.width(),
-      height: $(".poptrox-overlay").height()
+      height: $poptroxOverlay.height()
     }
     zoomStartPosition = {
       top: $poptroxImg.offset().top - $window.scrollTop(),
@@ -552,7 +569,7 @@
     });
 
     $zoomedImg.prop("src", $poptroxImg.attr("src"));
-    $(".poptrox-overlay").fadeTo(zoomSpeed, 0);
+    $poptroxOverlay.fadeTo(zoomSpeed, 0);
 
     zoomBounds();
 
@@ -575,14 +592,15 @@
     $zoomedImg.swipe("destroy");
 
     $main.css('filter', '');
-    $(".poptrox-overlay").fadeTo(zoomSpeed, 1);
+    $poptroxOverlay.fadeTo(zoomSpeed, 1);
     $zoomedImg.animate({
       "top": zoomStartPosition.top,
       "left": zoomStartPosition.left,
       "width": popImgSize.width,
       "height": popImgSize.height
     }, zoomSpeed, function() {
-      $("#zoom").remove();
+      $zoom.remove();
+      $zoom = 0;
     });
   };
 
@@ -631,8 +649,10 @@
     if (phase == "start") {
       // close poptrox popup
       event.preventDefault();
-      closePoptroxTimer  = setTimeout(function() {
-        $imgs.trigger('poptrox_close');
+      closePoptroxTimer = setTimeout(function() {
+        $imgs.swipe('disable')
+        .swipe('enable')
+        .trigger('poptrox_close');
       }, 650);
       // zoom opening point
       startingPoint = {
@@ -739,14 +759,16 @@
   */
 
   // Conform language menu style to album menu style
-  $('.flags .currentLanguage img').wrap('<a />');
-  $('.flags img').each(function() {
+  var $flags = $('.flags');
+  var $currentLanguage = $('.currentLanguage');
+  $flags.find($currentLanguage.find('img')).wrap('<a />');
+  $flags.find('img').each(function() {
     $(this).replaceWith($(this).attr('alt'));
   });
-  $('.flags').prev().find('a').text($('.currentLanguage a').text());
-  $('.flags').removeClass('flags');
-  $('.currentLanguage a').addClass('active-item');
-  $('.currentLanguage').removeClass('currentLanguage');
+  $flags.prev().find('a').text($currentLanguage.children('a').text());
+  $flags.removeClass('flags');
+  $currentLanguage.children('a').addClass('active-item');
+  $currentLanguage.removeClass('currentLanguage');
 
 
   /*
@@ -755,7 +777,7 @@
 
   // Conform news menu style to album menu style
   if (!$('#news_menu .active-item a').length > 0 ) {
-    $('#news_menu .active-item').not('a').removeClass('active-item').contents().wrap('<a class="active-item"></a>');
+    $('#news_menu .active-item').not('a').removeClass('active-item').contents().wrap('<a class="active-item" />');
   }
 
   // Add active-item class if we are on news loop or gallery loop in home page
@@ -773,9 +795,9 @@
   $("a.active-item").removeAttr("href");
 
   // open/close menu on click
-  $('.drop').on('click',function() {
-    $(this).toggleClass('dropped');
-    $(this).next().toggleClass('dropped');
+  $('.drop').on('click', function() {
+    $(this).toggleClass('dropped')
+    .next().toggleClass('dropped');
   });
 
 
@@ -786,14 +808,16 @@
   $('#search br').remove();
 
   // Set title for search options menu opener and open/close the menu
-  $('a.toggle_searchextrashow')
+  var $toggleSearchExtra = $('a.toggle_searchextrashow');
+  var $searchExtraShow = $('#searchextrashow');
+  $toggleSearchExtra
   .prop('title', $('img#searchfields_icon').attr('title'))
   .on('click', function() {
-    $(this).add('#searchextrashow').toggleClass('dropped');
+    $(this).add($searchExtraShow).toggleClass('dropped');
   });
 
   // Prepare for using FontAwesome checkbox
-  $('#searchextrashow label').each(function() {
+  $searchExtraShow.find('label').each(function() {
     $(this).prop('for', $(this).children().attr('id'));
     $(this).before($(this).children());
   });
@@ -819,10 +843,10 @@
     }
   });
 
-  // close all menus by clicking outside them too
+  // Close all menus by clicking outside them too
   $('footer').on('click', function(e) {
     if (!$(e.target).is('.main-nav *, #search_form *')) {
-      $('ul, .toggle_searchextrashow, #searchextrashow').removeClass('dropped');
+      $('ul').add($searchExtraShow).add($toggleSearchExtra).removeClass('dropped');
     }
   });
 
@@ -832,14 +856,15 @@
   */
 
   // Hide mail subject if defined in theme options
+  var $mailform = $('#mailform');
   if (received.mailSubject !== "") {
-    $('#mailform').children('#mailform-subject').hide().prev().hide();
+    $mailform.children('#mailform-subject').hide().prev().hide();
   }
 
   // Layout
   $('#commentcontent > br').remove();
-  $('#mailform').prev().hide();
-  $('#mailform > label, #commentform > label').addClass("hide");
+  $mailform.prev().hide();
+  $mailform.children('label').add('#commentform > label').addClass("hide");
   $('#loginform button[type=submit]').addClass('special');
 
   // Zenphoto PasswordForm layout adaptation
@@ -866,7 +891,7 @@
   Submit mail form via ajax
   */
 
-  $('#mailform').on('submit', function(e) {
+  $mailform.on('submit', function(e) {
     e.preventDefault();
 
     var $submit = $(this).find('input[type="submit"]'), message;
@@ -876,8 +901,9 @@
     $submit.next().prop('disabled', 'disabled');
 
     // Reposition container for feedback message and insert container for waiting icon spinner
-    $submit.parent().after($('#form-result'));
-    $submit.parent().after('<p class="idle"></p>');
+    var $formResult = $('#form-result');
+    $submit.parent().after($formResult);
+    $submit.parent().after('<p class="idle" />');
     $submit.parent().next().slideDown();
 
     $.ajax({
@@ -889,9 +915,10 @@
         message = '<div class="errorbox">Ajax error ' + xhr.status + ': ' + xhr.statusText + '</div>';
       },
       success: function(res) {
-        message = $(res).filter('.errorbox');
-        if (!$(res).filter('#mailform').length && !$(res).find('a[href*="again"]').length) {
-          message = '<div class="errorbox">' + $(res).text() + '</div>';
+        var $res = $(res);
+        message = $res.filter('.errorbox');
+        if (!$res.filter('#mailform').length && !$res.find('a[href*="again"]').length) {
+          message = '<div class="errorbox">' + $res.text() + '</div>';
         } else if (!message.length) {
           message = "<span>" + received.mailSent + "</span>";
         }
@@ -903,11 +930,11 @@
         });
         $submit.next().one('click', function() {
           $submit.removeAttr('disabled');
-          $('#form-result').slideUp(500, function() {
+          $formResult.slideUp(500, function() {
             $(this).children().remove();
           });
         });
-        $('#form-result').html(message).slideDown();
+        $formResult.html(message).slideDown();
       }
     });
   });
