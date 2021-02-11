@@ -1,36 +1,44 @@
 <?php
-$social_section = 0;
+$follow_section = 0;
 $has_search = getThemeOption('search');
 $has_album_menu = function_exists('printAlbumMenu');
-$see_more_count = $has_search + $has_album_menu + (ZENPAGE_ON && ZP_NEWS_ENABLED) + (ZENPAGE_ON && ZP_PAGES_ENABLED);
+$has_news = ZP_NEWS_ENABLED && !empty($_zp_zenpage->getArticles(1));
+$has_pages = ZP_PAGES_ENABLED && !empty($_zp_zenpage->getPages(true, true, 1));
+$see_more_count = $has_search + $has_album_menu + $has_news + $has_pages;
 $has_lang_menu = function_exists('printLanguageSelector');
 $menus_count = $see_more_count + 3 * $has_lang_menu;
 $has_contact = function_exists('printContactForm');
+$has_social = getThemeOption('social_contacts');
 
-// Positioning of the social section according to the layout
-if (getThemeOption('social_contacts')) {
+// Positioning the "follow" section according to the layout
+// $rss_links_enabled is defined in functions.php
+if ($has_social || $rss_links_enabled) {
   if ($menus_count > 0 && ($menus_count < 6 || $has_contact && getOption('contactform_captcha'))) {
-    $social_section = 3;
+    $follow_section = 3;
   } else if ($has_contact) {
-    $social_section = 2;
+    $follow_section = 2;
   } else {
-    $social_section = 1;
+    $follow_section = 1;
   }
 
-  function printSocialSection() {
-    $icons = explode (",", getThemeOption("social_content"));
-    $icons = array_chunk($icons, 3);
+  function printFollowSection() {
+    global $has_social;
     ?>
     <section class="social">
       <h2><?php echo gettext_th('Follow me on...'); ?></h2>
       <ul class="icons">
-        <?php foreach ($icons as $key) { ?>
-          <li>
-            <a href="<?php echo $key[0]; ?>" target="blank" class="icon <?php echo $key[1]; ?>">
-              <span class="label"><?php echo $key[2]; ?></span>
-            </a>
-          </li>
-        <?php } ?>
+        <?php printFooterRSS(); // RSS links as defined in functions.php
+        if ($has_social) {
+          $icons = explode (",", getThemeOption("social_content"));
+          $icons = array_chunk($icons, 3);
+          foreach ($icons as $key) { ?>
+            <li>
+              <a href="<?php echo $key[0]; ?>" target="_blank" rel="noopener" class="icon <?php echo $key[1]; ?>">
+                <span class="hide"><?php echo $key[2]; ?></span>
+              </a>
+            </li>
+          <?php }
+        } ?>
       </ul>
     </section>
     <?php
@@ -42,17 +50,18 @@ if (getThemeOption('social_contacts')) {
   <div class="inner split">
     <div>
       <section>
-        <?php if (in_context(ZP_ALBUM)) { ?>
+        <?php if (in_context(ZP_IMAGE)) { ?>
           <h2><?php printAlbumTitle(); ?></h2>
+          <?php printAlbumDesc(); ?>
+        <?php } elseif (in_context(ZP_ALBUM)) { ?>
+          <h1><?php printAlbumTitle(); ?></h1>
           <?php printAlbumDesc(); ?>
         <?php } else { ?>
           <h2><?php printGalleryTitle(); ?></h2>
           <?php printGalleryDesc(); ?>
         <?php } ?>
       </section>
-      <?php if ($social_section == 1) {  ?>
-        <?php printSocialSection(); ?>
-      <?php } ?>
+      <?php if ($follow_section == 1) printFollowSection(); ?>
       <section class="copyright">
         <p>
           <?php if ($copy_text = getOption('copyrigth_text')) { ?>
@@ -67,22 +76,20 @@ if (getThemeOption('social_contacts')) {
             }
             echo $archive_link . $copy_text . '<br>';
           } ?>
-          <i class="icon big fa-code" aria-hidden="true"></i>&nbsp;<a href="https://www.zenphoto.org/" title="Zenphoto CMS" target="blank"><span class="big">zen</span><span class="small">PHOTO</span></a>
-          + <a href="https://html5up.net" title="HTML5 UP" target="blank">HTML5 UP</a>
-          + <a class="small" href="https://www.antonioranesi.it" title="Antonio Ranesi <?php echo gettext_th('Photographer'); ?>" target="blank"><i class="icon fa-heart-o" aria-hidden="true"></i> bic-ed</a>
+          <i class="icon big fa-code" aria-hidden="true"></i>&nbsp;<a href="https://www.zenphoto.org/" title="Zenphoto CMS" target="_blank" rel="noopener"><span class="big">zen</span><span class="small">PHOTO</span></a>
+          + <a href="https://html5up.net" title="HTML5 UP" target="_blank" rel="noopener">HTML5 UP</a>
+          + <a class="small" href="https://www.antonioranesi.it" title="Antonio Ranesi <?php echo gettext_th('Photographer'); ?>" target="_blank" rel="noopener"><i class="icon fa-heart-o" aria-hidden="true"></i> bic-ed</a>
         </p>
       </section>
     </div>
-    <?php if ($has_contact) { ?> 
+    <?php if ($has_contact) { ?>
       <div>
         <section>
           <h2><?php echo gettext_th('Get in touch'); ?></h2>
           <?php printContactForm($mailsubject); ?>
           <div id="form-result"></div>
         </section>
-        <?php if ($social_section == 2) {  ?>
-          <?php printSocialSection(); ?>
-        <?php } ?>
+        <?php if ($follow_section == 2) printFollowSection(); ?>
       </div>
     <?php } ?>
     <?php if ($menus_count) { ?>
@@ -90,7 +97,9 @@ if (getThemeOption('social_contacts')) {
         <?php if ($see_more_count) { ?>
           <section>
             <h2><?php echo gettext_th("See more"); ?></h2>
-            <?php if ($has_search) {
+            <?php if ($has_search) { ?>
+              <label for="search_input" class="hide"><?php echo gettext('Search') ?></label>
+              <?php
               printSearchForm("","search", "","");
             } ?>
             <?php if ($has_album_menu) { ?>
@@ -102,34 +111,32 @@ if (getThemeOption('social_contacts')) {
                     </a>
                   </li>
                 </ul>
-                <?php printAlbumMenuList('list', false, 'album_menu', 'active-item', 'subalbum', 'active-item', gettext("Gallery Index"), NULL, false, false, true, NULL); ?>
+                <?php printAlbumMenuList('list', false, 'album_menu', 'active-item', 'subalbum', 'active-item', gettext("Gallery Index"), null, false, false, true, null); ?>
               </nav>
             <?php } ?>
-            <?php if (ZENPAGE_ON) { ?>
-              <?php if (ZP_PAGES_ENABLED) { ?>
-                <nav class="main-nav">
-                  <ul class="drop">
-                    <li>
-                      <a>
-                        <?php echo gettext('Pages') ?>
-                      </a>
-                    </li>
-                  </ul>
-                  <?php printPageMenu('list', 'page_menu', 'active-item', 'subalbum', 'active-item', null, 0); ?>
-                </nav>
-              <?php } if (ZP_NEWS_ENABLED) { ?>
-                <nav class="main-nav">
-                  <ul class="drop">
-                    <li>
-                      <a>
-                        <?php echo gettext('News') ?>
-                      </a>
-                    </li>
-                  </ul>
-                  <?php printAllNewsCategories(isset($ishome_news) ? '' : 'All news', $counter = false, $css_id = 'news_menu', $css_class_topactive = 'active-item', $startlist = true, $css_class = 'subalbum', $css_class_active = 'active-item', $option = 'list', $showsubs = false, $limit = NULL); ?>
-                </nav>
-              <?php }?>
-            <?php } ?>
+            <?php if ($has_pages) { ?>
+              <nav class="main-nav">
+                <ul class="drop">
+                  <li>
+                    <a>
+                      <?php echo gettext('Pages') ?>
+                    </a>
+                  </li>
+                </ul>
+                <?php printPageMenu('list', 'page_menu', 'active-item', 'subalbum', 'active-item', null, 0); ?>
+              </nav>
+            <?php } if ($has_news) { ?>
+              <nav class="main-nav">
+                <ul class="drop">
+                  <li>
+                    <a>
+                      <?php echo gettext('News') ?>
+                    </a>
+                  </li>
+                </ul>
+                <?php printNestedMenu('list', 'categories', false, 'news_menu', 'active-item', 'subalbum', 'active-item', gettext('All news')); ?>
+              </nav>
+            <?php }?>
           </section>
         <?php } ?>
         <?php if ($has_lang_menu) { ?>
@@ -147,9 +154,7 @@ if (getThemeOption('social_contacts')) {
             </nav>
           </section>
         <?php } ?>
-        <?php if ($social_section == 3) {  ?>
-          <?php printSocialSection(); ?>
-        <?php } ?>
+        <?php if ($follow_section == 3) printFollowSection(); ?>
       </div>
     <?php } ?>
   </div>

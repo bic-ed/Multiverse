@@ -1,4 +1,41 @@
 # Changelog
+<!-- ## [Unreleased] -->
+## [v2.0] - 2020-02-11
+### Added
+* Standard single image page `image.php` with:
+  - Comment support
+  - Open Street Map plugin support
+  - Optional full image link
+  - Image metadata & tags
+* Custom forms for comments and contact, to get rid of duplicate IDs in pages where comments are enabled (i.e. where both form are present)
+  * During data entry, required fields are marked in red if not filled in properly
+* A light shadow on info panel when active, to better separate it from the main content background
+* RSS feed links in footer for Gallery, Album and News
+
+### Changed
+* Hidden labels in forms and hidden texts for links (social) are now compliant with accessibility requirements (dropped CSS "display: none")
+* No more showing News menu when there are no published news article 
+* Subcategories, if any, are now shown in News menu when the parent category is the current page
+* Show the `cookieconsent` banner above the header
+* Updated Raleway fonts to v18 and filled `src: local()` in @font-face
+* Restyling of search bar and search options menu
+  * Added a coloured frame on focus to search input field, like the one already present in every other input field
+  * Harmonized search options menu (`searchexstrashow`) appearance and animation with all other menus
+  * Styled _Tag suggest_ plugin elements
+  * Preventing autofill of search input field on focus, allowing it only after the first interaction (unless the above plugin is active)
+
+### Fixed
+* Fixed an issue with the index for preloading popup images in search.php page
+* Missing translation for `All news` link in News menu
+* Typo preventing line breaks in comments
+* Sliding navigation extended to browsers not supporting `Math.sign`
+* Info button was slightly exceeding header height on small screens
+* Placed the h2 titles for images and albums sections as first children of the `#main` flex container in search results page, where they were supposed to be to break flex rows
+* Background color for active buttons updated to the proper new color palette from the original Multiverse old one
+
+### Removed
+* Image description from album page, since it is in image page now
+
 ## [v1.2] - 2020-12-07
 ### Changed
 * Redesigned sliding navigation for poptrox pupup
@@ -30,8 +67,9 @@
 ### Fixed
 * Image page redirection ([acrylian])
 * Proper RSS header link in `gallery.php` ([fretzl])
-* Removed from theme options unnecessary request for `functions.php` ([fretzl]))
+* Removed from theme options unnecessary request for `functions.php` ([fretzl])
 
+<!-- [Unreleased]: https://github.com/bic-ed/Multiverse/compare/2.0...master -->
 [v2.0]: https://github.com/bic-ed/Multiverse/compare/1.2...2.0
 [v1.2]: https://github.com/bic-ed/Multiverse/compare/1.1...1.2
 [v1.1]: https://github.com/bic-ed/Multiverse/compare/1.0...1.1

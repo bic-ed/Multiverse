@@ -1,4 +1,5 @@
 # Multiverse
+![gallery desktop](screenshots/gallery-desktop.png)
 ## A responsive theme for [Zenphoto](https://www.zenphoto.org/)
 
 This theme was initially developed for use on my own website, as a single album theme, just for some special presentations. Later I've added support for a complete gallery and for Zenpage extension too, so it can now also be used as the main theme of a Zenphoto gallery or a Zenphoto/Zenpage CMS*. It has been adapted for Zenphoto and extended to a multi-page theme from HTML5 UP’s [Multiverse](https://html5up.net/multiverse), a single-page web gallery, with some new JavaScript functionality as well:
@@ -11,7 +12,9 @@ This theme was initially developed for use on my own website, as a single album 
 * Some Zenphoto layout remodeling
 * Zenphoto ajax contact form
 
-Following the original nature of Multiverse layout, I have not included a real single image page. The `image.php` file is actually just a redirect script that acts to open the image popup in its album page.
+~~Following the original nature of Multiverse layout, I have not included a real single image page. The `image.php` file is actually just a redirect script that acts to open the image popup in its album page.~~
+
+A regular `image.php` page has been added since v2.0.
 
 \*Currently, **only image objects** are supported in albums, so Multiverse is not yet suitable for a full multimedia gallery. I may add support for medias other than images sooner or later, but I can't really say if and when. However, videos and other medias can of course be embedded in pages and news articles, like every other Zenpage theme allows to do.
 
@@ -35,3 +38,6 @@ This theme is based on Multiverse by HTML5 UP, a program licensed under the [Cre
 To run touch events, Matt Brison’s [TouchSwipe](https://github.com/mattbryson/TouchSwipe-Jquery-Plugin) Jquery Plugin has been included. It is dual licensed under the MIT or GPL-2 licenses.
 
 Multiverse also includes [Font Awesome](https://fontawesome.com/v4.7.0/) by Dave Gandy.
+
+### Changelog
+After v1.2 a [changelog](CHANGELOG.md) updated even with still unreleased major changes has been added.

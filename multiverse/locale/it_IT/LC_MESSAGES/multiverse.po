@@ -1,78 +1,90 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"POT-Creation-Date: 2020-07-30 11:24+0200\n"
-"PO-Revision-Date: 2020-07-30 12:27+0200\n"
+"Project-Id-Version: Multiverse 2.0\n"
+"POT-Creation-Date: 2021-02-10 18:01+0100\n"
+"PO-Revision-Date: 2021-02-10 18:02+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: ;gettext_th;ngettext_th:1,2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: footer.php:25
+#: footer.php:28
 msgid "Follow me on..."
 msgstr "Seguimi su..."
 
-#: footer.php:66
+#: footer.php:75
 msgid "Copyright info"
 msgstr "Informazioni sul Copyright"
 
-#: footer.php:72
+#: footer.php:81
 msgid "Photographer"
 msgstr "Fotografo"
 
-#: footer.php:79
+#: footer.php:88
 msgid "Get in touch"
 msgstr "Contattami"
 
-#: footer.php:92
+#: footer.php:99
 msgid "See more"
 msgstr "Vedi altro"
 
-#: footer.php:137
+#: footer.php:144
 msgid "Language"
 msgstr "Lingua"
 
-#: search.php:36
+#: image.php:16
+msgid "Open the pupup in Album page"
+msgstr "Apri il popup nella pagina dell’Album"
+
+#: image.php:30
+msgid "Open the pupup in Search page"
+msgstr "Apri il popup nella pagina di Ricerca"
+
+#: image.php:36
+msgid "Open the pupup in Archive page"
+msgstr "Apri il popup nella pagina Archivio"
+
+#: search.php:45
 msgid "Search results"
 msgstr "Risultati ricerca"
 
-#: search.php:144
+#: search.php:149
 msgid "album"
 msgid_plural "albums"
 msgstr[0] "album"
 msgstr[1] "album"
 
-#: search.php:176
+#: search.php:180
 msgid "image"
 msgid_plural "images"
 msgstr[0] "immagine"
 msgstr[1] "immagini"
 
-#: themeoptions.php:54
+#: themeoptions.php:59
 msgid "Image width"
 msgstr "Larghezza immagine"
 
-#: themeoptions.php:58
+#: themeoptions.php:63
 msgid "Set the max width in pixels for the image displayed in the popup."
 msgstr "Imposta la larghezza massima in pixel per l’immagine nel popup."
 
-#: themeoptions.php:59
+#: themeoptions.php:65
 msgid "Image height"
 msgstr "Altezza immagine"
 
-#: themeoptions.php:63
+#: themeoptions.php:69
 msgid "Set the max height in pixels for the image displayed in the popup."
 msgstr "Imposta l’altezza massima in pixel per l’immagine nel popup."
 
-#: themeoptions.php:63
+#: themeoptions.php:69
 msgid ""
 "<strong>Note:</strong> images in the popup might be visually reduced in "
 "width and height to fit user screen, but they can be zoomed to the sizes set "
@@ -82,11 +94,21 @@ msgstr ""
 "larghezza e altezza ridotte per adattarle allo schermo dei visitatori, ma è "
 "possibile ingrandirle, con un doppio click, alle dimensioni impostate qui."
 
-#: themeoptions.php:69
+#: themeoptions.php:75
+msgid ""
+"Check to show a link to the full size image on the image page. The behavior "
+"of the link depends on the options set in <code>Options->Image: Full image "
+"protection</code>."
+msgstr ""
+"Spunta per mostrare un link all’immagine originale nella pagina "
+"dell’immagine. Il comportamento del link dipende dalle opzioni impostate in "
+"<code>Opzioni->Immagine: Protezione immagine originale</code>."
+
+#: themeoptions.php:83
 msgid "Email subject"
 msgstr "Oggetto email"
 
-#: themeoptions.php:73
+#: themeoptions.php:87
 msgid ""
 "Subject of the email sent through the contact form included in Multiverse "
 "footer. Zenphoto automatically adds the title of your gallery (between "
@@ -96,7 +118,7 @@ msgstr ""
 "footer di Multiverse. Zenphoto aggiunge automaticamente il titolo della "
 "galleria (tra parentesi)."
 
-#: themeoptions.php:73
+#: themeoptions.php:87
 msgid ""
 "<strong>Note:</strong> leave this field empty to include a subject field in "
 "the contact form and let users fill it as they wish."
@@ -105,11 +127,11 @@ msgstr ""
 "oggetto nel modulo di contatto e consentire ai visitatori di compilarlo "
 "autonomamente."
 
-#: themeoptions.php:74
+#: themeoptions.php:89
 msgid "Copyright owner"
 msgstr "Titolare del copyright"
 
-#: themeoptions.php:78
+#: themeoptions.php:93
 msgid ""
 "Write the name of the copyright owner here. To this will be automatically "
 "added the year of the older image present in your gallery, followed by the "
@@ -119,7 +141,7 @@ msgstr ""
 "automaticamente l’anno dell’immagine più vecchia della galleria, seguito "
 "dall’anno in corso, con un link alla pagina dell’archivio completo."
 
-#: themeoptions.php:78
+#: themeoptions.php:93
 msgid ""
 "<strong>Note:</strong> leave this field empty if you don’t want any "
 "copyright text displayed."
@@ -127,11 +149,11 @@ msgstr ""
 "<strong>Nota:</strong> lascia vuoto questo campo se non vuoi mostrare nessun "
 "copyright."
 
-#: themeoptions.php:79
+#: themeoptions.php:95
 msgid "Copyright page"
 msgstr "Pagina del copyright"
 
-#: themeoptions.php:85
+#: themeoptions.php:101
 msgid ""
 "Choose the page that contains your site copyright terms, if any. A link to "
 "this page will be generated on the name of the copyright owner."
@@ -139,7 +161,7 @@ msgstr ""
 "Scegli la pagina che contiene i termini del copyright, se esiste. Sarà "
 "generato un link alla pagina sul nome del titolare del copyright."
 
-#: themeoptions.php:85 themeoptions.php:97 themeoptions.php:102
+#: themeoptions.php:101 themeoptions.php:127 themeoptions.php:136
 msgid ""
 "<strong>Note:</strong> You need the Zenpage extension enabled to use this "
 "feature."
@@ -147,11 +169,11 @@ msgstr ""
 "<strong>Nota:</strong> Per utilizzare questa funzione deve essere abilitata "
 "l’estensione Zenpage."
 
-#: themeoptions.php:86
+#: themeoptions.php:103
 msgid "Social profiles"
 msgstr "Profili social"
 
-#: themeoptions.php:90
+#: themeoptions.php:107
 msgid ""
 "Check to display a list of icons with links to your social media profiles, "
 "defined by filling the fields below with the following data:"
@@ -159,23 +181,23 @@ msgstr ""
 "Spunta per mostrare una lista di icone con i link ai tuoi profili social, "
 "definiti compilando i campi qui sotto con i seguenti dati:"
 
-#: themeoptions.php:90
+#: themeoptions.php:109
 msgid "Your social profile URL"
 msgstr "URL del tuo profilo social"
 
-#: themeoptions.php:90
+#: themeoptions.php:111
 msgid "Font Awesome class for the icon (i.e. <em>fa-github</em> for GitHub)."
 msgstr "Classe Font Awesome per l’icona (i.e. <em>fa-github</em> per GitHub)."
 
-#: themeoptions.php:90
+#: themeoptions.php:113
 msgid "Here the full list"
 msgstr "Qui la lista completa"
 
-#: themeoptions.php:90
+#: themeoptions.php:115
 msgid "Name of the social media"
 msgstr "Nome del social media"
 
-#: themeoptions.php:90
+#: themeoptions.php:117
 msgid ""
 "Use the <strong>Add</strong> button to add a new social media or the "
 "<strong>Delete</strong> button to remove the last one."
@@ -183,15 +205,15 @@ msgstr ""
 "Usa il pulsante <strong>Aggiungi</strong> per aggiungere un nuovo social "
 "media o quello <strong>Elimina</strong> per eliminare l’ultimo della lista."
 
-#: themeoptions.php:102
+#: themeoptions.php:138
 msgid "This overrides the <em>Homepage</em> option above."
 msgstr "Questo sovrascrive l’opzione <em>Home page</em> qui sopra."
 
-#: themeoptions.php:103
+#: themeoptions.php:141
 msgid "Enable Pagination"
 msgstr "Abilita paginazione"
 
-#: themeoptions.php:107
+#: themeoptions.php:145
 msgid ""
 "Check to split albums into multiple pages, depending on the options "
 "<code>Albums</code> and <code>Images</code> found at the top of this page. "
