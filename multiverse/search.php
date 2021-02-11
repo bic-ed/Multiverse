@@ -13,6 +13,8 @@ if ($pag_tot > 1) {
   $curr_pag = getCurrentPage();
   $pag = " (" . $curr_pag . "/" . $pag_tot .")";
 }
+// Set a cookie with number of albums, needed on image.php
+zp_setCookie("multiverse_search_numalbums", $numalbums, SEARCH_DURATION);
 ?>
 <!DOCTYPE html>
 <html<?php printLangAttribute(); ?>>
@@ -20,7 +22,14 @@ if ($pag_tot > 1) {
   <meta charset="<?php echo LOCAL_CHARSET; ?>">
   <?php printHeadTitle() ?>
   <?php zp_apply_filter('theme_head'); ?>
-  <?php if (class_exists('RSS')) printRSSHeaderLink('Gallery', gettext('Gallery RSS')); ?>
+  <?php if (class_exists('RSS')) {
+    if ($_rss_news) {
+      printRSSHeaderLink("News", gettext("Latest news"));
+    }
+    if ($_rss_gallery) {
+      printRSSHeaderLink("Gallery", gettext('Latest images'));
+    }
+  } ?>
   <?php printZDSearchToggleJS(); ?>
 </head>
 <body class="loading">
@@ -31,7 +40,7 @@ if ($pag_tot > 1) {
       <article id="page">
         <h1><?php if (isArchive()) {
           $date = strtotime($_zp_current_search->getSearchDate());
-          echo gettext('Gallery archive') . ': ' . strftime('%B %Y', $date);
+          echo '<a href="' . getCustomPageURL('archive') . '">' . gettext('Gallery archive') . '</a>' . ': ' . strftime('%B %Y', $date);
         } else {
           echo gettext_th('Search results');
         }
@@ -174,14 +183,34 @@ if ($pag_tot > 1) {
             <a class="image" href='<?php echo getCustomSizedImageMaxSpace($image_x, $image_y); ?>' title="<?php printBareImageTitle(); ?>">
               <?php printCustomSizedImageThumbMaxSpace(getBareImageTitle(), $thumb_x, $thumb_y); ?>
             </a>
-            <h2><?php printBareImageTitle(); ?></h2>
-            <?php printImageDesc(); ?>
+            <h2><a href="<?php echo htmlspecialchars(getImageURL());?>" title="<?php echo getBareImageTitle();?>"> <?php printBareImageTitle(); ?></a></h2>
+            <?php // echo truncate_string(html_encodeTagged(getImageDesc()), 100, ' (..)'); ?>
           </div>
         <?php } // end while ?>
       <?php } ?>
     </div>
   </div>
   <?php include("footer.php"); ?>
-  <?php zp_apply_filter('theme_body_close'); ?>
+  <?php zp_apply_filter('theme_body_close');
+
+  // Open popup with the image of the referer image.php page
+  if (isset($_GET['title']) && !class_exists('static_html_cache')) {
+    $title = sanitize($_GET['title']); ?>
+    <script>
+    $(window).on('load', function(){
+      $('a.image, a.icon').css("pointer-events", "none");
+      var title = "<?php echo js_encode($title); ?>",
+      $image = $('a.image[title="' + title + '"]');
+      setTimeout(function(){
+        $('html').animate({scrollTop: $image.offset().top + ($image.height() - $(window).height())/2}, 400, function(){
+          $('a.image, a.icon').css("pointer-events", "auto");
+        });
+      }, 2000);
+      setTimeout(function(){
+        $image.click();
+      }, 1600);
+    });
+    </script>
+  <?php } ?>
 </body>
 </html>

@@ -9,7 +9,9 @@ if (!defined('WEBPATH')) die();
   <meta charset="<?php echo LOCAL_CHARSET; ?>">
   <?php zp_apply_filter('theme_head'); ?>
   <?php printHeadTitle(); ?>
-  <?php if (class_exists('RSS')) printRSSHeaderLink('Album', getAlbumTitle()); ?>
+  <?php if (class_exists('RSS') && $_rss_gallery) {
+    printRSSHeaderLink("Album", "Album: " . getAlbumTitle());
+  } ?>
 </head>
 <body class="loading">
   <?php zp_apply_filter('theme_body_open'); ?>
@@ -29,8 +31,8 @@ if (!defined('WEBPATH')) die();
             <a class="image" href='<?php echo getCustomSizedImageMaxSpace($image_x, $image_y); ?>' title="<?php printBareImageTitle(); ?>">
               <?php printCustomSizedImageThumbMaxSpace(getBareImageTitle(), $thumb_x, $thumb_y); ?>
             </a>
-            <h2><?php printBareImageTitle(); ?></h2>
-            <?php printImageDesc(); ?>
+            <h2><a href="<?php echo htmlspecialchars(getImageURL());?>" title="<?php echo getBareImageTitle();?>"> <?php printBareImageTitle(); ?></a></h2>
+            <?php // echo truncate_string(html_encodeTagged(getImageDesc()), 100, ' (..)'); ?>
           </div>
         <?php } // end while
         $once = 0;
@@ -69,19 +71,19 @@ if (!defined('WEBPATH')) die();
             <a class="image" href='<?php echo getCustomSizedImageMaxSpace($image_x, $image_y); ?>' title="<?php printBareImageTitle(); ?>">
               <?php printCustomSizedImageThumbMaxSpace(getBareImageTitle(), $thumb_x, $thumb_y); ?>
             </a>
-            <h2><?php printBareImageTitle(); ?></h2>
-            <?php printImageDesc(); ?>
+            <h2><a href="<?php echo htmlspecialchars(getImageURL());?>" title="<?php echo getBareImageTitle();?>"> <?php printBareImageTitle(); ?></a></h2>
+            <?php // echo truncate_string(html_encodeTagged(getImageDesc()), 100, ' (..)'); ?>
           </div>
         <?php }
-        printPageListWithNav("", "", false, true, 'pagelist gallery', null, true, 5); ?>
-      <?php } ?>
+        printPageListWithNav("", "", false, true, 'pagelist gallery', null, true, 5);
+      } // end if ?>
     </div>
   </div>
   <?php include 'footer.php'; ?>
   <?php zp_apply_filter('theme_body_close');
 
-  // Open popup with the image defined by redirect from image.php
-  if (isset($_GET['title'])) {
+  // Open popup with the image of the referer image.php page
+  if (isset($_GET['title']) && !class_exists('static_html_cache')) {
     $title = sanitize($_GET['title']); ?>
     <script>
     $(window).on('load', function(){

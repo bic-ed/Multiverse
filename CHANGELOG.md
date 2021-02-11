@@ -1,6 +1,12 @@
 # Changelog
-## [Unreleased]
+<!-- ## [Unreleased] -->
+## [v2.0] - 2020-02-11
 ### Added
+* Standard single image page `image.php` with:
+  - Comment support
+  - Open Street Map plugin support
+  - Optional full image link
+  - Image metadata & tags
 * Custom forms for comments and contact, to get rid of duplicate IDs in pages where comments are enabled (i.e. where both form are present)
   * During data entry, required fields are marked in red if not filled in properly
 * A light shadow on info panel when active, to better separate it from the main content background
@@ -26,6 +32,9 @@
 * Info button was slightly exceeding header height on small screens
 * Placed the h2 titles for images and albums sections as first children of the `#main` flex container in search results page, where they were supposed to be to break flex rows
 * Background color for active buttons updated to the proper new color palette from the original Multiverse old one
+
+### Removed
+* Image description from album page, since it is in image page now
 
 ## [v1.2] - 2020-12-07
 ### Changed
@@ -60,8 +69,8 @@
 * Proper RSS header link in `gallery.php` ([fretzl])
 * Removed from theme options unnecessary request for `functions.php` ([fretzl])
 
-<!-- [v2.0]: https://github.com/bic-ed/Multiverse/compare/1.2...2.0 -->
-[Unreleased]: https://github.com/bic-ed/Multiverse/compare/1.2...master
+<!-- [Unreleased]: https://github.com/bic-ed/Multiverse/compare/2.0...master -->
+[v2.0]: https://github.com/bic-ed/Multiverse/compare/1.2...2.0
 [v1.2]: https://github.com/bic-ed/Multiverse/compare/1.1...1.2
 [v1.1]: https://github.com/bic-ed/Multiverse/compare/1.0...1.1
 

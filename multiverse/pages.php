@@ -10,7 +10,14 @@ die();
   <meta charset="<?php echo LOCAL_CHARSET; ?>">
   <?php printHeadTitle(); ?>
   <?php zp_apply_filter('theme_head'); ?>
-  <?php if (class_exists('RSS')) printRSSHeaderLink("News", "Zenpage news", ""); ?>
+  <?php if (class_exists('RSS')) {
+    if ($_rss_news) {
+      printRSSHeaderLink("News", gettext("Latest news"));
+    }
+    if ($_rss_gallery) {
+      printRSSHeaderLink("Gallery", gettext('Latest images'));
+    }
+  } ?>
   <?php printCodeblock(1); ?>
 </head>
 <body class="loading">

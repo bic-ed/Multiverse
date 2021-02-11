@@ -8,7 +8,14 @@ if (!defined('WEBPATH')) die();
   <meta charset="<?php echo LOCAL_CHARSET; ?>">
   <?php printHeadTitle(); ?>
   <?php zp_apply_filter('theme_head'); ?>
-  <?php if (class_exists('RSS')) printRSSHeaderLink("News", "Zenpage news", ""); ?>
+  <?php if (class_exists('RSS')) {
+    if ($_rss_news) {
+      printRSSHeaderLink("News", gettext("Latest news"));
+    }
+    if ($_rss_gallery) {
+      printRSSHeaderLink("Gallery", gettext('Latest images'));
+    }
+  } ?>
 </head>
 <body class="loading">
   <?php zp_apply_filter('theme_body_open'); ?>
@@ -20,7 +27,7 @@ if (!defined('WEBPATH')) die();
         <h2><?php echo gettext('Gallery'); ?></h2>
         <?php printAllDates(); ?>
         <?php if(ZENPAGE_ON && ZP_NEWS_ENABLED) { ?>
-          <h2><?php echo gettext('News'); ?></h2>
+          <h2><a id="news_arch"></a><?php echo gettext('News'); ?></h2>
           <?php printNewsArchive("archive", 'year', 'month', "", false, 'asc'); ?>
         <?php } ?>
         <h2><?php echo gettext('Tags'); ?></h2>

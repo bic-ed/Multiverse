@@ -133,7 +133,7 @@ html,
 body {
   background: #242629;
 }
-body.loading *, body.loading *:before, body.loading *:after {
+body.loading *:not(header), body.loading *:before, body.loading *:after {
   -webkit-animation: none !important;
   animation: none !important;
   transition: none !important;
@@ -606,6 +606,7 @@ input[type="checkbox"]:focus+label::before {
 #loginform {
   padding: 1em;
   background-color: #2f3136;
+  box-shadow: 0 0 40px -20px #1f2224;
 }
 #loginform > .errorbox {
   font-size: .8em;
@@ -890,8 +891,8 @@ table.alt tfoot {
   min-width: 52px;
   min-height: 52px;
 }
-.poptrox-popup .nav-previous,
-.poptrox-popup .nav-next {
+.nav-previous,
+.nav-next {
   background-image: url(../images/sprite.svg#arrow);
   background-repeat: no-repeat;
   background-size: 80%;
@@ -906,11 +907,11 @@ table.alt tfoot {
   min-width: 52px;
   max-height: 96px;
 }
-.poptrox-popup .nav-previous {
+.nav-previous {
   transform: scaleX(-1) translateY(-50%);
   left: 0;
 }
-.poptrox-popup .nav-next {
+.nav-next {
   right: 0px;
 }
 #play {
@@ -941,6 +942,9 @@ table.alt tfoot {
 .poptrox-popup.loading > span {
   display: none !important;
 }
+.swipe a {
+  pointer-events: none;
+}
 #fullscreen {
   top: 0;
   background-image: url(../images/sprite.svg#maximize);
@@ -966,17 +970,22 @@ table.alt tfoot {
   min-width: 52px;
   max-height: 96px;
 }
-.poptrox-popup span {
-  transition: opacity 0.2s ease-in-out, background-color .2s ease-in-out;
-  opacity: 0;
+.poptrox-popup span,
+#image span {
   position: absolute;
   z-index: 2;
+  font-size: 1.25em;
+  opacity: 0;
   cursor: pointer;
+  transition: opacity 0.2s ease-in-out,
+  background-color .2s ease-in-out;
 }
-.poptrox-popup:hover > span {
+.poptrox-popup:hover > span,
+#image:hover > span {
   opacity: 0.5;
 }
-.poptrox-popup:hover > span:hover {
+.poptrox-popup:hover > span:hover,
+#image:hover > span:hover {
   opacity: 1.0;
   background-color: rgba(0, 0, 0, 0.3);
 }
@@ -996,7 +1005,8 @@ table.alt tfoot {
   color: #ebebeb;
 }
 .poptrox-popup .caption p {
-  margin: -0.3em 0 0;
+  margin: 0 1em 0.3em;
+  text-align: left;
 }
 .poptrox-popup .loader {
   -webkit-animation: spinner 1s infinite linear !important;
@@ -1152,15 +1162,21 @@ header {
   height: 4em;
   background: #1f2224;
   line-height: 4em;
-  transition: transform 1s ease;
+  transition: transform 1s ease, top 1s;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
 }
-body.modal-active header,
-body.loading header {
+body.modal-active header {
   transform: translateY(4em);
+}
+/* For some reasons Lighthouse fails if the correct value of 4em is set here
+"Something went wrong with recording the trace over your page load. Please run Lighthouse again. (NO_LCP)"
+*/
+body.loading header {
+  transform: translateY(3em);
+  transition: transform .2s;
 }
 header h1 {
   color: #a0a0a1;
@@ -1267,18 +1283,25 @@ body.modal-active #main{
   position: absolute;
   top: 0;
   width: 100%;
+  cursor: zoom-in !important;
 }
 #main .thumb>h2 {
-  -moz-pointer-events: none;
-  -webkit-pointer-events: none;
-  -ms-pointer-events: none;
-  pointer-events: none;
   bottom: 1.875em;
   font-size: 0.8em;
   left: 2.1875em;
   margin: 0;
   position: absolute;
   z-index: 1;
+}
+.thumb>h2>a {
+  padding: 1em 0;
+  border: none;
+}
+.thumb h2 a::before {
+  content: '\f0c1';
+  font-family: fontawesome;
+  transform: scaleX(-1);
+  display: inline-block;
 }
 #main .thumb:not(.album)>p {
   display: none;
@@ -1433,6 +1456,9 @@ body.loading #main > h2 {
 
 /* Footer */
 
+footer h1 {
+  font-size: 1.25em;
+}
 footer .copyright {
   color: inherit;
   font-size: 0.9em;
@@ -1892,7 +1918,7 @@ div.pagelist {
   display: inline-block;
 }
 #tag_cloud {
-  line-height: 1.7em;
+  line-height: 1.26;
   text-align: center;
   word-spacing: -2px;
 }
@@ -1956,15 +1982,145 @@ ul.pagelist.gallery li:first-child > * {
   padding-left: 10px;
 }
 
+
+/**
+ * Image
+ */
+
+#image {
+  position: relative;
+  text-align: left;
+  cursor: grab;
+  align-self: center;
+}
+.swipe #image {
+  cursor: grabbing;
+}
+.swipe #image:hover > span {
+  opacity: 0;
+}
+#page.swipe {
+  overflow-x: hidden;
+}
+#image > span {
+  min-height: 100%;
+  width: 100%;
+  border-radius: 0;
+  background-position: 8px;
+  background-size: 100%;
+}
+#image a {
+  display:block;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+#container {
+  display: flex;
+  margin: 2em auto;
+  max-width: max-content;
+  background-color: #2c2e33;
+  box-shadow: 0 0 0 1em #2c2e33;
+
+  justify-content: center;
+}
+#container h1 {
+  margin: 0 0 .8em;
+  font-size: 1.25em;
+}
+#container p {
+  text-align: left;
+}
+#container img {
+  display: block;
+}
+#img_info {
+  position: relative;
+  padding: 0 0 0 1em;
+  max-width: 15.95em;
+  background-color: #2c2e33;
+  color: #fff;
+  text-align: left;
+  letter-spacing: normal;
+  font-size: .9em;
+  flex-shrink: 4;
+}
+#img_info a {
+  color: #fff;
+}
+#img_info h2 {
+  font-size: 1em;
+}
+.counter {
+  font-size: 0.9em;
+  padding-bottom: 0.05em;
+}
+#img_info p {
+  margin-bottom: 1em;
+}
+#img_info > :last-child{
+  margin-bottom: 0;
+}
+#img_info * {
+    word-break: break-word;
+}
+.img_descr {
+  padding: 1em 0 2em;
+}
+#osm_map {
+  margin-bottom: 70.4px;
+  box-shadow: 0 0 0 17.6px #2c2e33;
+}
+@media screen and (min-width: 1681px) {
+  #osm_map {
+    margin-bottom: 96px;
+    box-shadow: 0 0 0 24px #2c2e33;
+  }
+}
+#img_info .date {
+  margin-bottom: 1em;
+  white-space: nowrap;
+}
+#img_info .date::before {
+  margin-right: 0.2em;
+  content: "\f073";
+  font-family: FontAwesome;
+}
 .tags_title {
   text-transform: uppercase;
 }
 .taglist {
-  display: inline;
+  margin-bottom: 1em;
   padding: 0;
+}
+.taglist::before {
+  margin-right: 0.2em;
+  content: "\f02c";
+  font-family: FontAwesome;
 }
 .taglist li {
   display: inline;
+  padding-left: 0;
+}
+#exif_link::before {
+  margin-right: 0.2em;
+  content: "\f030";
+  font-family: FontAwesome;
+}
+#imagemetadata_data {
+  position: absolute;
+  left: 50%;
+  z-index: 999;
+  margin-top: .8em;
+  width: max-content;
+  transform: translateX(calc(.5em - 50%));
+}
+#imagemetadata {
+  margin-bottom: -4em;
+  font-size: .85em;
+}
+#imagemetadata table tbody tr:nth-child(2n) {
+  background-color: #2c2e33;
 }
 
 
@@ -2072,8 +2228,8 @@ ul.pagelist.gallery li:first-child > * {
   .poptrox-popup .closer {
     background-size: 3em;
   }
-  .poptrox-popup .nav-previous,
-  .poptrox-popup .nav-next {
+  .nav-previous,
+  .nav-next {
     background-size: 4em;
   }
   #main .thumb {
@@ -2114,6 +2270,32 @@ ul.pagelist.gallery li:first-child > * {
   #main > *:nth-child(9) {
     transition-delay: 1.85s;
   }
+
+  /* Image */
+
+  #image {
+    /* width: max-content; */
+    max-width: 100%;
+    /* height: 100%; */
+  }
+  #container {
+    flex-direction: column;
+    margin: 1em auto 2em;
+    max-width: max-content;
+  }
+  #img_info {
+    padding: 2em 1em 1em 0;
+    max-width: none;
+    width: 100%;
+
+    /* align-self: normal; */
+  }
+  #imagemetadata_data {
+    position: relative;
+    left: 0;
+    width: 100%;
+    transform: none;
+  }
 }
 
 @media screen and (max-width: 736px) {
@@ -2145,13 +2327,6 @@ ul.pagelist.gallery li:first-child > * {
   .data_conf {
     margin: -.12em 0 1.2em;
   }
-  #passwordform {
-    max-width: none;
-  }
-  #loginform form {
-    padding: 0;
-    background-color: #2c2e33;
-  }
   .panel {
     transform: translateY(-80vh);
     padding: 4em 2em 2em 2em;
@@ -2171,8 +2346,8 @@ ul.pagelist.gallery li:first-child > * {
     display: none;
   }
   .poptrox-popup .closer,
-  .poptrox-popup .nav-previous,
-  .poptrox-popup .nav-next {
+  .nav-previous,
+  .nav-next {
     display: none !important;
   }
   body {
@@ -2185,9 +2360,14 @@ ul.pagelist.gallery li:first-child > * {
     padding: 0 1em;
     top: 0;
   }
-  body.loading header,
   body.modal-active header {
     transform: translateY(-4em);
+  }
+  /* For some reasons Lighthouse fails if the correct value of 4em is set here
+  "Something went wrong with recording the trace over your page load. Please run Lighthouse again. (NO_LCP)"
+  */
+  body.loading header {
+    transform: translateY(-2.5em);
   }
   header h1 {
     font-size: 0.9em;
@@ -2217,7 +2397,7 @@ ul.pagelist.gallery li:first-child > * {
   .pagelist ul.pagelist {
     font-size: 1.2em;
   }
-  #page h1 {
+  #page h1::not(#container h1) {
     margin-top: .5em;
   }
 
@@ -2228,6 +2408,12 @@ ul.pagelist.gallery li:first-child > * {
   }
   #tag_cloud li {
     margin-bottom: 1em;
+  }
+
+  /* Image */
+
+  #container {
+    margin-top: -1em;
   }
 }
 
@@ -2260,6 +2446,7 @@ ul.pagelist.gallery li:first-child > * {
     max-width: calc(100% + 2em);
     height: auto;
     margin-left: -1em;
+    margin-right: -1em;
   }
   #passwordform {
     max-width: none;
@@ -2272,6 +2459,18 @@ ul.pagelist.gallery li:first-child > * {
   }
   #commentcontent img {
     margin: 0;
+  }
+
+  /* Image */
+
+  #img_info {
+    padding-left: 1em;
+    margin-left: -1.111em;
+    margin-right: -1.111em;
+    width: auto;
+  }
+  #page {
+    overflow-x: hidden;
   }
 }
 

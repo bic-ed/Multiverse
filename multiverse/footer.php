@@ -50,8 +50,11 @@ if ($has_social || $rss_links_enabled) {
   <div class="inner split">
     <div>
       <section>
-        <?php if (in_context(ZP_ALBUM)) { ?>
+        <?php if (in_context(ZP_IMAGE)) { ?>
           <h2><?php printAlbumTitle(); ?></h2>
+          <?php printAlbumDesc(); ?>
+        <?php } elseif (in_context(ZP_ALBUM)) { ?>
+          <h1><?php printAlbumTitle(); ?></h1>
           <?php printAlbumDesc(); ?>
         <?php } else { ?>
           <h2><?php printGalleryTitle(); ?></h2>

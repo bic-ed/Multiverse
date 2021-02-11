@@ -8,7 +8,18 @@ if (!defined('WEBPATH')) die();
   <meta charset="<?php echo LOCAL_CHARSET; ?>">
   <?php printHeadTitle(); ?>
   <?php zp_apply_filter('theme_head'); ?>
-  <?php if (class_exists('RSS')) printRSSHeaderLink("News", "Zenpage news", ""); ?>
+  <?php if (class_exists('RSS')) {
+    if ($_rss_news) {
+      $rss_title = gettext("Latest news");
+      if (is_NewsCategory()) {
+        $rss_title = gettext("Latest news") . " (" . $_zp_current_category->getTitle() . ")";
+      }
+      printRSSHeaderLink("Category", $rss_title);
+    }
+    if (!is_NewsArticle() && !is_NewsCategory() && $_rss_gallery) {
+      printRSSHeaderLink("Gallery", gettext('Latest images'));
+    }
+  } ?>
 </head>
 
 <body class="loading">
@@ -36,7 +47,7 @@ if (!defined('WEBPATH')) die();
             <?php printTags('links', gettext('Tags') . ': ', 'taglist', ', '); ?>
             <?php
             @call_user_func('printCommentForm');
-
+            
           } else { // news article loop
             $pag = "";
             $pag_tot = ceil($_zp_zenpage->getTotalArticles() / ZP_ARTICLES_PER_PAGE);
@@ -48,7 +59,7 @@ if (!defined('WEBPATH')) die();
             <h1><?php if (in_context(ZP_ZENPAGE_NEWS_CATEGORY)) {
               printCurrentNewsCategory();
             } else if (is_NewsArchive()) {
-              echo gettext('News archive') . ': ';
+              echo '<a href="' . getCustomPageURL('archive') . '#news_arch">' . gettext('News archive') . '</a>' . ': ';
               printCurrentNewsArchive();
             } else {
               echo gettext('All news');

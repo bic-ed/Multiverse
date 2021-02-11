@@ -9,7 +9,14 @@ if (!defined('WEBPATH')) die();
   <meta charset="<?php echo LOCAL_CHARSET; ?>">
   <?php zp_apply_filter('theme_head'); ?>
   <?php printHeadTitle(); ?>
-  <?php if (class_exists('RSS')) printRSSHeaderLink('Gallery', gettext('Gallery RSS')); ?>
+  <?php if (class_exists('RSS')) {
+    if ($_rss_news) {
+      printRSSHeaderLink("News", gettext("Latest news"));
+    }
+    if ($_rss_gallery) {
+      printRSSHeaderLink("Gallery", gettext('Latest images'));
+    }
+  } ?>
 </head>
 <body class="loading">
   <?php zp_apply_filter('theme_body_open'); ?>

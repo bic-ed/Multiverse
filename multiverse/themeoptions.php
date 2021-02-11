@@ -23,11 +23,15 @@ class ThemeOptions {
     setThemeOptionDefault('images_per_page', 24);
     setThemeOptionDefault('images_per_row', 2);
     setThemeOptionDefault('thumb_transition', 1);
+    setThemeOptionDefault('full_image', 0);
+    setThemeOptionDefault('image_size', 595);
+    setThemeOptionDefault('image_use_side', 'longest');
 
     if (class_exists('cacheManager')) {
       cacheManager::deleteCacheSizes($me);
       $width = getThemeOption('image_size_x');
       $height = getThemeOption('image_size_y');
+      $image_size = getThemeOption('image_size');
       $img_wmk = getOption('fullimage_watermark') ? getOption('fullimage_watermark') : null;
       $tmb_wmk = getOption('Image_watermark') ? getOption('Image_watermark') : null;
       $img_effect = getThemeOption('image_gray') ? 'gray' : null;
@@ -36,6 +40,8 @@ class ThemeOptions {
       cacheManager::addCacheSize($me, null, $width, $height, null, null, null, null, null, $img_wmk, $img_effect, true);
       // thumbs
       cacheManager::addCacheSize($me, null, 600, 6000, null, null, null, null, true, $tmb_wmk, $tmb_effect, true);
+      // image page
+      cacheManager::addCacheSize($me, $image_size, null, null, null, null, null, null, null, $img_wmk, $img_effect, null);
     }
   }
 
@@ -62,6 +68,12 @@ class ThemeOptions {
         'order' => 2,
         'desc' => gettext_th('Set the max height in pixels for the image displayed in the popup.') . '<p class="notebox">' . gettext_th("<strong>Note:</strong> images in the popup might be visually reduced in width and height to fit user screen, but they can be zoomed to the sizes set here by double clicking on them.") . '</p>'
       ),
+      gettext('Full image link') => array(
+        'key' => 'full_image',
+        'type' => OPTION_TYPE_CHECKBOX,
+        'order' => 3,
+        'desc' => gettext_th('Check to show a link to the full size image on the image page. The behavior of the link depends on the options set in <code>Options->Image: Full image protection</code>.') . "</p>"
+      ),
       gettext('Allow search') => array(
         'key' => 'search',
         'type' => OPTION_TYPE_CHECKBOX,
@@ -72,7 +84,7 @@ class ThemeOptions {
         'key' => 'email_subject',
         'type' => OPTION_TYPE_TEXTBOX,
         'order' => 5,
-        'desc' => gettext_th('Subject of the email sent through the contact form included in Multiverse footer. Zenphoto automatically adds the title of your gallery (between brackets)') . '<br><p class="notebox">' .  gettext_th('<strong>Note:</strong> leave this field empty to include a subject field in the contact form and let users fill it as they wish.') . "</p>"
+        'desc' => gettext_th('Subject of the email sent through the contact form included in Multiverse footer. Zenphoto automatically adds the title of your gallery (between brackets)') . '<p class="notebox">' .  gettext_th('<strong>Note:</strong> leave this field empty to include a subject field in the contact form and let users fill it as they wish.') . "</p>"
       ),
       gettext_th('Copyright owner') => array(
         'key' => 'copyrigth_text',
@@ -92,7 +104,17 @@ class ThemeOptions {
         'key' => 'social_contacts',
         'type' => OPTION_TYPE_CHECKBOX,
         'order' => 8,
-        'desc' => gettext_th("Check to display a list of icons with links to your social media profiles, defined by filling the fields below with the following data:") . "<ul><li>" . gettext_th("Your social profile URL") . "</li><li>" . gettext_th("Font Awesome class for the icon (i.e. <em>fa-github</em> for GitHub).") . "<a href='https://fontawesome.com/v4.7.0/icons/#brand' target='blank' title='FontAwesome 4.7'> " . gettext_th("Here the full list") . "</a>" . "</li><li>" . gettext_th("Name of the social media") . "</li></ul>" . gettext_th('Use the <strong>Add</strong> button to add a new social media or the <strong>Delete</strong> button to remove the last one.')
+        'desc' => gettext_th("Check to display a list of icons with links to your social media profiles, defined by filling the fields below with the following data:")
+        . "<ul><li>"
+        . gettext_th("Your social profile URL")
+        . "</li><li>"
+        . gettext_th("Font Awesome class for the icon (i.e. <em>fa-github</em> for GitHub).")
+        . '<a href="https://fontawesome.com/v4.7.0/icons/#brand" target="_blank" rel="noopener" title="FontAwesome 4.7"> '
+        . gettext_th("Here the full list") . "</a>"
+        . "</li><li>"
+        . gettext_th("Name of the social media")
+        . "</li></ul>"
+        . gettext_th('Use the <strong>Add</strong> button to add a new social media or the <strong>Delete</strong> button to remove the last one.')
       ),
       gettext('Homepage') => array(
         'key' => 'zenpage_homepage',
@@ -100,26 +122,34 @@ class ThemeOptions {
         'order' => 10,
         'selections' => $unpublishedpages,
         'null_selection' => gettext('none'),
-        'desc' => gettext("Choose here any <em>un-published Zenpage page</em> (listed by <em>titlelink</em>) to act as your site’s homepage instead the normal gallery index.") . "<p class='notebox'>" . gettext_th("<strong>Note:</strong> You need the Zenpage extension enabled to use this feature.") . "</p>"
+        'desc' => gettext("Choose here any <em>un-published Zenpage page</em> (listed by <em>titlelink</em>) to act as your site’s homepage instead the normal gallery index.")
+        . "<p class='notebox'>"
+        . gettext_th("<strong>Note:</strong> You need the Zenpage extension enabled to use this feature.")
+        . "</p>"
       ),
       gettext('News on index page') => array(
         'key' => 'zenpage_zp_index_news',
         'type' => OPTION_TYPE_CHECKBOX,
         'order' => 11,
-        'desc' => gettext("Enable this if you want to show the news section’s first page on the <code>index.php</code> page.") . "<p class='notebox'>" . gettext_th("<strong>Note:</strong> You need the Zenpage extension enabled to use this feature.") . "<br>" . gettext_th("This overrides the <em>Homepage</em> option above.") . "</p>"
+        'desc' => gettext("Enable this if you want to show the news section’s first page on the <code>index.php</code> page.")
+        . "<p class='notebox'>"
+        . gettext_th("<strong>Note:</strong> You need the Zenpage extension enabled to use this feature.")
+        . "<br>"
+        . gettext_th("This overrides the <em>Homepage</em> option above.")
+        . "</p>"
       ),
       gettext_th('Enable Pagination') => array(
         'key' => 'pagination',
         'type' => OPTION_TYPE_CHECKBOX,
         'order' => 12,
         'desc' => gettext_th('Check to split albums into multiple pages, depending on the options <code>Albums</code> and <code>Images</code> found at the top of this page. The album design is cleaner with this option disabled (default), however if you have some albums with many images and you are experiencing a too long loading time, you may wish to enable this option.')
-      ),
+      )
     );
   }
 
   function getOptionsDisabled() {
     return array(
-      'image_size',
+      // 'image_size',
       'thumb_size',
       'custom_index_page',
       'thumb_transition',
