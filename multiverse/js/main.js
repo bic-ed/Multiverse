@@ -944,7 +944,122 @@
   Remove border bottom from links with images
   */
 
-  $('#page a').has('img').css('border', 'none');
+  var $page = $('#page');
+  $page.find('a').has('img').css('border', 'none');
 
+
+  /*
+  Image page
+  */
+
+  var navigateImages = {
+    swipeStatus: swipePrevNext,
+    preventDefaultEvents: false,
+    threshold: 0, // "cancel" event delegated to "end"
+  };
+
+  var $singleImage = $('#image');
+
+  $singleImage.swipe(navigateImages);
+  $singleImage.on('dragstart', function() {
+    return false;
+  });
+
+
+  /**
+  * On swipe, changes image page to previous or next, with slide animation following swipe.
+  *
+  * On swipe move -> image follows finger
+  * On swipe end -> call redirect function
+  * On swipe cancel -> reset image position
+  *
+  * @author bic-ed
+  * @param  {obj} event
+  * @param  {string} phase start | move | end | cancel
+  * @param  {string} direction left | right | up | down
+  */
+  function swipePrevNext(event, phase, direction) {
+    var nextLink = $('.nav-next > a').attr('href'),
+    prevLink = $('.nav-previous > a').attr('href'),
+    evt;
+    event.touches ? evt = event.touches[0] : evt = event;
+    if (phase == "start") {
+      startingPoint = {
+        x: evt.clientX,
+        y: evt.clientY
+      }
+      swipeStarted = 0;
+    }
+    if (phase == "move") {
+      delta = {
+        x: evt.clientX - startingPoint.x,
+        y: evt.clientY - startingPoint.y
+      }
+      if (!event.touches || Math.abs(delta.x) > Math.abs(delta.y)) {
+        swipeStarted = 1;
+      }
+      if (swipeStarted && event.cancelable) {
+        event.preventDefault();
+
+        if (delta.x > 0 && prevLink || delta.x < 0 && nextLink) {
+          $('#imagemetadata_data').hide();
+          $page.addClass('swipe');
+
+          $singleImage.parent()
+          .css({
+            'transform': 'translateX(' + delta.x + 'px)',
+            'transition-duration': '0s',
+          });
+        }
+      }
+
+
+    } else if (phase == "end" && Math.abs(delta.x) > 90 && event.cancelable) {
+      if (delta.x > 0 && prevLink) {
+        changePage(1, prevLink);
+      } else if (delta.x < 0 && nextLink) {
+        changePage(-1, nextLink);
+      }
+
+    } else if (phase == "end" && Math.abs(delta.x) < 91) {
+      setTimeout(function() {
+        $page.removeClass('swipe');
+      }, 150);
+      $singleImage.parent()
+      .css({
+        'transition-duration': '.15s',
+        'transform': 'translateX(0)',
+      })
+    }
+  }
+
+  /**
+  * Slides image out of its container
+  * Redirects to next or previous image page
+  *
+  * @author bic-ed
+  * @param  {int} direction Direction for image slide out [+1|-1]
+  * @param  {string} location URL of next or previous image page
+  */
+  function changePage(direction, location) {
+    var $singleImg = $singleImage.children('img'),
+    $container = $singleImage.parent(),
+    boxShadow = $container.css('box-shadow').match(/(-?\S+px)|(rgb\(.+\))/g),
+    slideOut;
+
+    slideOut = ($page.outerWidth() + $container.outerWidth())/2
+    + parseInt(boxShadow[4]) // box shadow spread
+    + 1; // for eventual decimal pixels
+
+    slideOut = slideOut * direction;
+    $container.css({
+      'transition-duration': .3 + 's',
+      'transform': 'translateX(' + slideOut + 'px)',
+    });
+    setTimeout(function() {
+      $('body').addClass('loading');
+      objWindow.location.href = location;
+    }, 300);
+  }
 
 })(jQuery);
