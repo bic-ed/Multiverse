@@ -13,7 +13,7 @@ $origin = array(
   'link' => html_encode($_zp_current_album->getLink($page)),
   'title' => gettext('View Album'),
   'text' => gettext('Album'),
-  'open_title' => gettext_th('Open the pupup in Album page'),
+  'open_title' => gettext_th('Open the popup in Album page'),
   'key' => getBareAlbumTitle(),
 );
 
@@ -27,13 +27,13 @@ if (in_context(ZP_SEARCH_LINKED) && !in_context(ZP_ALBUM_LINKED)) {
   $origin = array_merge(
     getParentBreadcrumb()[0],
     array(
-      'open_title' => gettext_th('Open the pupup in Search page'),
+      'open_title' => gettext_th('Open the popup in Search page'),
       'key' => stripcslashes($_zp_current_search->codifySearchString()),
     )
   );
 
   if ($_zp_current_search->getSearchDate()) {
-    $origin['open_title'] = gettext_th('Open the pupup in Archive page');
+    $origin['open_title'] = gettext_th('Open the popup in Archive page');
   }
 
   // NOTE: Dates are not used at all in cached files and

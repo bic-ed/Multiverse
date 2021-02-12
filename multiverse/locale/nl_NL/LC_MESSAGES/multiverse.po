@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Multiverse\n"
-"POT-Creation-Date: 2021-02-12 17:57+0100\n"
-"PO-Revision-Date: 2021-02-12 18:05+0100\n"
+"Project-Id-Version: Multiverse v2.0\n"
+"POT-Creation-Date: 2021-02-12 18:35+0100\n"
+"PO-Revision-Date: 2021-02-12 18:37+0100\n"
 "Last-Translator: fretzl\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -41,15 +41,15 @@ msgid "Language"
 msgstr "Taal"
 
 #: image.php:16
-msgid "Open the pupup in Album page"
+msgid "Open the popup in Album page"
 msgstr "Open de popup op de album-pagina"
 
 #: image.php:30
-msgid "Open the pupup in Search page"
+msgid "Open the popup in Search page"
 msgstr "Open de popup op de zoek-pagina"
 
 #: image.php:36
-msgid "Open the pupup in Archive page"
+msgid "Open the popup in Archive page"
 msgstr "Open de popup op de archief-pagina"
 
 #: search.php:45

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Multiverse 2.0\n"
-"POT-Creation-Date: 2021-02-10 18:01+0100\n"
-"PO-Revision-Date: 2021-02-10 18:02+0100\n"
+"POT-Creation-Date: 2021-02-12 18:38+0100\n"
+"PO-Revision-Date: 2021-02-12 18:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -41,15 +41,15 @@ msgid "Language"
 msgstr "Lingua"
 
 #: image.php:16
-msgid "Open the pupup in Album page"
+msgid "Open the popup in Album page"
 msgstr "Apri il popup nella pagina dell’Album"
 
 #: image.php:30
-msgid "Open the pupup in Search page"
+msgid "Open the popup in Search page"
 msgstr "Apri il popup nella pagina di Ricerca"
 
 #: image.php:36
-msgid "Open the pupup in Archive page"
+msgid "Open the popup in Archive page"
 msgstr "Apri il popup nella pagina Archivio"
 
 #: search.php:45

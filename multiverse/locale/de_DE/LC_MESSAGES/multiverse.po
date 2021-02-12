@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Multiverse 2.0\n"
-"POT-Creation-Date: 2021-02-12 17:34+0100\n"
-"PO-Revision-Date: 2021-02-12 17:36+0100\n"
+"POT-Creation-Date: 2021-02-12 18:36+0100\n"
+"PO-Revision-Date: 2021-02-12 18:36+0100\n"
 "Last-Translator: Malte Müller (acrylian) <wartgart@gmx.net>\n"
 "Language-Team: Malte Müller (acrylian)\n"
 "Language: de_DE\n"
@@ -41,15 +41,15 @@ msgid "Language"
 msgstr "Sprache"
 
 #: image.php:16
-msgid "Open the pupup in Album page"
+msgid "Open the popup in Album page"
 msgstr "Das Popup auf der Albumseite öffnen"
 
 #: image.php:30
-msgid "Open the pupup in Search page"
+msgid "Open the popup in Search page"
 msgstr "Das Popup auf der Sucheseite öffnen"
 
 #: image.php:36
-msgid "Open the pupup in Archive page"
+msgid "Open the popup in Archive page"
 msgstr "Das Popup auf der Archivseite öffnen"
 
 #: search.php:45
