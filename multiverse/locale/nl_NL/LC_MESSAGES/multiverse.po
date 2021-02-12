@@ -1,78 +1,90 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Multiverse\n"
-"POT-Creation-Date: 2020-07-30 11:24+0200\n"
-"PO-Revision-Date: 2020-07-31 19:04+0200\n"
+"POT-Creation-Date: 2021-02-12 17:57+0100\n"
+"PO-Revision-Date: 2021-02-12 18:05+0100\n"
 "Last-Translator: fretzl\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: ;gettext_th;ngettext_th:1,2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: footer.php:25
+#: footer.php:28
 msgid "Follow me on..."
 msgstr "Volg me op…"
 
-#: footer.php:66
+#: footer.php:75
 msgid "Copyright info"
 msgstr "Copyright info"
 
-#: footer.php:72
+#: footer.php:81
 msgid "Photographer"
 msgstr "Fotograaf"
 
-#: footer.php:79
+#: footer.php:88
 msgid "Get in touch"
 msgstr "Contact"
 
-#: footer.php:92
+#: footer.php:99
 msgid "See more"
 msgstr "Meer"
 
-#: footer.php:137
+#: footer.php:144
 msgid "Language"
 msgstr "Taal"
 
-#: search.php:36
+#: image.php:16
+msgid "Open the pupup in Album page"
+msgstr "Open de popup op de album-pagina"
+
+#: image.php:30
+msgid "Open the pupup in Search page"
+msgstr "Open de popup op de zoek-pagina"
+
+#: image.php:36
+msgid "Open the pupup in Archive page"
+msgstr "Open de popup op de archief-pagina"
+
+#: search.php:45
 msgid "Search results"
 msgstr "Zoekresultaten"
 
-#: search.php:144
+#: search.php:149
 msgid "album"
 msgid_plural "albums"
 msgstr[0] "album"
 msgstr[1] "albums"
 
-#: search.php:176
+#: search.php:180
 msgid "image"
 msgid_plural "images"
 msgstr[0] "afbeelding"
 msgstr[1] "afbeeldingen"
 
-#: themeoptions.php:54
+#: themeoptions.php:59
 msgid "Image width"
 msgstr "Breedte afbeeldingen"
 
-#: themeoptions.php:58
+#: themeoptions.php:63
 msgid "Set the max width in pixels for the image displayed in the popup."
 msgstr "Maximale breedte van de afbeelding in de popup."
 
-#: themeoptions.php:59
+#: themeoptions.php:65
 msgid "Image height"
 msgstr "Hoogte afbeeldingen"
 
-#: themeoptions.php:63
+#: themeoptions.php:69
 msgid "Set the max height in pixels for the image displayed in the popup."
 msgstr "Maximale hoogte van de afbeelding in de popup."
 
-#: themeoptions.php:63
+#: themeoptions.php:69
 msgid ""
 "<strong>Note:</strong> images in the popup might be visually reduced in "
 "width and height to fit user screen, but they can be zoomed to the sizes set "
@@ -81,11 +93,21 @@ msgstr ""
 "<strong>Opmerking:</strong> afbeeldingen in de popup worden geschaald zodat "
 "ze in het browservenster passen."
 
-#: themeoptions.php:69
+#: themeoptions.php:75
+msgid ""
+"Check to show a link to the full size image on the image page. The behavior "
+"of the link depends on the options set in <code>Options->Image: Full image "
+"protection</code>."
+msgstr ""
+"Vink aan voor een link naar de volledige afbeelding op de afbeeldings-"
+"pagina, Hoe de link werkt is afhankelijk van de opties in <code>Opties > "
+"Afbeeldingen: Full image protection</code>."
+
+#: themeoptions.php:83
 msgid "Email subject"
 msgstr "E-mail onderwerp"
 
-#: themeoptions.php:73
+#: themeoptions.php:87
 msgid ""
 "Subject of the email sent through the contact form included in Multiverse "
 "footer. Zenphoto automatically adds the title of your gallery (between "
@@ -94,7 +116,7 @@ msgstr ""
 "Het onderwerp van de e-mail die verzonden wordt via het contactformulier. "
 "Zenphoto voegt automatisch de titel van de website toe (tussen haakjes)."
 
-#: themeoptions.php:73
+#: themeoptions.php:87
 msgid ""
 "<strong>Note:</strong> leave this field empty to include a subject field in "
 "the contact form and let users fill it as they wish."
@@ -102,11 +124,11 @@ msgstr ""
 "<strong>Opmerking:</strong> als dit veld leeg is krijgt de gebruiker de "
 "mogelijkheid zelf een onderwerp in te vullen."
 
-#: themeoptions.php:74
+#: themeoptions.php:89
 msgid "Copyright owner"
 msgstr "Copyright eigenaar"
 
-#: themeoptions.php:78
+#: themeoptions.php:93
 msgid ""
 "Write the name of the copyright owner here. To this will be automatically "
 "added the year of the older image present in your gallery, followed by the "
@@ -116,7 +138,7 @@ msgstr ""
 "het laatste jaar van afbeeldingen toegevoegd met een link naar de "
 "archiefpagina gemaakt."
 
-#: themeoptions.php:78
+#: themeoptions.php:93
 msgid ""
 "<strong>Note:</strong> leave this field empty if you don’t want any "
 "copyright text displayed."
@@ -124,11 +146,11 @@ msgstr ""
 "<strong>Opmerking:</strong> laat dit leeg als je geen copyright tekst op de "
 "website wilt."
 
-#: themeoptions.php:79
+#: themeoptions.php:95
 msgid "Copyright page"
 msgstr "Copyright pagina"
 
-#: themeoptions.php:85
+#: themeoptions.php:101
 msgid ""
 "Choose the page that contains your site copyright terms, if any. A link to "
 "this page will be generated on the name of the copyright owner."
@@ -136,7 +158,7 @@ msgstr ""
 "Kies een pagina met je copyright voorwaarden. De naam van de copyright "
 "eigenaar wordt dan een link naar deze pagina."
 
-#: themeoptions.php:85 themeoptions.php:97 themeoptions.php:102
+#: themeoptions.php:101 themeoptions.php:127 themeoptions.php:136
 msgid ""
 "<strong>Note:</strong> You need the Zenpage extension enabled to use this "
 "feature."
@@ -144,11 +166,11 @@ msgstr ""
 "<strong>Opmerking:</strong> Om dit te kunnen gebruiken moet de Zenpage "
 "plugin geactiveerd zijn."
 
-#: themeoptions.php:86
+#: themeoptions.php:103
 msgid "Social profiles"
 msgstr "Social media profielen"
 
-#: themeoptions.php:90
+#: themeoptions.php:107
 msgid ""
 "Check to display a list of icons with links to your social media profiles, "
 "defined by filling the fields below with the following data:"
@@ -157,24 +179,24 @@ msgstr ""
 "pagina’s. De iconen en links worden gecreëerd door de volgende gegevens in "
 "te vullen:"
 
-#: themeoptions.php:90
+#: themeoptions.php:109
 msgid "Your social profile URL"
 msgstr "URL van je socal media pagina"
 
-#: themeoptions.php:90
+#: themeoptions.php:111
 msgid "Font Awesome class for the icon (i.e. <em>fa-github</em> for GitHub)."
 msgstr ""
 "Font Awesome class voor het icoon (b.v. <em>fa-github</em> for GitHub)."
 
-#: themeoptions.php:90
+#: themeoptions.php:113
 msgid "Here the full list"
 msgstr "Bekijk de volledige lijst"
 
-#: themeoptions.php:90
+#: themeoptions.php:115
 msgid "Name of the social media"
 msgstr "Naam van het social media platform"
 
-#: themeoptions.php:90
+#: themeoptions.php:117
 msgid ""
 "Use the <strong>Add</strong> button to add a new social media or the "
 "<strong>Delete</strong> button to remove the last one."
@@ -182,15 +204,15 @@ msgstr ""
 "Gebruik de <strong>Toevoegen</strong> knop om meer social media pagina’s toe "
 "te voegen of de <strong>Verwijder</strong> knop op de laatste te verwijderen."
 
-#: themeoptions.php:102
+#: themeoptions.php:138
 msgid "This overrides the <em>Homepage</em> option above."
 msgstr "Deze optie gaat vóór de <em>Homepage</em> optie hierboven."
 
-#: themeoptions.php:103
+#: themeoptions.php:141
 msgid "Enable Pagination"
 msgstr "Activeer paginering"
 
-#: themeoptions.php:107
+#: themeoptions.php:145
 msgid ""
 "Check to split albums into multiple pages, depending on the options "
 "<code>Albums</code> and <code>Images</code> found at the top of this page. "
