@@ -2474,6 +2474,28 @@ ul.pagelist.gallery li:first-child > * {
   }
 }
 
+/* Theme switcher plugin */
+#themeSwitcher_zenpage label {
+  display: inline;
+  margin-left: 5px;
+  cursor: pointer;
+}
+#themeSwitcher_zenpage label:hover {
+  color: inherit;
+}
+#themeSwitcher_zenpage input {
+  left: 0;
+  display: inline;
+  float: none;
+  margin-right: 6px;
+  opacity: 1;
+  cursor: pointer;
+}
+@media screen and (max-width: 736px) {
+  .themeSwitcherControlLink{
+    top: 3em;
+  }
+}
 /* Accessible alternative to "display: none" */
 .captcha-label,
 .hide {
@@ -2486,3 +2508,4 @@ ul.pagelist.gallery li:first-child > * {
   height: 1px !important;
   border: 0 !important;
 }
+

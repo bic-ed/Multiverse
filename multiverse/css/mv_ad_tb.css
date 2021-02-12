@@ -58,4 +58,10 @@ body.modal-active #zp__admin_module {
   .poptrox-overlay {
     z-index: 100002 !important;
   }
+  .themeSwitcherControlLink{
+    top: 0;
+    z-index: 100002;
+    height: 30px;
+    border: none;
+  }
 }

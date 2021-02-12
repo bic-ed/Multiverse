@@ -131,7 +131,7 @@ function newsOnIndex($link, $obj, $page) {
 if (!OFFSET_PATH) {
   enableExtension('print_album_menu', 1 | THEME_PLUGIN, false);
   setOption('user_logout_login_form', 2, false);
-  define('ZENPAGE_ON', ZP_PAGES_ENABLED || ZP_NEWS_ENABLED);
+  define('ZENPAGE_ON', extensionEnabled('zenpage'));
   $_zp_page_check = 'my_checkPageValidity';
   if (ZENPAGE_ON) {
     define('PAGE_IS_HOME', getOption('zenpage_homepage'));
@@ -219,7 +219,7 @@ $rss_links_enabled = false;
 if (class_exists('RSS')) {
   // Get needed (here and later) RSS options
   $_rss_gallery = getOption('RSS_album_image');
-  $_rss_news = ZP_NEWS_ENABLED && getOption('RSS_articles');
+  $_rss_news = ZENPAGE_ON && ZP_NEWS_ENABLED && getOption('RSS_articles');
   $rss_links_enabled = $_rss_gallery || $_rss_news;
 }
 /**

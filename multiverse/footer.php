@@ -2,8 +2,8 @@
 $follow_section = 0;
 $has_search = getThemeOption('search');
 $has_album_menu = function_exists('printAlbumMenu');
-$has_news = ZP_NEWS_ENABLED && !empty($_zp_zenpage->getArticles(1));
-$has_pages = ZP_PAGES_ENABLED && !empty($_zp_zenpage->getPages(true, true, 1));
+$has_news = ZENPAGE_ON && ZP_NEWS_ENABLED && !empty($_zp_zenpage->getArticles(1));
+$has_pages = ZENPAGE_ON && ZP_PAGES_ENABLED && !empty($_zp_zenpage->getPages(true, true, 1));
 $see_more_count = $has_search + $has_album_menu + $has_news + $has_pages;
 $has_lang_menu = function_exists('printLanguageSelector');
 $menus_count = $see_more_count + 3 * $has_lang_menu;

@@ -1,5 +1,12 @@
 # Changelog
-<!-- ## [Unreleased] -->
+## [Unreleased]
+### Added
+* Support for the plugin `theme_switcher`
+
+### Changed
+* German translation update ([acrylian])
+* Dutch translation update ([fretzl])
+
 ## [v2.0] - 2020-02-11
 ### Added
 * Standard single image page `image.php` with:
@@ -69,7 +76,7 @@
 * Proper RSS header link in `gallery.php` ([fretzl])
 * Removed from theme options unnecessary request for `functions.php` ([fretzl])
 
-<!-- [Unreleased]: https://github.com/bic-ed/Multiverse/compare/2.0...master -->
+[Unreleased]: https://github.com/bic-ed/Multiverse/compare/2.0...master
 [v2.0]: https://github.com/bic-ed/Multiverse/compare/1.2...2.0
 [v1.2]: https://github.com/bic-ed/Multiverse/compare/1.1...1.2
 [v1.1]: https://github.com/bic-ed/Multiverse/compare/1.0...1.1
