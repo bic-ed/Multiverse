@@ -1,6 +1,6 @@
 # Changelog
 <!-- ## [Unreleased] -->
-## [v2.1] - 2020-02-11
+## [v2.1] - 2021-02-11
 
 ### Added
 * Support for the plugin `theme_switcher`
@@ -9,7 +9,7 @@
 * German translation update ([acrylian])
 * Dutch translation update ([fretzl])
 
-## [v2.0] - 2020-02-11
+## [v2.0] - 2021-02-11
 ### Added
 * Standard single image page `image.php` with:
   - Comment support
