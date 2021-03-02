@@ -29,13 +29,13 @@ class ThemeOptions {
 
     if (class_exists('cacheManager')) {
       cacheManager::deleteCacheSizes($me);
-      $width = getThemeOption('image_size_x');
-      $height = getThemeOption('image_size_y');
-      $image_size = getThemeOption('image_size');
+      $width = getThemeOption('image_size_x', null, 'multiverse');
+      $height = getThemeOption('image_size_y', null, 'multiverse');
+      $image_size = getThemeOption('image_size', null, 'multiverse');
       $img_wmk = getOption('fullimage_watermark') ? getOption('fullimage_watermark') : null;
       $tmb_wmk = getOption('Image_watermark') ? getOption('Image_watermark') : null;
-      $img_effect = getThemeOption('image_gray') ? 'gray' : null;
-      $tmb_effect = getThemeOption('thumb_gray') ? 'gray' : null;
+      $img_effect = getThemeOption('image_gray', null, 'multiverse') ? 'gray' : null;
+      $tmb_effect = getThemeOption('thumb_gray', null, 'multiverse') ? 'gray' : null;
       // popup
       cacheManager::addCacheSize($me, null, $width, $height, null, null, null, null, null, $img_wmk, $img_effect, true);
       // thumbs

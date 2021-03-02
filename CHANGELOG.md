@@ -1,5 +1,9 @@
 # Changelog
-<!-- ## [Unreleased] -->
+## [Unreleased]
+
+### Fixed
+* Set proper image caching sizes also if Multiverse is not the current theme of the Gallery
+
 ## [v2.1] - 2021-02-11
 
 ### Added
@@ -78,7 +82,7 @@
 * Proper RSS header link in `gallery.php` ([fretzl])
 * Removed from theme options unnecessary request for `functions.php` ([fretzl])
 
-<!-- [Unreleased]: https://github.com/bic-ed/Multiverse/compare/2.0...master -->
+[Unreleased]: https://github.com/bic-ed/Multiverse/compare/2.1...master
 [v2.1]: https://github.com/bic-ed/Multiverse/compare/2.0...2.1
 [v2.0]: https://github.com/bic-ed/Multiverse/compare/1.2...2.0
 [v1.2]: https://github.com/bic-ed/Multiverse/compare/1.1...1.2
