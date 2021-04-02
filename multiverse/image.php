@@ -115,11 +115,11 @@ if (!class_exists('static_html_cache')) {
             </p>
             <?php printTags('links', null, 'taglist','&nbsp;'); ?>
             <?php $full_img_opt = getOption('protect_full_image');
-            if ($full_img_opt !== "No access" && getThemeOption("full_image")) { ?>
+            if ($full_img_opt !== "No access" && $full_img_opt !== "no-access" && getThemeOption("full_image")) { ?>
               <p>
                 <?php $icon = "fa fa-picture-o";
                 $text = gettext('Original');
-                if ($full_img_opt === "Download") {
+                if ($full_img_opt === "Download" || $full_img_opt === "download") {
                   $icon = "fa fa-download";
                   $text = gettext('Download');
                 } ?>
