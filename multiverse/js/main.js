@@ -331,19 +331,19 @@
         $fullscreen.appendTo($imgs);
       }, fadeSpeed + popupSpeed);
     },
-    overlayOpacity: 0,
-    popupCloserText: '',
-    popupHeight: 80,
-    popupLoaderText: '',
+    selector: selector,
     fadeSpeed: fadeSpeed,
     popupSpeed: popupSpeed,
+    usePopupLoader: true,
+    popupLoaderText: '',
     popupWidth: 80,
-    selector: selector,
+    popupHeight: 80,
+    popupCloserText: '',
+    overlayOpacity: 0,
     usePopupCaption: true,
     usePopupDefaultStyling: false,
     usePopupEasyClose: false,
     usePopupForceClose: true,
-    usePopupLoader: true,
     useBodyOverflow: true,
     windowMargin: 50
   });
@@ -739,7 +739,10 @@
 
   function reset_swipe(time) {
     setTimeout(function() {
-      $imgs.css({'transition-timing-function':'', "transform" : "translate(0px)"});
+      $imgs.css({
+        'transition-timing-function': '',
+        "transform": ""
+      });
       $main[0]._poptrox.fadeSpeed = fadeSpeed;
       $main[0]._poptrox.popupSpeed = popupSpeed;
       $imgs.removeClass('swipe');

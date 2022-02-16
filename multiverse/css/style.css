@@ -1162,7 +1162,7 @@ header {
   height: 4em;
   background: #1f2224;
   line-height: 4em;
-  transition: transform 1s ease, top 1s;
+  transition: transform .4s, top .4s;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -2079,7 +2079,7 @@ ul.pagelist.gallery li:first-child > * {
 }
 #img_info .date {
   margin-bottom: 1em;
-  white-space: nowrap;
+  /* white-space: nowrap; */
 }
 #img_info .date::before {
   margin-right: 0.2em;
@@ -2352,7 +2352,7 @@ ul.pagelist.gallery li:first-child > * {
   }
   body {
     padding: 4em 0 0 0;
-    transition: padding .5s ease;
+    transition: padding .25s;
   }
   header {
     bottom: auto;
