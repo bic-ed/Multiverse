@@ -875,12 +875,12 @@
     var eId = $(elem).attr("id");
     var legend = null;
     if (eId && (legend = $(elem).prev()).length == 1) {
+      var reqRd = eId == "user" ? false : true; // Don't add required attribute to user field
       $(elem).prop({
         "placeholder": $(legend).text(),
-        "required": true
+        "required": reqRd
       })
       .removeClass("textfield")
-      // .addClass("field")
       .prev().addClass("hide");
     }
   });

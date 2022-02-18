@@ -7,6 +7,7 @@
 
 ### Fixed
 * Set proper image caching sizes also if Multiverse is not the current theme of the Gallery
+* Removed the _required_ attribute from user field in login form
 
 ## [v2.1] - 2021-02-11
 
