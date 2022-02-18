@@ -23,6 +23,9 @@ class ThemeOptions {
     setThemeOptionDefault('images_per_page', 24);
     setThemeOptionDefault('images_per_row', 2);
     setThemeOptionDefault('thumb_transition', 1);
+    setThemeOptionDefault('thumb_transition_min', 24);
+    setThemeOptionDefault('thumb_transition_max', 24);
+    setThemeOptionDefault('display_copyright_notice', 0);
     setThemeOptionDefault('full_image', 0);
     setThemeOptionDefault('image_size', 595);
     setThemeOptionDefault('image_use_side', 'longest');
@@ -46,7 +49,8 @@ class ThemeOptions {
   }
 
   function getOptionsSupported() {
-    $pages = query_full_array("SELECT `title`,`titlelink`,`show` FROM " . prefix('pages') . "ORDER by `sort_order`");
+    global $_zp_db;
+    $pages = $_zp_db->queryFullArray("SELECT `title`,`titlelink`,`show` FROM " . $_zp_db->prefix('pages') . "ORDER by `sort_order`");
     $allpages = array();
     $unpublishedpages = array();
     foreach ($pages as $page) {
@@ -153,6 +157,8 @@ class ThemeOptions {
       'thumb_size',
       'custom_index_page',
       'thumb_transition',
+      'thumb_transition_min',
+      'thumb_transition_max',
       'thumb_crop'
     );
   }

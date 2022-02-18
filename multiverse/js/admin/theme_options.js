@@ -95,6 +95,14 @@
 
     // Set option with ajax request
     $('form').one('submit', function(e) {
+      // Set min e max thumb transition to match images per page
+      if ($('input[name="images_per_page"]').hasClass('dirty')) {
+        $('input[name="thumb_transition_min"], input[name="thumb_transition_max"]')
+        .prop('disabled', false)
+        .val($('input[name="images_per_page"]').val());
+      }
+      // Prevent resetting thumb transition on submit
+      $('input[name="thumb_transition"]').prop('disabled', false);
       // Set custom_index_page to gallery.php if the home page is set to news loop or to an unpublished page
       if (!$('#zenpage_zp_index_news').prop('checked') && $('#zenpage_homepage').val() == "") {
         $('#custom_index_page').prop('disabled', false).val('');

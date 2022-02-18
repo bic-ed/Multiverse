@@ -7,7 +7,6 @@ $numimages = getNumImages();
 $total = $numimages + $numalbums;
 $img_per_page = getThemeOption('images_per_page');
 $alb_per_page = getThemeOption('albums_per_page');
-$_firstPageImages = $numalbums ? $img_per_page : null;
 $pag_tot = getTotalPages();
 if ($pag_tot > 1) {
   $curr_pag = getCurrentPage();
@@ -126,7 +125,6 @@ zp_setCookie("multiverse_search_numalbums", $numalbums, SEARCH_DURATION);
           ?>
         </h3>
         <?php printPageListWithNav("", "", false, true, 'pagelist', null, true, 5);
-        $_firstPageImages = null;
         ?>
       </article>
       <?php if ($numalbums) {

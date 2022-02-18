@@ -216,7 +216,7 @@ return;
  * @var boolean
  */
 $rss_links_enabled = false;
-if (class_exists('RSS')) {
+if (class_exists('RSS') && !OFFSET_PATH) {
   // Get needed (here and later) RSS options
   $_rss_gallery = getOption('RSS_album_image');
   $_rss_news = ZENPAGE_ON && ZP_NEWS_ENABLED && getOption('RSS_articles');

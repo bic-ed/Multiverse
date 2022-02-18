@@ -3,6 +3,7 @@
 
 ### Added
 * Support for Zenphoto changes in protect_full_image option values
+* Zenphoto 1.6 support. Multiverse will not work correctly with previous versions of Zenphoto from now on
 
 ### Fixed
 * Set proper image caching sizes also if Multiverse is not the current theme of the Gallery
