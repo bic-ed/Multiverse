@@ -50,7 +50,7 @@ if (!defined('WEBPATH')) die();
             
           } else { // news article loop
             $pag = "";
-            $pag_tot = ceil($_zp_zenpage->getTotalArticles() / ZP_ARTICLES_PER_PAGE);
+            $pag_tot = getTotalNewsPages();
             if ($pag_tot > 1) {
               $curr_pag = getCurrentPage();
               $pag = " (" . $curr_pag . "/" . $pag_tot .")";
