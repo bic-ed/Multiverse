@@ -9,6 +9,7 @@
 * Set proper image caching sizes also if Multiverse is not the current theme of the Gallery
 * Removed the _required_ attribute from user field in login form
 * Correct number of total pages in category loop title
+* Translation for theme options page when Multiverse is not the current theme of the Gallery
 
 ## [v2.1] - 2021-02-11
 
