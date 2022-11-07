@@ -27,7 +27,7 @@ if (!defined('WEBPATH')) die();
         <h2><?php echo gettext('Gallery'); ?></h2>
         <?php printAllDates(); ?>
         <?php if(ZENPAGE_ON && ZP_NEWS_ENABLED) { ?>
-          <h2><a id="news_arch"></a><?php echo gettext('News'); ?></h2>
+          <h2 id="news_arch"><?php echo gettext('News'); ?></h2>
           <?php printNewsArchive("archive", 'year', 'month', "", false, 'asc'); ?>
         <?php } ?>
         <h2><?php echo gettext('Tags'); ?></h2>

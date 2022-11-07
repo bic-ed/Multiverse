@@ -14,7 +14,7 @@
   </p>
   <label for="mailform-email"><?php echo gettext("E-Mail") ?></label>
   <input type="email" required placeholder="<?php echo gettext("E-Mail") ?>" id="mailform-email" name="email" size="50" value="<?php echo html_encode($mailcontent['email']); ?>" class="field half">
-  <label for="mailform-subject"><?php $lbl_txt = gettext("Subject:"); $lbl_txt ?></label>
+  <label for="mailform-subject"><?php echo $lbl_txt = gettext("Subject:"); ?></label>
   <input class="field" type="text" required placeholder="<?php echo str_replace(':', '', $lbl_txt) ?>" id="mailform-subject" name="subject" size="50" value="<?php echo html_encode($mailcontent['subject']) ?>">
   <label for="mailform-message"><?php echo gettext("Message"); ?></label>
   <textarea class="field" id="mailform-message" required placeholder="<?php echo gettext("Message") ?>" name="message" rows="3"><?php echo $mailcontent['message']; ?></textarea>
