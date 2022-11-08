@@ -111,7 +111,13 @@ if ($has_social || $rss_links_enabled) {
                     </a>
                   </li>
                 </ul>
-                <?php printAlbumMenuList('list', false, 'album_menu', 'active-item', 'subalbum', 'active-item', gettext("Gallery Index"), null, false, false, true, null); ?>
+                <?php
+                $galleryText = gettext("Gallery Index");
+                if (!ZENPAGE_ON) {
+                  $galleryText = gettext("Home");
+                  setOption('custom_index_page', '', false);
+                }
+                printAlbumMenuList('list', false, 'album_menu', 'active-item', 'subalbum', 'active-item', $galleryText, null, false, false, true, null); ?>
               </nav>
             <?php } ?>
             <?php if ($has_pages) { ?>

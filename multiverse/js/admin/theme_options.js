@@ -103,12 +103,7 @@
       }
       // Prevent resetting thumb transition on submit
       $('input[name="thumb_transition"]').prop('disabled', false);
-      // Set custom_index_page to gallery.php if the home page is set to news loop or to an unpublished page
-      if (!$('#zenpage_zp_index_news').prop('checked') && $('#zenpage_homepage').val() == "") {
-        $('#custom_index_page').prop('disabled', false).val('');
-      } else {
-        $('#custom_index_page').prop('disabled', false).val('gallery');
-      }
+
       var paramlist = $(".social_data").map(function() {
         return this.id + '=' + this.value;
       }).get();
