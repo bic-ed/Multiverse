@@ -770,7 +770,7 @@
   });
   $flags.prev().find('a').text($currentLanguage.children('a').text());
   $flags.removeClass('flags');
-  $currentLanguage.children('a').addClass('active-item');
+  $currentLanguage.addClass('active-item');
   $currentLanguage.removeClass('currentLanguage');
 
 
@@ -780,22 +780,19 @@
 
   // Conform news menu style to album menu style
   if (!$('#news_menu .active-item a').length > 0 ) {
-    $('#news_menu .active-item').not('a').removeClass('active-item').contents().wrap('<a class="active-item" />');
+    $('#news_menu .active-item').not('a').contents().wrap('<a/>');
   }
 
   // Add active-item class if we are on news loop or gallery loop in home page
   if (received.newsActive) {
-    $('#news_menu > li:first-child > a').addClass('active-item');
+    $('#news_menu > li:first-child').addClass('active-item');
   }
   if (received.galleryActive) {
-    $('#album_menu > li:first-child > a').addClass('active-item');
+    $('#album_menu > li:first-child').addClass('active-item');
   }
 
   // Add a class to albums with subalbums
   $('.subalbum').parent().addClass('has_sub');
-
-  // Deactivate self-link for the active item
-  $("a.active-item").removeAttr("href");
 
   // open/close menu on click
   $('.drop').on('click', function() {

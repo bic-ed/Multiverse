@@ -1509,9 +1509,10 @@ footer .copyright a {
 
 /* Selected Dropdown nav item */
 
-.main-nav ul li > a.active-item {
+.main-nav ul li.active-item > a {
   color: #fff;
   padding-right: 38px;
+  pointer-events: none;
 }
 
 .main-nav ul li {
@@ -1536,7 +1537,7 @@ footer .copyright a {
 .main-nav ul:not(.drop) li:nth-of-type(2n+1) {
   background-color: #2F3136;
 }
-.main-nav ul:not(.drop) li > a.active-item::after {
+.main-nav ul:not(.drop) li.active-item > a::after {
   font-family: FontAwesome;
   content: "\f00c";
   opacity: 0.5;
