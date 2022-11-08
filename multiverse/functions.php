@@ -136,8 +136,8 @@ if (!OFFSET_PATH) {
   define('ZENPAGE_ON', extensionEnabled('zenpage'));
   $_zp_page_check = 'my_checkPageValidity';
   if (ZENPAGE_ON) {
-    define('PAGE_IS_HOME', getOption('zenpage_homepage'));
     define('NEWS_IS_HOME', getOption('zenpage_zp_index_news'));
+    define('PAGE_IS_HOME', (NEWS_IS_HOME ? false : getOption('zenpage_homepage')));
     if (NEWS_IS_HOME) {  // only one index page if zenpage plugin is enabled & displaying
       zp_register_filter('getLink', 'newsOnIndex');
     }
@@ -193,7 +193,7 @@ function multiverse() {
       $gallery_active = 1;
       break;
     }
-  } else {
+  } else if ($_zp_gallery_page == "index.php" && getCurrentPage() < 2) {
     $gallery_active = 1;
   }
 
