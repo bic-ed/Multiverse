@@ -39,15 +39,11 @@
   <?php
   if (getOption("contactform_captcha")) {
     $captcha = $_zp_captcha->getCaptcha(gettext("Enter CAPTCHA"));
-    ?>
-    <p>
-      <?php
       if (isset($captcha['html'])) echo $captcha['html'];
       if (isset($captcha['input'])) echo $captcha['input'];
       if (isset($captcha['hidden'])) echo $captcha['hidden'];
-      ?>
-    </p>
-  <?php } ?>
+    }
+    ?>
   <p>
     <input type="submit" class="button special" value="<?php echo gettext("Send e-mail"); ?>">
     <input type="reset" class="button" value="<?php echo gettext("Reset"); ?>">

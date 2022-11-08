@@ -570,6 +570,14 @@ input[type="checkbox"]:focus+label::before {
 #comment_toggle {
   margin-bottom: 2em;
 }
+#commentcontent > a {
+  font-size: 12pt;
+}
+#commentcontent > a::before {
+  margin-right: 0.4em;
+  content: '\f09e';
+  font-family: FontAwesome;
+}
 .pagination {
   margin-bottom: 1.6em;
 }
@@ -592,6 +600,9 @@ input[type="checkbox"]:focus+label::before {
 }
 .errorbox strong {
   color: #e6e6e6;
+}
+.errorbox > :last-child {
+  margin: 0;
 }
 
 #passwordform {
@@ -643,7 +654,9 @@ input[type="checkbox"]:focus+label::before {
 .logon_link {
   margin: 0;
 }
-
+.g-recaptcha {
+  margin-bottom: 2em;
+}
 /* Icon */
 
 .icon {

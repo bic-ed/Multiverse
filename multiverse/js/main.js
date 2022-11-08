@@ -862,8 +862,8 @@
   }
 
   // Layout
-  $('#commentcontent > br').remove();
-  $mailform.prev().hide();
+  $('#commentcontent > br, #commentcontent > a > img').remove();
+  $mailform.prev().addClass('hide');
   $mailform.children('label').add('#commentform > label').addClass("hide");
   $('#loginform button[type=submit]').addClass('special');
 
