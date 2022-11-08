@@ -69,6 +69,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 body {
   line-height: 1;
+  -webkit-text-size-adjust: none;
+  -ms-overflow-style: scrollbar;
 }
 
 ol, ul {
@@ -87,10 +89,6 @@ blockquote:before, blockquote:after, q:before, q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
-}
-
-body {
-  -webkit-text-size-adjust: none;
 }
 
 
@@ -118,22 +116,20 @@ body {
   }
 }
 
-
+:root {
+  color-scheme: dark;
+}
 /* Basic */
 
 @-ms-viewport {
   width: device-width;
 }
 
-body {
-  -ms-overflow-style: scrollbar;
-}
-
 html,
 body {
   background: #242629;
 }
-body.loading *:not(header), body.loading *:before, body.loading *:after {
+body.loading *:not(#header), body.loading *:before, body.loading *:after {
   -webkit-animation: none !important;
   animation: none !important;
   transition: none !important;
@@ -1037,11 +1033,11 @@ table.alt tfoot {
   cursor: grabbing;
 }
 
-header > #fullscreen {
+#header > #fullscreen {
   opacity: 0.5;
   height: 100%;
 }
-header > #fullscreen:hover {
+#header > #fullscreen:hover {
   opacity: 1;
 }
 
@@ -1152,7 +1148,7 @@ body.loading #wrapper:before {
 body {
   padding: 0 0 4em 0;
 }
-header {
+#header {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -1168,17 +1164,17 @@ header {
       -ms-user-select: none;
           user-select: none;
 }
-body.modal-active header {
+body.modal-active #header {
   transform: translateY(4em);
 }
 /* For some reasons Lighthouse fails if the correct value of 4em is set here
 "Something went wrong with recording the trace over your page load. Please run Lighthouse again. (NO_LCP)"
 */
-body.loading header {
+body.loading #header {
   transform: translateY(3em);
   transition: transform .2s;
 }
-header h1 {
+#header h1 {
   color: #a0a0a1;
   display: inline-block;
   font-size: 1em;
@@ -1189,27 +1185,27 @@ header h1 {
   overflow: hidden;
   white-space: nowrap;
 }
-header h1 a {
+#header h1 a {
   border: 0;
   color: inherit;
 }
-header h1 a:hover {
+#header h1 a:hover {
   color: inherit !important;
 }
-header nav {
+#header nav {
   position: absolute;
   right: 0;
   top: 0;
 }
-header nav>ul {
+#header nav>ul {
   margin: 0;
   padding: 0;
 }
-header nav>ul>li {
+#header nav>ul>li {
   display: inline-block;
   padding: 0;
 }
-header nav>ul>li a {
+#header nav>ul>li a {
   transition: background-color 0.5s ease;
   border: 0;
   color: #ffffff;
@@ -1218,15 +1214,15 @@ header nav>ul>li a {
   padding: 0 1.65em;
   text-transform: uppercase;
 }
-header nav>ul>li a.icon:before {
+#header nav>ul>li a.icon:before {
   color: #505051;
   float: right;
   margin-left: 0.5em;
 }
-header nav > ul > li a:hover {
+#header nav > ul > li a:hover {
   color: #ffffff !important;
 }
-header nav > ul > li a.active {
+#header nav > ul > li a.active {
   background-color: #27292c;
 }
 
@@ -2354,30 +2350,30 @@ ul.pagelist.gallery li:first-child > * {
     padding: 4em 0 0 0;
     transition: padding .25s;
   }
-  header {
+  #header {
     bottom: auto;
     height: 4em;
     padding: 0 1em;
     top: 0;
   }
-  body.modal-active header {
+  body.modal-active #header {
     transform: translateY(-4em);
   }
   /* For some reasons Lighthouse fails if the correct value of 4em is set here
   "Something went wrong with recording the trace over your page load. Please run Lighthouse again. (NO_LCP)"
   */
-  body.loading header {
+  body.loading #header {
     transform: translateY(-2.5em);
   }
-  header h1 {
+  #header h1 {
     font-size: 0.9em;
     max-width: calc(50% - 1.5em);
     margin-top: 1.78em;
   }
-  header nav > ul {
+  #header nav > ul {
     font-size: 0.9em;
   }
-  header nav > ul > li a {
+  #header nav > ul > li a {
     padding: 0 1.15em;
   }
   #main .album {
@@ -2386,7 +2382,7 @@ ul.pagelist.gallery li:first-child > * {
   #page {
     width: 100%;
   }
-  header > #fullscreen {
+  #header > #fullscreen {
     opacity: .5;
     background-size: 2.6em;
   }
@@ -2474,28 +2470,6 @@ ul.pagelist.gallery li:first-child > * {
   }
 }
 
-/* Theme switcher plugin */
-#themeSwitcher_zenpage label {
-  display: inline;
-  margin-left: 5px;
-  cursor: pointer;
-}
-#themeSwitcher_zenpage label:hover {
-  color: inherit;
-}
-#themeSwitcher_zenpage input {
-  left: 0;
-  display: inline;
-  float: none;
-  margin-right: 6px;
-  opacity: 1;
-  cursor: pointer;
-}
-@media screen and (max-width: 736px) {
-  .themeSwitcherControlLink{
-    top: 3em;
-  }
-}
 /* Accessible alternative to "display: none" */
 .captcha-label,
 .hide {

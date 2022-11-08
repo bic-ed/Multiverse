@@ -74,7 +74,9 @@ function css_head() {
   ?>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="<?php echo pathurlencode($_zp_themeroot . '/css/multi.css') ?>">
-  <?php
+  <?php if (extensionEnabled("themeSwitcher")) { ?>
+    <style><?php readfile(dirname(__FILE__) . '/css/internal/theme_switcher.min.css') ?></style>
+  <?php }
 }
 
 function my_checkPageValidity($request, $gallery_page, $page) {
@@ -157,6 +159,10 @@ setOption('contactform_confirm','0',false);
 setOption('contactform_email','required',false);
 setOption('contactform_name','required',false);
 setOption('tinymce4_comments',null,false);
+if (extensionEnabled("themeSwitcher")) {
+  setOption('themeSwitcher_css', null, false);
+  setOption('themeSwitcher_css_loggedin', null, false);
+}
 
 // Set email subject if the theme option is filled
 $mailsubject = ($mailsubject = getThemeOption('email_subject')) ? $mailsubject : "";

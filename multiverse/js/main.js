@@ -80,7 +80,7 @@
   $('form').placeholder();
 
   // Panels.
-  var $header = $('header');
+  var $header = $('#header');
   var $panels = $('.panel');
 
   var $toggle = $header.children('nav').has('a'),
@@ -847,7 +847,7 @@
   });
 
   // Close all menus by clicking outside them too
-  $('footer').on('click', function(e) {
+  $('footer.panel').on('click', function(e) {
     if (!$(e.target).is('.main-nav *, #search_form *')) {
       $('ul').add($searchExtraShow).add($toggleSearchExtra).removeClass('dropped');
     }
