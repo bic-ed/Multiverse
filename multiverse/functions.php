@@ -136,8 +136,8 @@ if (!OFFSET_PATH) {
   define('ZENPAGE_ON', extensionEnabled('zenpage'));
   $_zp_page_check = 'my_checkPageValidity';
   if (ZENPAGE_ON) {
-    define('NEWS_IS_HOME', getOption('zenpage_zp_index_news'));
-    define('PAGE_IS_HOME', (NEWS_IS_HOME ? false : getOption('zenpage_homepage')));
+    define('NEWS_IS_HOME', getThemeOption('zenpage_zp_index_news'));
+    define('PAGE_IS_HOME', (NEWS_IS_HOME ? false : getThemeOption('zenpage_homepage')));
     if (NEWS_IS_HOME) {  // only one index page if zenpage plugin is enabled & displaying
       zp_register_filter('getLink', 'newsOnIndex');
     }

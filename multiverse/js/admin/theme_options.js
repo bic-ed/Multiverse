@@ -20,9 +20,9 @@
     // create social icon input fields (function triggered by reset button too)
     populate();
     function populate() {
-      for (var field = 1, i = 0; field < socialContent.length + 1; field++, i++) {
+      for (var field = 0, i = 0; field < socialContent.length; field++, i++) {
         if (i == 3) { i = 0 }
-        $('.add_del').before('<input style="display:block; width:338px;' + styleitem[i] + '"' + placeholder[i] + ' id="sc' + field + '" class="social_data" type="text" value="' + socialContent[field - 1] + '" disabled>');
+        $('.add_del').before('<input style="display:block; width:338px;' + styleitem[i] + '"' + placeholder[i] + ' class="social_data" type="text" value="' + decodeURIComponent(socialContent[field]).replace(/"/g, '&quot;') + '" disabled>');
         $('.add_del').prev().hide().toggle(600);
         if (socialEnabled == 1) {
           $('.social_data, .add_del button').prop('disabled', false);
@@ -58,18 +58,18 @@
       e.preventDefault();
       field = ($('.social_data').length);
       if ($(this).val() == 'add') { // add
-        for (var new_field = field + 1, i = 0; new_field < 4 + field; new_field++, i++) {
-          $('.add_del').before('<input style="display:block; width:338px;' + styleitem[i] + '"' + placeholder[i] + ' id="sc' + new_field + '" class="social_data" type="text" value="">');
-          $id = $('#sc' + new_field);
-          $id.hide().toggle(400);
+        for (var i = 0; i < 3; i++) {
+          $('.add_del').before('<input style="display:block; width:338px;' + styleitem[i] + '"' + placeholder[i] + ' class="social_data" type="text" value="">');
+          $thisField = $('.social_data').eq(field + i);
+          $thisField.hide().toggle(400);
           if (i == 0) {
-            $id.focus();
+            $thisField.focus();
           }
         }
       } else { // delete
-        for (var new_field = field - 2; new_field < 1 + field; new_field++) {
-          $id = $("#sc" + new_field);
-          $id.toggle(400, function(){
+        for (var i = field - 3; i < field; i++) {
+          $thisField = $('.social_data').eq(i);
+          $thisField.toggle(400, function(){
             $(this).remove();
           });
         }
@@ -94,7 +94,7 @@
     });
 
     // Set option with ajax request
-    $('form').one('submit', function(e) {
+    $('form').on('submit', function(e) {
       // Set min e max thumb transition to match images per page
       if ($('input[name="images_per_page"]').hasClass('dirty')) {
         $('input[name="thumb_transition_min"], input[name="thumb_transition_max"]')
@@ -105,21 +105,17 @@
       $('input[name="thumb_transition"]').prop('disabled', false);
 
       var paramlist = $(".social_data").map(function() {
-        return this.id + '=' + this.value;
-      }).get();
+        return encodeURIComponent(this.value);
+      }).get().join(',');
       $('#zenpage_homepage').prop('disabled', false);
       // only apply ajax request if any social icon input fields is changed
       if ($('.social_data').hasClass('dirty') || paramlist.length == 0) {
-        e.preventDefault();
-        $.ajax({
-          type: 'POST',
-          cache: false,
-          data: paramlist.length ? paramlist.join("&") : 'sc1=""&sc2=""&sc3=""',
-          url: saveurl,
-          complete: function() { // submit form for all other fields
-            $('form').submit();
-          }
-        });
+        $(this).append(
+          '<input type="hidden" name="_ZP_CUSTOM_text-social_content" value="1">'
+          + '<input type="hidden" id="social_content" name="social_content" value="'
+          + paramlist
+          + '">'
+        );
       }
     });
   });

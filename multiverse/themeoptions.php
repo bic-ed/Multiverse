@@ -174,8 +174,7 @@ $social_content = getThemeOption('social_content', null, 'multiverse');
 ?>
 <script>
 var socialEnabled = <?php echo $social_contacts ? $social_contacts : 0; ?>,
-socialContent = '<?php echo $social_content ? $social_content : ',,'; ?>',
-saveurl = '<?php echo WEBPATH . "/" . THEMEFOLDER; ?>/multiverse/ajax/save_options.php',
+socialContent = "<?php echo $social_content ? $social_content : ',,'; ?>",
 buttonAdd = '<?php echo ucfirst(gettext("add")) ?>',
 buttonDel = '<?php echo gettext("Delete") ?>';
 </script>

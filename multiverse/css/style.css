@@ -1598,7 +1598,7 @@ footer ul li {
 .drop a:hover {
   cursor: pointer;
 }
-.main-nav a:hover {
+.main-nav a:not(.fa-rss):hover {
   color: #fff !important;
 }
 .dropped.drop a::after {

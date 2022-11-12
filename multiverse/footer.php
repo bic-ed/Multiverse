@@ -33,8 +33,8 @@ if ($has_social || $rss_links_enabled) {
           $icons = array_chunk($icons, 3);
           foreach ($icons as $key) { ?>
             <li>
-              <a href="<?php echo $key[0]; ?>" target="_blank" rel="noopener" class="icon <?php echo $key[1]; ?>">
-                <span class="hide"><?php echo $key[2]; ?></span>
+              <a href="<?php echo htmlentities(urldecode($key[0])); ?>" target="_blank" rel="noopener" class="icon <?php echo $key[1]; ?>">
+                <span class="hide"><?php echo htmlentities(urldecode($key[2])); ?></span>
               </a>
             </li>
           <?php }
