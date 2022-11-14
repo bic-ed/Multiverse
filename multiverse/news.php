@@ -46,7 +46,7 @@ if (!defined('WEBPATH')) die();
             ?>
             <?php printTags('links', gettext('Tags') . ': ', 'taglist', ', '); ?>
             <?php
-            @call_user_func('printCommentForm');
+            @callUserFunction('printCommentForm');
             
           } else { // news article loop
             $pag = "";

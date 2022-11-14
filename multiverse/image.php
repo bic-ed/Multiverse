@@ -138,14 +138,14 @@ if (!class_exists('static_html_cache')) {
         <?php
         // TODO: enable if and when it will work properly
         // Not working on Android, buggy in Firefox on Windows
-        // @call_user_func('printThumbNav');
+        // @callUserFunction('printThumbNav');
         ?>
         <div class="img_descr">
           <?php printImageDesc(); ?>
         </div>
-        <?php @call_user_func('printOpenStreetMap'); ?>
+        <?php @callUserFunction('printOpenStreetMap'); ?>
         <?php if ($_zp_current_image->getCommentsAllowed() || $_zp_current_image->getCommentCount()) {
-          @call_user_func('printCommentForm');
+          @callUserFunction('printCommentForm');
         } ?>
       </article>
     </div>

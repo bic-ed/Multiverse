@@ -33,7 +33,7 @@ die();
           printCodeblock(2);
           printPageExtraContent();
           printCodeblock(3);
-          @call_user_func('printCommentForm');
+          @callUserFunction('printCommentForm');
           ?>
         </div>
       </article>
