@@ -21,7 +21,7 @@ class ThemeOptions {
     setThemeOptionDefault('albums_per_page', 12);
     setThemeOptionDefault('images_per_page', 24);
     setThemeOptionDefault('thumb_transition', 1);
-    setThemeOptionDefault('thumb_transition_min', 24);
+    setThemeOptionDefault('thumb_transition_min', 2);
     setThemeOptionDefault('thumb_transition_max', 24);
     setThemeOptionDefault('display_copyright_notice', 0);
     setThemeOptionDefault('full_image', 0);
@@ -155,9 +155,6 @@ class ThemeOptions {
       // 'image_size',
       'thumb_size',
       'custom_index_page',
-      'thumb_transition',
-      'thumb_transition_min',
-      'thumb_transition_max',
       'thumb_crop'
     );
   }

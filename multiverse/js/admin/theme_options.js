@@ -93,17 +93,8 @@
       populate();
     });
 
-    // Set option with ajax request
+    // Set social content option with hidden field
     $('form').on('submit', function(e) {
-      // Set min e max thumb transition to match images per page
-      if ($('input[name="images_per_page"]').hasClass('dirty')) {
-        $('input[name="thumb_transition_min"], input[name="thumb_transition_max"]')
-        .prop('disabled', false)
-        .val($('input[name="images_per_page"]').val());
-      }
-      // Prevent resetting thumb transition on submit
-      $('input[name="thumb_transition"]').prop('disabled', false);
-
       var paramlist = $(".social_data").map(function() {
         return encodeURIComponent(this.value);
       }).get().join(',');

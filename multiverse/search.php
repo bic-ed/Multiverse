@@ -12,8 +12,6 @@ if ($pag_tot > 1) {
   $curr_pag = getCurrentPage();
   $pag = " (" . $curr_pag . "/" . $pag_tot .")";
 }
-// Set a cookie with number of albums, needed on image.php
-zp_setCookie("multiverse_search_numalbums", $numalbums, SEARCH_DURATION);
 ?>
 <!DOCTYPE html>
 <html<?php printLangAttribute(); ?>>
@@ -134,17 +132,15 @@ zp_setCookie("multiverse_search_numalbums", $numalbums, SEARCH_DURATION);
         while (next_album()) { ?>
           <?php if ($ii == 0) {
             $ii = 1;
-            if ($numimages || $numalbums > $alb_per_page) {
-              $from = (($curr_pag - 1) * $first_album + 1);
-              $to = min(($curr_pag * $first_album), $numalbums);
-              if ($from === $to) {
-                $to = "";
-              } else {
-                $from .= ' - ';
-              }
+            $from = ($_zp_page - 1) * $alb_per_page + 1;
+            $to = min(($_zp_page * $alb_per_page), $numalbums);
+            if ($from === $to || $numalbums < $alb_per_page) {
+              $from = ' (' . $numalbums . ')';
+            } else {
+              $from = ' (' . $from . ' - ' . $to . ')';
             }
             ?>
-            <h2><?php echo ngettext_th('album', 'albums', $numalbums) . ' ' . $from . $to; ?></h2>
+            <h2><?php echo ngettext_th('album', 'albums', $numalbums) . $from; ?></h2>
           <?php } ?>
           <div class="album thumb">
             <a href="<?php echo html_encode(getAlbumURL()); ?>" title="<?php echo gettext('View album:'); ?> <?php printAnnotatedAlbumTitle(); ?>"><?php printCustomAlbumThumbImage(getBareAlbumTitle(), null, 300, 200, 300, 200); ?></a>
@@ -162,20 +158,26 @@ zp_setCookie("multiverse_search_numalbums", $numalbums, SEARCH_DURATION);
         $thumb_y = 10 * $thumb_x; // dummy multiplier for height to get all thumbs of the same width
         $from = $to = '';
         $ii = 0;
-        while (next_image(false, $img_per_page)) { ?>
+        while (next_image()) { ?>
           <?php if ($ii == 0) {
             $ii = 1;
-            if ($numalbums || $numimages > $img_per_page) {
-              $from = ($curr_pag - intval(($numalbums - 1)/$alb_per_page) - 1) * $img_per_page + 1;
-              $to = min(($curr_pag - intval(($numalbums - 1)/$alb_per_page)) * $img_per_page, $numimages);
-              if ($from === $to) {
-                $to = "";
-              } else {
-                $from .= ' - ';
-              }
+            // Set a cookie with number of albums and first page images, needed on image.php
+            zp_setCookie("bic_multiverse_search", $numalbums . ',' . $_zp_first_page_images, SEARCH_DURATION);
+            $imagePageOffset = getTotalPages(2);
+            if ($_zp_page == $imagePageOffset) {
+              $from = 1;
+              $to = min($_zp_first_page_images, $numimages);
+            } else {
+              $from = 1 + $_zp_first_page_images + ($_zp_page - $imagePageOffset - 1) * $img_per_page;
+              $to = min($_zp_first_page_images + ($_zp_page - $imagePageOffset) * $img_per_page, $numimages);
+            }
+            if ($from === $to || $numimages <= $_zp_first_page_images) {
+              $from = ' (' . $numimages . ')';
+            } else {
+              $from = ' (' . $from . ' - ' . $to . ')';
             }
             ?>
-            <h2><?php echo ngettext_th('image', 'images', $numimages) . ' ' . $from . $to; ?></h2>
+            <h2><?php echo ngettext_th('image', 'images', $numimages) . $from; ?></h2>
           <?php } ?>
           <div class="thumb">
             <a class="image" href='<?php echo getCustomSizedImageMaxSpace($image_x, $image_y); ?>' title="<?php printBareImageTitle(); ?>">

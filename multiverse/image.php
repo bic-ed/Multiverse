@@ -3,26 +3,18 @@
 if (!defined('WEBPATH'))
 die();
 
-if (getOption('pagination')) {
-  $page = getAlbumPage();
-} else {
-  $page = 1;
-}
-
-$origin = array(
-  'link' => html_encode($_zp_current_album->getLink($page)),
-  'title' => gettext('View Album'),
-  'text' => gettext('Album'),
-  'open_title' => gettext_th('Open the popup in Album page'),
-  'key' => getBareAlbumTitle(),
-);
-
 if (in_context(ZP_SEARCH_LINKED) && !in_context(ZP_ALBUM_LINKED)) {
-  // We need to recalculate page number here, as it never changes on browsing found images
-  $img_per_page = getThemeOption('images_per_page');
-  $alb_per_page = getThemeOption('albums_per_page');
-  $only_alb_pages = intval((zp_getCookie("multiverse_search_numalbums") - 1)/$alb_per_page);
-  $_zp_current_search->page = 1 + intval(((imageNumber() - 1)/$img_per_page)) + $only_alb_pages;
+  // We need to recalculate the page number, as it never changes when browsing the found images
+  // NOTE: cookie needed because, if requested from here, number of albums is returned including not owned albums!
+  if ($search_data = zp_getCookie('bic_multiverse_search')) {
+    $search_data = explode(',', $search_data);
+    // Album pages
+    $alb_pages = ceil($search_data[0] / $_zp_current_search->getAlbumsPerPage());
+    // Images pages (excluding transition page)
+    $img_pages = ceil((imageNumber() - $search_data[1]) / $_zp_current_search->getImagesPerPage());
+    
+    $_zp_current_search->page = $alb_pages + $img_pages;
+  }
 
   $origin = array_merge(
     getParentBreadcrumb()[0],
@@ -56,6 +48,19 @@ if (in_context(ZP_SEARCH_LINKED) && !in_context(ZP_ALBUM_LINKED)) {
     $origin['key'] = gettext('Archive');
   }
 
+} else {
+  if (getThemeOption('pagination')) {
+    $page = getAlbumPage();
+  } else {
+    $page = 1;
+  }
+  $origin = array(
+    'link' => html_encode($_zp_current_album->getLink($page)),
+    'title' => gettext('View Album'),
+    'text' => gettext('Album'),
+    'open_title' => gettext_th('Open the popup in Album page'),
+    'key' => getBareAlbumTitle(),
+  );
 }
 
 $imgNumber = imageNumber() . '/' . getNumImages();
