@@ -75,7 +75,7 @@ function css_head() {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="<?php echo pathurlencode($_zp_themeroot . '/css/multi.css') ?>">
   <?php if (extensionEnabled("themeSwitcher")) { ?>
-    <style><?php readfile(dirname(__FILE__) . '/css/internal/theme_switcher.min.css') ?></style>
+    <style><?php echo file_get_contents(dirname(__FILE__) . '/css/internal/theme_switcher.min.css') ?></style>
   <?php }
 }
 
