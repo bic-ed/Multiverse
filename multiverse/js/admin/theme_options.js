@@ -5,7 +5,7 @@
  * @author bic-ed
  */
 
-(function() {
+ (function() {
   var styleitem = ['margin:2px 0', 'margin:2px 0', 'margin:0 0 30px'],
   placeholder = ['placeholder = "https://www.social-media.com/your-profile"','placeholder = "fa-social-media"','placeholder = "Social media name"'];
   // create an array with DB stored value (or an empty one if DB option not set yet)
@@ -13,8 +13,8 @@
   $('document').ready(function() {
 
     // create buttons to add or delete social icon input fields
-    $('#social_contacts').css('margin-bottom', '20px');
-    $('#social_contacts').parent().append('<p class="buttons add_del"><button disabled value="add"><img src="images/add.png" alt="">' + buttonAdd + '</button><button disabled value="delete"><img src="images/edit-delete.png" alt="">' + buttonDel + '</button><p>');
+    $('#multiverse_social_contacts').css('margin-bottom', '20px');
+    $('#multiverse_social_contacts').parent().append('<p class="buttons add_del"><button disabled value="add"><img src="images/add.png" alt="">' + buttonAdd + '</button><button disabled value="delete"><img src="images/edit-delete.png" alt="">' + buttonDel + '</button><p>');
     $('.add_del button').fadeTo(10, .4);
 
     // create social icon input fields (function triggered by reset button too)
@@ -30,24 +30,24 @@
         }
       }
       setTimeout(function() {
-        if ($('#zenpage_zp_index_news').prop('checked')) {
-          $('#zenpage_homepage').prop('disabled', true).css('background', '#f0f0f0');
+        if ($('#multiverse_index_news').prop('checked')) {
+          $('#multiverse_homepage').prop('disabled', true).css('background', '#f0f0f0');
         } else {
-          $('#zenpage_homepage').prop('disabled', false);
+          $('#multiverse_homepage').prop('disabled', false);
         }
       }, 10);
     }
 
-    // Disable zenpage_homepage option if zenpage_zp_index_news is enabled and vice versa
-    $('#zenpage_zp_index_news').on('click', function() {
-      $('#zenpage_homepage').prop('disabled', function(q, v) {
-        $('#zenpage_homepage').css('background', v ? '' : '#f0f0f0');
+    // Disable multiverse_homepage option if multiverse_index_news is enabled and vice versa
+    $('#multiverse_index_news').on('click', function() {
+      $('#multiverse_homepage').prop('disabled', function(q, v) {
+        $('#multiverse_homepage').css('background', v ? '' : '#f0f0f0');
         return !v;
       });
     });
 
     // toggle enabled status of social icon input fields and of add/delete buttons
-    $('#social_contacts').on('click', function() {
+    $('#multiverse_social_contacts').on('click', function() {
       $('.social_data, .add_del button').prop('disabled', function(q, v) { return !v; });
       $('.add_del button').fadeTo(10, 1);
       $('.add_del button[disabled]').fadeTo(10, .4);
@@ -98,12 +98,12 @@
       var paramlist = $(".social_data").map(function() {
         return encodeURIComponent(this.value);
       }).get().join(',');
-      $('#zenpage_homepage').prop('disabled', false);
+      $('#multiverse_homepage').prop('disabled', false);
       // only apply ajax request if any social icon input fields is changed
       if ($('.social_data').hasClass('dirty') || paramlist.length == 0) {
         $(this).append(
-          '<input type="hidden" name="_ZP_CUSTOM_text-social_content" value="1">'
-          + '<input type="hidden" id="social_content" name="social_content" value="'
+          '<input type="hidden" name="_ZP_CUSTOM_text-multiverse_social_content" value="1">'
+          + '<input type="hidden" id="multiverse_social_content" name="multiverse_social_content" value="'
           + paramlist
           + '">'
         );

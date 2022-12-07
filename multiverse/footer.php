@@ -1,6 +1,6 @@
 <?php
 $follow_section = 0;
-$has_search = getThemeOption('search');
+$has_search = getThemeOption('multiverse_search');
 $has_album_menu = function_exists('printAlbumMenu');
 $has_news = ZENPAGE_ON && ZP_NEWS_ENABLED && !empty($_zp_zenpage->getArticles(1));
 $has_pages = ZENPAGE_ON && ZP_PAGES_ENABLED && !empty($_zp_zenpage->getPages(true, true, 1));
@@ -8,7 +8,7 @@ $see_more_count = $has_search + $has_album_menu + $has_news + $has_pages;
 $has_lang_menu = function_exists('printLanguageSelector');
 $menus_count = $see_more_count + 3 * $has_lang_menu;
 $has_contact = function_exists('printContactForm');
-$has_social = getThemeOption('social_contacts');
+$has_social = getThemeOption('multiverse_social_contacts');
 
 // Positioning the "follow" section according to the layout
 // $rss_links_enabled is defined in functions.php
@@ -29,7 +29,7 @@ if ($has_social || $rss_links_enabled) {
       <ul class="icons">
         <?php printFooterRSS(); // RSS links as defined in functions.php
         if ($has_social) {
-          $icons = explode (",", getThemeOption("social_content"));
+          $icons = explode (",", getThemeOption("multiverse_social_content"));
           $icons = array_chunk($icons, 3);
           foreach ($icons as $key) { ?>
             <li>
@@ -64,14 +64,14 @@ if ($has_social || $rss_links_enabled) {
       <?php if ($follow_section == 1) printFollowSection(); ?>
       <section class="copyright">
         <p>
-          <?php if ($copy_text = getOption('copyrigth_text')) { ?>
+          <?php if ($copy_text = getThemeOption('multiverse_copyrigth_text')) { ?>
             <i class="icon fa-copyright" aria-hidden="true"></i>
             <?php
             $archive_link = getAllDates();
             reset($archive_link);
             $archive_link = substr(key($archive_link), 0, 4);
             $archive_link = '<a title="' . gettext('Archive') . '" href="' . getCustomPageURL('archive') . '">' . $archive_link . '-' . getdate()['year'] . '</a> ';
-            if (($copy_page = getOption('copyright_page')) && function_exists('getPageURL')) {
+            if (($copy_page = getThemeOption('multiverse_copyright_page')) && function_exists('getPageURL')) {
               $copy_text = '<a href="' . getPageURL($copy_page) . '" title="' . gettext_th('Copyright info') . '">' . $copy_text . '</a>';
             }
             echo $archive_link . $copy_text . '<br>';

@@ -49,7 +49,7 @@ if (in_context(ZP_SEARCH_LINKED) && !in_context(ZP_ALBUM_LINKED)) {
   }
 
 } else {
-  if (getThemeOption('pagination')) {
+  if (getThemeOption('multiverse_pagination')) {
     $page = getAlbumPage();
   } else {
     $page = 1;
@@ -120,7 +120,7 @@ if (!class_exists('static_html_cache')) {
             </p>
             <?php printTags('links', null, 'taglist','&nbsp;'); ?>
             <?php $full_img_opt = getOption('protect_full_image');
-            if ($full_img_opt !== "No access" && $full_img_opt !== "no-access" && getThemeOption("full_image")) { ?>
+            if ($full_img_opt !== "No access" && $full_img_opt !== "no-access" && getThemeOption("multiverse_full_image")) { ?>
               <p>
                 <?php $icon = "fa fa-picture-o";
                 $text = gettext('Original');

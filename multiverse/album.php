@@ -20,12 +20,12 @@ if (!defined('WEBPATH')) die();
     <div id="main">
       <?php
       // Get size options before the loops
-      $image_x = getThemeOption('image_size_x');
-      $image_y = getThemeOption('image_size_y');
+      $image_x = getThemeOption('multiverse_image_size_x');
+      $image_y = getThemeOption('multiverse_image_size_y');
       $thumb_x = 600;
       $thumb_y = 10 * $thumb_x; // dummy multiplier for height to get all thumbs of the same width
 
-      if (!getOption('pagination')) { // no pagination (default)
+      if (!getThemeOption('multiverse_pagination')) { // no pagination (default)
         while (next_image(true)) { ?>
           <div class="thumb">
             <a class="image" href='<?php echo getCustomSizedImageMaxSpace($image_x, $image_y); ?>' title="<?php printBareImageTitle(); ?>">

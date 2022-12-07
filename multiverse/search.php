@@ -152,8 +152,8 @@ if ($pag_tot > 1) {
       <?php } ?>
       <?php if ($numimages) {
         // Get size options before the loops
-        $image_x = getThemeOption('image_size_x');
-        $image_y = getThemeOption('image_size_y');
+        $image_x = getThemeOption('multiverse_image_size_x');
+        $image_y = getThemeOption('multiverse_image_size_y');
         $thumb_x = 600;
         $thumb_y = 10 * $thumb_x; // dummy multiplier for height to get all thumbs of the same width
         $from = $to = '';
