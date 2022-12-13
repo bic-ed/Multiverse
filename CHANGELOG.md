@@ -1,11 +1,19 @@
 # Changelog
 ## [Unreleased]
 
+### Changed
+* Renamed all custom options. **NOTICE**: Visit the theme’s option page after updgrading to import any existing option values with earlier names
+* Simplified internal handling and saving of "social_content" option
+* Option "social_content" is now encoded with `encodeURIComponent` to avoid messing up things if a comma is eventually present in any field value
+* Set color-scheme to dark to get dark scrollbars in browsers
+
 ### Added
+* Support for the thumbs transition option, new in ZP v1.6
 * Support for Zenphoto changes in protect_full_image option values
 * Zenphoto 1.6 support. Multiverse will not work correctly with previous versions of Zenphoto from now on
 
 ### Fixed
+* HTLM markup validation when using reCAPTCHA
 * Set proper image caching sizes also if Multiverse is not the current theme of the Gallery
 * Removed the _required_ attribute from user field in login form
 * Correct number of total pages in category loop title
