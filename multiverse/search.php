@@ -36,8 +36,8 @@ if ($pag_tot > 1) {
     <div id="main">
       <article id="page">
         <h1><?php if (isArchive()) {
-          $date = strtotime($_zp_current_search->getSearchDate());
-          echo '<a href="' . getCustomPageURL('archive') . '">' . gettext('Gallery archive') . '</a>' . ': ' . strftime('%B %Y', $date);
+          $date = $_zp_current_search->getSearchDate();
+          echo '<a href="' . getCustomPageURL('archive') . '">' . gettext('Gallery archive') . '</a>' . ': ' . getFormattedLocaleDate('F Y', $date);
         } else {
           echo gettext_th('Search results');
         }

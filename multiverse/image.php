@@ -33,8 +33,8 @@ if (in_context(ZP_SEARCH_LINKED) && !in_context(ZP_ALBUM_LINKED)) {
   // so the specific infos below are available for live pages only.
   if (!class_exists('static_html_cache')) {
 
-    if ($_zp_current_search->getSearchDate()) {
-      $origin['key'] = strftime('%B %Y', strtotime($_zp_current_search->getSearchDate()));
+    if ($search_date = $_zp_current_search->getSearchDate()) {
+      $origin['key'] = getFormattedLocaleDate('F Y', strtotime($search_date));
     }
 
     if ($_zp_current_search->getSearchFields() && $_zp_current_search->getSearchFields() != 'tags') {
