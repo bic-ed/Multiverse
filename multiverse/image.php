@@ -66,11 +66,8 @@ if (in_context(ZP_SEARCH_LINKED) && !in_context(ZP_ALBUM_LINKED)) {
 $imgNumber = imageNumber() . '/' . getNumImages();
 if (!class_exists('static_html_cache')) {
   $open = urlencode($_zp_current_image->getTitle());
-  if (MOD_REWRITE && !isset($searchfields)) {
-    $open = '?title=' . $open;
-  } else {
-    $open = '&title=' . $open;
-  }
+  // NOTE: handled with an hashtag now, as ZP v1.6 does not allow parameters other than search words
+  $open = '#' . $open;
   $imgNumber = ' <a title="'
   . $origin['open_title']. '" href="' . $origin['link'] . $open . '">' . $imgNumber
   . '</a>';

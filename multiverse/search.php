@@ -194,22 +194,9 @@ if ($pag_tot > 1) {
   <?php zp_apply_filter('theme_body_close');
 
   // Open popup with the image of the referer image.php page
-  if (isset($_GET['title']) && !class_exists('static_html_cache')) {
-    $title = sanitize($_GET['title']); ?>
+  if (!class_exists('static_html_cache')) { ?>
     <script>
-    $(window).on('load', function(){
-      $('a.image, a.icon').css("pointer-events", "none");
-      var title = "<?php echo js_encode($title); ?>",
-      $image = $('a.image[title="' + title + '"]');
-      setTimeout(function(){
-        $('html').animate({scrollTop: $image.offset().top + ($image.height() - $(window).height())/2}, 400, function(){
-          $('a.image, a.icon').css("pointer-events", "auto");
-        });
-      }, 2000);
-      setTimeout(function(){
-        $image.click();
-      }, 1600);
-    });
+      <?php echo file_get_contents(dirname(__FILE__) . '/js/internal/popup_on_hash.min.js'); ?>
     </script>
   <?php } ?>
 </body>
