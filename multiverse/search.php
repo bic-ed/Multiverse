@@ -158,8 +158,9 @@ if ($pag_tot > 1) {
         $thumb_y = 10 * $thumb_x; // dummy multiplier for height to get all thumbs of the same width
         $from = $to = '';
         $ii = 0;
-        while (next_image()) { ?>
-          <?php if ($ii == 0) {
+        while (next_image()) {
+          $media_adapted = Multiverse::handleMediaAlbPage($_zp_current_image, $image_x, $image_y);
+          if ($ii == 0) {
             $ii = 1;
             // Set a cookie with number of albums and first page images, needed on image.php
             zp_setCookie("bic_multiverse_search", $numalbums . ',' . $_zp_first_page_images, SEARCH_DURATION);
@@ -180,10 +181,10 @@ if ($pag_tot > 1) {
             <h2><?php echo ngettext_th('image', 'images', $numimages) . $from; ?></h2>
           <?php } ?>
           <div class="thumb">
-            <a class="image" href='<?php echo getCustomSizedImageMaxSpace($image_x, $image_y); ?>' title="<?php printBareImageTitle(); ?>">
+          <a class="image"<?php echo $media_adapted['data']; ?> href='<?php echo html_encode($media_adapted['url']); ?>' title="<?php printBareImageTitle(); ?>">
               <?php printCustomSizedImageThumbMaxSpace(getBareImageTitle(), $thumb_x, $thumb_y); ?>
             </a>
-            <h2><a href="<?php echo htmlspecialchars(getImageURL());?>" title="<?php echo getBareImageTitle();?>"> <?php printBareImageTitle(); ?></a></h2>
+            <h2><a href="<?php echo html_encode(getImageURL());?>" title="<?php echo getBareImageTitle();?>"> <?php printBareImageTitle(); ?></a></h2>
             <?php // echo truncate_string(html_encodeTagged(getImageDesc()), 100, ' (..)'); ?>
           </div>
         <?php } // end while ?>

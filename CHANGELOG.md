@@ -1,16 +1,20 @@
 # Changelog
 ## [Unreleased]
 
+### Added
+* Multimedia support for album, search and image pages
+* Implemented a custom mod version of _jquery.poptrox_ to support audio and video files
+* Open zoom from poptrox-popup on pinch 
+* Animated scrolling of the page, when the image in the popup changes, until the thumbnail of the new image reaches the center of the screen
+* Support for the max/min number of thumbs in transition page, new option in ZP v1.6
+* Support for Zenphoto changes in protect_full_image option values
+* Zenphoto v1.6 support. Multiverse will not work correctly with previous versions of Zenphoto from now on
+
 ### Changed
-* Renamed all custom options. **NOTICE**: Visit the theme’s option page after updgrading to import any existing option values with earlier names
+* Renamed all custom options. **NOTICE: Visit the theme’s option page after updgrading to import any existing option values with earlier names**
 * Simplified internal handling and saving of "social_content" option
 * Option "social_content" is now encoded with `encodeURIComponent` to avoid messing up things if a comma is eventually present in any field value
 * Set color-scheme to dark to get dark scrollbars in browsers
-
-### Added
-* Support for the thumbs transition option, new in ZP v1.6
-* Support for Zenphoto changes in protect_full_image option values
-* Zenphoto 1.6 support. Multiverse will not work correctly with previous versions of Zenphoto from now on
 
 ### Fixed
 * HTLM markup validation when using reCAPTCHA

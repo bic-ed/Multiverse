@@ -1,6 +1,5 @@
 <?php
 // force UTF-8 Ø
-// TODO: Develop video compatibility
 if (!defined('WEBPATH')) die();
 ?>
 <!DOCTYPE html>
@@ -24,14 +23,17 @@ if (!defined('WEBPATH')) die();
       $image_y = getThemeOption('multiverse_image_size_y');
       $thumb_x = 600;
       $thumb_y = 10 * $thumb_x; // dummy multiplier for height to get all thumbs of the same width
-
+      
       if (!getThemeOption('multiverse_pagination')) { // no pagination (default)
         while (next_image(true)) { ?>
+        <?php
+          $media_adapted = Multiverse::handleMediaAlbPage($_zp_current_image, $image_x, $image_y);
+          ?>
           <div class="thumb">
-            <a class="image" href='<?php echo getCustomSizedImageMaxSpace($image_x, $image_y); ?>' title="<?php printBareImageTitle(); ?>">
+            <a class="image"<?php echo $media_adapted['data']; ?> href='<?php echo html_encode($media_adapted['url']); ?>' title="<?php printBareImageTitle(); ?>">
               <?php printCustomSizedImageThumbMaxSpace(getBareImageTitle(), $thumb_x, $thumb_y); ?>
             </a>
-            <h2><a href="<?php echo htmlspecialchars(getImageURL());?>" title="<?php echo getBareImageTitle();?>"> <?php printBareImageTitle(); ?></a></h2>
+            <h2><a href="<?php echo html_encode(getImageURL());?>" title="<?php echo getBareImageTitle();?>"> <?php printBareImageTitle(); ?></a></h2>
             <?php // echo truncate_string(html_encodeTagged(getImageDesc()), 100, ' (..)'); ?>
           </div>
         <?php } // end while
@@ -64,14 +66,15 @@ if (!defined('WEBPATH')) die();
         <?php }
         $once = 0;
         while (next_image()) {
+          $media_adapted = Multiverse::handleMediaAlbPage($_zp_current_image, $image_x, $image_y);
           if (!$once++ && isset($has_sub)) { ?>
             <h2><?php echo gettext('Images') ?></h2>
           <?php } ?>
           <div class="thumb">
-            <a class="image" href='<?php echo getCustomSizedImageMaxSpace($image_x, $image_y); ?>' title="<?php printBareImageTitle(); ?>">
+          <a class="image"<?php echo $media_adapted['data']; ?> href='<?php echo html_encode($media_adapted['url']); ?>' title="<?php printBareImageTitle(); ?>">
               <?php printCustomSizedImageThumbMaxSpace(getBareImageTitle(), $thumb_x, $thumb_y); ?>
             </a>
-            <h2><a href="<?php echo htmlspecialchars(getImageURL());?>" title="<?php echo getBareImageTitle();?>"> <?php printBareImageTitle(); ?></a></h2>
+            <h2><a href="<?php echo html_encode(getImageURL());?>" title="<?php echo getBareImageTitle();?>"> <?php printBareImageTitle(); ?></a></h2>
             <?php // echo truncate_string(html_encodeTagged(getImageDesc()), 100, ' (..)'); ?>
           </div>
         <?php }
@@ -82,7 +85,6 @@ if (!defined('WEBPATH')) die();
   <?php include 'footer.php'; ?>
   <?php zp_apply_filter('theme_body_close');
 
-  // Open popup with the image of the referer image.php page
   if (!class_exists('static_html_cache')) { ?>
     <script>
       <?php echo file_get_contents(dirname(__FILE__) . '/js/internal/popup_on_hash.min.js'); ?>

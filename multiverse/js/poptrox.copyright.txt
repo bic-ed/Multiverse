@@ -1,0 +1,2 @@
+/* 1) jquery.poptrox.js v2.5.2-dev | (c) @ajlkn | github.com/ajlkn/jquery.poptrox | MIT licensed
+Mod for Multiverse Zenphoto Theme | (c) @bic-ed | www.antonioranesi.it | GPL-2.0 or later License */

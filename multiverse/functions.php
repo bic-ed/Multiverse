@@ -64,19 +64,22 @@ zp_register_filter('theme_head', 'css_head', 500);
 zp_register_filter('theme_body_close', 'multiverse');
 
 /**
+ * Sets viewport & load CSS
  *
- * Set viewport & load CSS
- * @author bic-ed
- *
+ * @return void 
  */
 function css_head() {
-  global $_zp_themeroot;
+  global $_zp_themeroot, $_zp_loggedin;
   ?>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="<?php echo pathurlencode($_zp_themeroot . '/css/multi.css') ?>">
-  <?php if (extensionEnabled("themeSwitcher")) { ?>
-    <style><?php echo file_get_contents(dirname(__FILE__) . '/css/internal/theme_switcher.min.css') ?></style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="<?php echo pathurlencode($_zp_themeroot . '/css/multi.css') ?>">
+  <?php if (extensionEnabled("themeSwitcher") && themeSwitcher::active()) { ?>
+<style><?php echo file_get_contents(dirname(__FILE__) . '/css/internal/theme_switcher.min.css') ?></style>
   <?php }
+  if ($_zp_loggedin) { ?>
+<style><?php echo file_get_contents(dirname(__FILE__) . '/css/mv_ad_tb.min.css') ?></style>
+<?php }
+
 }
 
 function my_checkPageValidity($request, $gallery_page, $page) {
@@ -108,10 +111,11 @@ function my_checkPageValidity($request, $gallery_page, $page) {
 }
 
 /**
- * makex news page 1 link go to the index page
- * @param type $link
- * @param type $obj
- * @param type $page
+ * makes news page 1 link go to the index page
+ * 
+ * @param string $link
+ * @param object $obj
+ * @param int $page
  */
 function newsOnIndex($link, $obj, $page) {
   if (is_string($obj) && $obj == 'news.php') {
@@ -205,9 +209,7 @@ function multiverse() {
     'mailSubject' => $mailsubject,
     'mailSent' => get_language_string(getOption('contactform_thankstext')),
   );
-if ($_zp_loggedin) { ?>
-<link rel="stylesheet" href="<?php echo $_zp_themeroot . '/css/mv_ad_tb.min.css' ?>">
-<?php } ?>
+?>
 <script>
 var phpToJS = <?php echo json_encode($javas) ?>;
 </script>
@@ -260,4 +262,207 @@ function printFooterRSS() {
     <?php
   }
   return;
+}
+
+class Multiverse {
+
+  /**
+   * Implements audio video and text object support for poptrox-popup
+   * 
+   * Also returns some media info to be used in the single image page
+   *
+   * @param object  $media  current media ($_zp_current_image)
+   * @param integer $w      media width
+   * @param integer $h      media height
+   * @return array The url and data attribute for links on poptrox selectors thumbs; sizes and type of the media, sidecar image for iframe with no sizes info and audio file
+   */
+  static function handleMediaAlbPage($media, $w = 0, $h = 0) {
+
+    $type = $poster = null;
+
+    if ($media->isPhoto()) {
+
+      $media_url = getCustomSizedImageMaxSpace($w, $h);
+      $data_poptrox = '';
+
+    } else if ($media->isVideo()) { // video or audio file
+
+      $media_url = getUnprotectedImageURL();
+
+      if ($width = $media->get('VideoResolution_x')) { // video file
+
+        $height = $media->get('VideoResolution_y');
+
+        $data_poptrox = ' data-poptrox="video,' . $width . 'x' . $height . '"';
+        $type = 'video';
+
+      } else { // audio file
+
+        $poster = $media->getThumbImageFile();
+        list($width, $height) = getimagesize($poster);
+        
+        $data_poptrox = ' data-poptrox="audio,' . $width . 'x' . $height . '"';
+        $type = 'audio';
+
+      }
+
+    } else if (strtolower(get_class($media)) == 'textobject') { // text object
+
+      $dom = new DOMDocument();
+      @$dom->loadHTML(file_get_contents(SERVERPATH . getUnprotectedImageURL()));
+      $elm = $dom->getElementsByTagName('iframe');
+
+      if ($elm->length) { // iframe text object
+
+        $width = $elm->item(0)->getAttribute('width');
+        $height = $elm->item(0)->getAttribute('height');
+
+        if (strpos($width, '%') !== false || strpos($height, '%') !== false) {
+          $width = $height = null;
+        }
+
+        if (!($width && $height)) {
+          $poster = $media->getThumbImageFile();
+          if (strpos($poster, 'themes/multiverse/images') === false) {
+            list($width, $height) = getimagesize($poster);
+          }
+        }
+        $sizes = ($width && $height) ? ',' . $width . 'x' . $height : '';
+
+        $media_url = $elm->item(0)->getAttribute('src');
+        $data_poptrox = ' data-poptrox="iframe' . $sizes . '"';
+        $type = 'text-iframe';
+
+      } else { // generic text object. We don't load it into the popup but open it's image page
+        // QUESTION: Add popup support for non-iframe TextObject?
+
+        $media_url = getImageURL();
+        $data_poptrox = ' data-poptrox="ignore"';
+        $type = 'text-any';
+
+      }
+
+    } else { // class-AnyFile object. We don't load it into the popup but open it's image page
+
+      $media_url = getImageURL();
+      $data_poptrox = ' data-poptrox="ignore"';
+      $type = 'anyfile-any';
+
+    }
+
+    return array(
+      // for poptrox-popup
+      'url' => $media_url,
+      'data' => $data_poptrox,
+      // for image page
+      'width' => isset($width) ? round($width) : null,
+      'height' => isset($height) ? round($height) : null,
+      'type' => $type,
+      'poster' => $poster
+    );
+
+  }
+
+  /**
+   * Scales dimensions following image size settings. Does not enlarge.
+   * 
+   * @param integer     $width  Full widht of the media
+   * @param integer     $height Full height of the media
+   * @return array<int>         scaled width and height
+   */
+  static function resizePoster($width, $height) {
+    $ratio = $width / $height;
+    $size = getOption('image_size');
+
+    switch (getOption('image_use_side')) {
+
+      case 'width':
+        if ($width > $size) {
+          $width = $size;
+          $height = round($size / $ratio);
+        }
+        break;
+
+      case 'height':
+        if ($height > $size) {
+          $height = $size;
+          $width = round($size * $ratio);
+        }
+        break;
+
+      case 'longest':
+        if ($ratio >= 1 && $width > $size) {
+          $width = $size;
+          $height = round($size / $ratio);
+        } else if ($height > $size) {
+          $height = $size;
+          $width = round($size * $ratio);
+        }
+        break;
+
+      case 'shortest':
+        if ($ratio < 1 && $width > $size) {
+          $width = $size;
+          $height = round($size / $ratio);
+        } else if ($height > $size) {
+          $height = $size;
+          $width = round($size * $ratio);
+        }
+        break;
+    }
+
+    return array('width' => (int) $width, 'height' => (int) $height);
+
+  }
+
+  /**
+   * Implements audio, video and text object handling on image page
+   * 
+   * @param object $media current media ($_zp_current_image)
+   * @return array The class and sizes for any media; The html element for video or audio
+   */
+  static function handleMediaImgPage($media) {
+
+    $media_info = self::handleMediaAlbPage($media);
+
+    // If missing sizes, get them from poster (if any).
+    if (!($media_info['height'] && $media_info['width']) && !$media_info['poster']) {
+      $poster = $media->getThumbImageFile();
+      if (strpos($poster, 'themes/multiverse/images') === false) {
+        list($media_info['width'], $media_info['height']) = getimagesize($poster);
+      }
+    }
+
+    $resized = array('width' => null, 'height' => null);
+    if ($media_info['height'] && $media_info['width']) {
+      $resized = self::resizePoster($media_info['width'], $media_info['height']);
+    }
+
+    $class = ' class="is-media"';
+    $element = null;
+    if ($media_info['type'] == 'audio') {
+      $class = ' class="is-media is-audio"';
+      $poster = $media_info['poster'];
+      if (strpos($poster, 'themes/multiverse/images') === false) {
+        $poster_src = str_replace(SERVERPATH, WEBPATH, $poster);
+      } else {
+        $filename = makeSpecialImageName($poster);
+        $args = getImageParameters(array(null, $resized['width'], $resized['height']));
+        $mtime = filemtime(internalToFilesystem($poster));
+        $poster_src = getImageURI($args, $media->getAlbumName(), $filename, $mtime);
+      }
+      $element = '<audio style="background-image:url(' . $poster_src . ')" controls src="' . getUnprotectedImageURL() . '"></audio>';
+    } else if ($media_info['type'] == 'video') {
+      $element = '<video controls preload="metadata" src="' . getUnprotectedImageURL() . '"></video>';
+    }
+
+    return array(
+      'class' => $class,
+      'width' => $resized['width'],
+      'height' => $resized['height'],
+      'element' => $element
+    );
+
+  }
+
 }

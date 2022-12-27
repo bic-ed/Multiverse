@@ -40,8 +40,8 @@
   <path d="M32 80L64 48"/>
 </g>
 <g id="close">
-  <path d="M25 25L71 71"/>
-  <path d="M25 71L71 25"/>
+  <path d="M32 32L64 64"/>
+  <path d="M32 64L64 32"/>
 </g>
 <g id="maximize">
   <path d="M16 16L44 16"/>

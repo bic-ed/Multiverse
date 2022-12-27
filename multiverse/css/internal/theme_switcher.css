@@ -43,6 +43,7 @@ body.modal-active .themeSwitcherControlLink {
     width: 100%;
     height: 26px;
     text-align: center;
+    z-index: 100001;
   }
   body {
     margin-bottom: 26px

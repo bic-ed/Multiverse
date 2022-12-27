@@ -73,9 +73,10 @@ if (!defined('WEBPATH')) die();
           <div class="newsarticle">
             <h2><?php printNewsURL(); ?></h2>
             <div class="newsarticlecredit">
-              <span class="newsarticlecredit-left"><?php printNewsDate(); ?> | <?php
+              <span class="newsarticlecredit-left"><?php printNewsDate();
               if (function_exists('getCommentCount')) {
-                echo gettext("Comments:") . " " . getCommentCount(); } ?>
+                echo " | " . gettext("Comments:") . " " . getCommentCount();
+              } ?>
               </span>
               <?php if (getNewsCategories()) { echo ' | '; printNewsCategories(", ", gettext("Categories: "), "newscategories"); }?>
               </div>

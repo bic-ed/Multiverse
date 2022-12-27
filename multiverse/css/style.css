@@ -872,7 +872,7 @@ table.alt tfoot {
   box-shadow: 0 1em 3em 0.5em rgba(0, 0, 0, 0.25);
   cursor: default;
   transition-timing-function: ease-in-out;
-  margin-top: -25px;
+  margin: 0 16px 32px;
 }
 .poptrox-popup:before {
   transition: opacity 0.2s ease-in-out;
@@ -886,58 +886,37 @@ table.alt tfoot {
   opacity: 1;
 }
 .poptrox-popup .closer {
-  background-image: url(../images/sprite.svg#close);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 60%;
-  height: 10%;
-  right: 0;
   top: 0;
-  width: 15%;
+  right: 0;
   border-radius: 0 0 0 30%;
-  max-height: 96px;
-  max-width: 96px;
-  min-width: 52px;
-  min-height: 52px;
+  background-image: url(../images/sprite.svg#close);
 }
-.nav-previous,
-.nav-next {
-  background-image: url(../images/sprite.svg#arrow);
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: right;
-  height: 15%;
+.poptrox-popup :is(.nav-prev, .nav-next) {
   top: 50%;
-  border-radius: 30% 0 0 30%;
-  min-height: 52px;
-  max-width: 96px;
-  width: 15%;
+  right: 0;
   transform: translateY(-50%);
-  min-width: 52px;
-  max-height: 96px;
+  border-radius: 30% 0 0 30%;
+  background-image: url(../images/sprite.svg#arrow);
 }
-.nav-previous {
-  transform: scaleX(-1) translateY(-50%);
+.poptrox-popup .nav-prev {
   left: 0;
+  transform: scaleX(-1) translateY(-50%);
 }
-.nav-next {
-  right: 0px;
+.not-image :is(.nav-prev, .nav-next, .closer) {
+  width: 70px;
+  height: auto;
+  background-size: 100%;
+  margin: 0 -60px;
+}
+.not-image.poptrox-popup:hover > span:hover {
+  background-color: transparent;
 }
 #play {
   bottom: 0;
-  background-image: url(../images/sprite.svg#play);
-  max-height: 96px;
-  max-width: 96px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 80%;
-  border-radius: 30% 30% 0 0;
-  min-height: 52px;
-  height: 10%;
-  transform: translateX(-50%);
-  min-width: 52px;
-  width: 10%;
   left: 50%;
+  transform: translate(-50%);
+  border-radius: 30% 30% 0 0;
+  background-image: url(../images/sprite.svg#play);
 }
 #play.playing{
   background-image: url(../images/sprite.svg#pause);
@@ -946,57 +925,50 @@ table.alt tfoot {
   opacity: 1;
   background-color: rgba(89, 166, 213, 0.39) !important;
 }
-.swipe .loader,
-.swipe > span,
-.poptrox-popup.loading > span {
-  display: none !important;
-}
-.swipe a {
-  pointer-events: none;
-}
 #fullscreen {
   top: 0;
   background-image: url(../images/sprite.svg#maximize);
-  height: 14%;
-  min-height: 36px;
-  width: 56px;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 3.5em;
   border-radius: 0 0 30% 30%;
   position: absolute;
   cursor: pointer;
   transition: opacity 0.2s ease-in-out;
-  transform: translateX(-50%);
+  transform: translate(-50%);
   left: 50%;
 }
-.poptrox-popup #fullscreen {
-  width: 10%;
-  height: 10%;
-  background-size: 80%;
-  min-height: 52px;
-  max-width: 96px;
-  min-width: 52px;
-  max-height: 96px;
-}
-.poptrox-popup span,
-#image span {
+.poptrox-popup span {
+  font-size: 1.25em;
   position: absolute;
   z-index: 2;
-  font-size: 1.25em;
-  opacity: 0;
+  width: 10%;
+  min-width: 52px;
+  max-width: 96px;
+  height: 15%;
+  min-height: 52px;
+  max-height: 96px;
   cursor: pointer;
-  transition: opacity 0.2s ease-in-out,
-  background-color .2s ease-in-out;
+  transition: opacity .2s ease-in-out, background-color .2s ease-in-out;
+  opacity: 0;
+  background: no-repeat center / 80%;
 }
-.poptrox-popup:hover > span,
-#image:hover > span {
+.poptrox-popup:hover > span {
   opacity: 0.5;
 }
-.poptrox-popup:hover > span:hover,
-#image:hover > span:hover {
+.poptrox-popup:hover > span:hover {
   opacity: 1.0;
   background-color: rgba(0, 0, 0, 0.3);
+}
+.poptrox-popup.swipe>span {
+  opacity: 0;
+  pointer-events: none;
+}
+.poptrox-popup.swipe a {
+  pointer-events: none;
+}
+.swipe .loader,
+.poptrox-popup.loading>span {
+  display: none !important;
 }
 .poptrox-popup .caption {
   background-color: rgba(16, 16, 16, 0.2);
@@ -1007,34 +979,28 @@ table.alt tfoot {
   width: 100%;
   z-index: 2;
   color: #ebebeb;
-  padding: 0.4em;
+  padding: 0 0.4em;
+  height: 32px;
 }
-.poptrox-popup .caption h2, .poptrox-popup .caption h3, .poptrox-popup .caption h4, .poptrox-popup .caption h5, .poptrox-popup .caption h6 {
+.poptrox-popup .caption h2 {
   margin: 0;
   color: #ebebeb;
 }
-.poptrox-popup .caption p {
-  margin: 0 1em 0.3em;
-  text-align: left;
-}
 .poptrox-popup .loader {
-  -webkit-animation: spinner 1s infinite linear !important;
-  animation: spinner 1s infinite linear !important;
-  background-image: url(../images/sprite.svg#spinner);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  display: block;
   font-size: 2em;
-  height: 2em;
-  left: 50%;
   line-height: 2em;
-  margin: -1em 0 0 -1em;
-  opacity: 0.25;
   position: absolute;
-  text-align: center;
   top: 50%;
+  left: 50%;
+  display: block;
   width: 2em;
+  height: 2em;
+  margin: -1em -1em;
+  -webkit-animation: spinner 1s infinite linear !important;
+          animation: spinner 1s infinite linear !important;
+  text-align: center;
+  opacity: .25;
+  background: url(../images/sprite.svg#spinner) no-repeat center / contain;
 }
 .poptrox-popup.loading:before {
   opacity: 0;
@@ -1047,8 +1013,11 @@ table.alt tfoot {
 }
 
 #header > #fullscreen {
-  opacity: 0.5;
+  min-height: 36px;
+  width: 56px;
   height: 100%;
+  opacity: 0.5;
+  background-size: 3.5em;
 }
 #header > #fullscreen:hover {
   opacity: 1;
@@ -1292,8 +1261,20 @@ body.modal-active #main{
   position: absolute;
   top: 0;
   width: 100%;
-  cursor: zoom-in !important;
+  cursor: zoom-in;
 }
+
+/* QUESTION:[IE support] Drop support for Internet Explorer?
+Then we have to add below rule after handling the same question in main.js
+and we can remove the backround declarations from the above rule */
+
+/* #main .thumb>a.image>img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  height: 100%;
+} */
+
 #main .thumb>h2 {
   bottom: 1.875em;
   font-size: 0.8em;
@@ -1996,43 +1977,58 @@ ul.pagelist.gallery li:first-child > * {
 /**
  * Image
  */
-
+#container {
+  cursor: grab;
+}
 #image {
   position: relative;
   text-align: left;
-  cursor: grab;
   align-self: center;
 }
-.swipe #image {
+#image>a {
+  font-size: 1.25em;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  width: 96px;
+  max-width: 50%;
+  display: block;
+  height: 100%;
+  transition: opacity .2s ease-in-out, background-color .2s ease-in-out;
+  opacity: 0;
+  border: none;
+  background: url(../images/sprite.svg#arrow) no-repeat 8px / 100%;
+}
+#image>.nav-prev {
+  left: 0;
+  transform: scaleX(-1);
+}
+#image:hover>a {
+  opacity: 0.5;
+}
+#image:hover>a:hover {
+  opacity: 1.0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.swipe #container {
   cursor: grabbing;
 }
-.swipe #image:hover > span {
+.swipe #image:hover > a {
   opacity: 0;
+  pointer-events: none;
 }
 #page.swipe {
   overflow-x: hidden;
 }
-#image > span {
-  min-height: 100%;
-  width: 100%;
-  border-radius: 0;
-  background-position: 8px;
-  background-size: 100%;
-}
-#image a {
-  display:block;
-  width: 100%;
-  height: 100%;
-  border: none;
-}
 #container {
+  position: relative;
   display: flex;
-  margin: 2em auto;
+  justify-content: center;
   max-width: max-content;
+  margin: 2em auto;
   background-color: #2c2e33;
   box-shadow: 0 0 0 1em #2c2e33;
-
-  justify-content: center;
 }
 #container h1 {
   margin: 0 0 .8em;
@@ -2081,6 +2077,69 @@ ul.pagelist.gallery li:first-child > * {
   margin-bottom: 70.4px;
   box-shadow: 0 0 0 17.6px #2c2e33;
 }
+
+/* Video/Audio support */
+#image.is-media {
+  position: static;
+}
+#image.is-media>a {
+  right: -96px;
+  clip-path: inset(calc(50% - 52px));
+}
+#image.is-media>.nav-prev {
+  left: -96px;
+}
+#container:hover #image.is-media>a {
+  opacity: .5;
+}
+#container:hover #image.is-media>a:hover {
+  background-color: transparent;
+  opacity: 1;
+}
+.swipe #image.is-media>a {
+  display: none;
+}
+.swipe #container {
+  cursor: grabbing;
+}
+.swipe #container a {
+  pointer-events: none;
+}
+.textobject {
+  width: auto !important;
+  height: auto !important;
+}
+.textobject :last-child {
+  margin-bottom: 0;
+}
+.textobject>*:first-child ,
+#image>video {
+  display: block;
+  width: var(--media-width, 595px);
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: var(--media-ratio, 1);
+}
+#image>video:fullscreen {
+  object-fit: contain;
+}
+#image.is-audio {
+  /* Firefox does not apply aspect-ratio on audio tag */
+  aspect-ratio: var(--media-ratio);
+}
+#image>audio {
+  display: block;
+  width: var(--media-width);
+  max-width: 100%;
+  height: 100%;
+  padding: 10%;
+  aspect-ratio: var(--media-ratio);
+  background-size: cover;
+}
+
+
+
 @media screen and (min-width: 1681px) {
   #osm_map {
     margin-bottom: 96px;
@@ -2238,7 +2297,7 @@ ul.pagelist.gallery li:first-child > * {
   .poptrox-popup .closer {
     background-size: 3em;
   }
-  .nav-previous,
+  .nav-prev,
   .nav-next {
     background-size: 4em;
   }
@@ -2288,6 +2347,9 @@ ul.pagelist.gallery li:first-child > * {
     max-width: 100%;
     /* height: 100%; */
   }
+  #image.is-media {
+    position: relative;
+  }
   #container {
     flex-direction: column;
     margin: 1em auto 2em;
@@ -2306,6 +2368,7 @@ ul.pagelist.gallery li:first-child > * {
     width: 100%;
     transform: none;
   }
+
 }
 
 @media screen and (max-width: 736px) {
@@ -2347,7 +2410,7 @@ ul.pagelist.gallery li:first-child > * {
     transform: translateY(0);
   }
   .poptrox-popup {
-    margin-top: 0;
+    margin: 0  0 30px 0;
   }
   .panel>.closer {
     display: none;
@@ -2356,11 +2419,14 @@ ul.pagelist.gallery li:first-child > * {
     display: none;
   }
   .poptrox-popup .closer,
-  .nav-previous,
+  .nav-prev,
   .nav-next {
     display: none !important;
   }
-  body {
+  .poptrox-popup .caption {
+    height: 30px;
+  }
+    body {
     padding: 4em 0 0 0;
     transition: padding .25s;
   }
@@ -2397,7 +2463,6 @@ ul.pagelist.gallery li:first-child > * {
     width: 100%;
   }
   #header > #fullscreen {
-    opacity: .5;
     background-size: 2.6em;
   }
   .poptrox-popup > span {
@@ -2452,9 +2517,9 @@ ul.pagelist.gallery li:first-child > * {
   #main > *:nth-child(3) {
     transition-delay: 0.95s;
   }
-  #page img {
+  #page :is(img, video, audio, .textobject>:first-child)  {
     max-width: calc(100% + 2em);
-    height: auto;
+    /* height: auto; */
     margin-left: -1em;
     margin-right: -1em;
   }
@@ -2482,6 +2547,10 @@ ul.pagelist.gallery li:first-child > * {
   #page {
     overflow-x: hidden;
   }
+  #image.is-audio {
+    max-width: calc(100% + 2em);
+  }
+
 }
 
 /* Accessible alternative to "display: none" */

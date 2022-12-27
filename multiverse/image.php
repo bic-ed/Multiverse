@@ -3,7 +3,7 @@
 if (!defined('WEBPATH'))
 die();
 
-if (in_context(ZP_SEARCH_LINKED) && !in_context(ZP_ALBUM_LINKED)) {
+if (isset($_zp_current_search)) {
   // We need to recalculate the page number, as it never changes when browsing the found images
   // NOTE: cookie needed because, if requested from here, number of albums is returned including not owned albums!
   if ($search_data = zp_getCookie('bic_multiverse_search')) {
@@ -74,6 +74,11 @@ if (!class_exists('static_html_cache')) {
 } else {
   $imgNumber = ' <span>' . $imgNumber . '</span>';
 }
+
+// Handle non image media
+if (!$_zp_current_image->isPhoto()) {
+  $media_data = Multiverse::handleMediaImgPage($_zp_current_image);
+}
 ?>
 <!DOCTYPE html>
 <html<?php printLangAttribute(); ?>>
@@ -84,7 +89,14 @@ if (!class_exists('static_html_cache')) {
   <?php if (class_exists('RSS') && $_rss_gallery) {
     printRSSHeaderLink("Album", "Album: " . getAlbumTitle());
   } ?>
-
+<?php if (isset($media_data['width'])) { ?>
+<style>
+  :root {
+    --media-width: <?php echo $media_data['width'] . 'px' ?>;
+    --media-ratio: <?php echo $media_data['width'] . '/' . $media_data['height'] ?>
+  }
+</style>
+<?php } ?>
 </head>
 <body class="loading">
   <?php zp_apply_filter('theme_body_open'); ?>
@@ -93,12 +105,18 @@ if (!class_exists('static_html_cache')) {
     <div id="main">
       <article id="page">
         <div id="container">
-          <div id="image">
-            <?php	printDefaultSizedImage(getBareImageTitle()); ?>
+          <div id="image"<?php echo isset($media_data) ? $media_data['class'] : ""; ?>>
+            <?php
+            if (isset($media_data['element'])) { // Video or audio file
+              echo $media_data['element'];
+            } else {
+              printDefaultSizedImage(getBareImageTitle());
+            }
+            ?>
             <?php if (hasPrevImage()) { ?>
-              <span class="nav-previous"><a href="<?php echo html_encode(getPrevImageURL()); ?>"></a></span>
+              <a class="nav-prev" href="<?php echo html_encode(getPrevImageURL()); ?>"></a>
             <?php } if (hasNextImage()) { ?>
-              <span class="nav-next"><a href="<?php echo html_encode(getNextImageURL()); ?>"></a></span>
+              <a class="nav-next" href="<?php echo html_encode(getNextImageURL()); ?>"></a>
             <?php } ?>
           </div>
           <div id="img_info">
@@ -117,7 +135,7 @@ if (!class_exists('static_html_cache')) {
             </p>
             <?php printTags('links', null, 'taglist','&nbsp;'); ?>
             <?php $full_img_opt = getOption('protect_full_image');
-            if ($full_img_opt !== "No access" && $full_img_opt !== "no-access" && getThemeOption("multiverse_full_image")) { ?>
+            if (!isset($media_data) && $full_img_opt !== "No access" && $full_img_opt !== "no-access" && getThemeOption("multiverse_full_image")) { ?>
               <p>
                 <?php $icon = "fa fa-picture-o";
                 $text = gettext('Original');
@@ -137,11 +155,7 @@ if (!class_exists('static_html_cache')) {
             } ?>
           </div>
         </div>
-        <?php
-        // TODO: enable if and when it will work properly
-        // Not working on Android, buggy in Firefox on Windows
-        // @callUserFunction('printThumbNav');
-        ?>
+        <?php // TODO: add support for paged_thumbs_nav. ?>
         <div class="img_descr">
           <?php printImageDesc(); ?>
         </div>

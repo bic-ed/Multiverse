@@ -1,2 +1,2 @@
 /* 5) Multiverse by HTML5 UP html5up.net @ajlkn | CCA 3.0 licensed (html5up.net/license)
-New features by bic-ed www.antonioranesi.it | GPL-2.0 License */
+New features for Multiverse Zenphoto Theme | (c) @bic-ed | www.antonioranesi.it | GPL-2.0 or later License */
