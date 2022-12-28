@@ -182,7 +182,10 @@ if ($pag_tot > 1) {
           <?php } ?>
           <div class="thumb">
           <a class="image"<?php echo $media_adapted['data']; ?> href='<?php echo html_encode($media_adapted['url']); ?>' title="<?php printBareImageTitle(); ?>">
-              <?php printCustomSizedImageThumbMaxSpace(getBareImageTitle(), $thumb_x, $thumb_y); ?>
+              <?php
+              printCustomSizedImageThumbMaxSpace(getBareImageTitle(), $thumb_x, $thumb_y);
+              echo $media_adapted['icon'];
+              ?>
             </a>
             <h2><a href="<?php echo html_encode(getImageURL());?>" title="<?php echo getBareImageTitle();?>"> <?php printBareImageTitle(); ?></a></h2>
             <?php // echo truncate_string(html_encodeTagged(getImageDesc()), 100, ' (..)'); ?>

@@ -267,18 +267,17 @@ function printFooterRSS() {
 class Multiverse {
 
   /**
-   * Implements audio video and text object support for poptrox-popup
+   * Implements audio, video and text object support for poptrox-popup
    * 
    * Also returns some media info to be used in the single image page
-   *
    * @param object  $media  current media ($_zp_current_image)
-   * @param integer $w      media width
-   * @param integer $h      media height
-   * @return array The url and data attribute for links on poptrox selectors thumbs; sizes and type of the media, sidecar image for iframe with no sizes info and audio file
+   * @param int $w      media width
+   * @param int $h      media height
+   * @return array
    */
   static function handleMediaAlbPage($media, $w = 0, $h = 0) {
 
-    $type = $poster = null;
+    $type = $poster = $icon = null;
 
     if ($media->isPhoto()) {
 
@@ -295,6 +294,7 @@ class Multiverse {
 
         $data_poptrox = ' data-poptrox="video,' . $width . 'x' . $height . '"';
         $type = 'video';
+        $icon = '<i class="fa fa-video-camera" aria-hidden="true"></i>';
 
       } else { // audio file
 
@@ -303,6 +303,7 @@ class Multiverse {
         
         $data_poptrox = ' data-poptrox="audio,' . $width . 'x' . $height . '"';
         $type = 'audio';
+        $icon = '<i class="fa fa-music" aria-hidden="true"></i>';
 
       }
 
@@ -332,21 +333,24 @@ class Multiverse {
         $media_url = $elm->item(0)->getAttribute('src');
         $data_poptrox = ' data-poptrox="iframe' . $sizes . '"';
         $type = 'text-iframe';
+        $icon = '<i class="fa fa-code" aria-hidden="true"></i>';
 
-      } else { // generic text object. We don't load it into the popup but open it's image page
+      } else { // generic text object. We don't load it into the popup but open its image page
         // QUESTION: Add popup support for non-iframe TextObject?
 
         $media_url = getImageURL();
         $data_poptrox = ' data-poptrox="ignore"';
         $type = 'text-any';
+        $icon = '<i class="fa fa-external-link-square" aria-hidden="true"></i>';
 
       }
 
-    } else { // class-AnyFile object. We don't load it into the popup but open it's image page
+    } else { // class-AnyFile object. We don't load it into the popup but open its image page
 
       $media_url = getImageURL();
       $data_poptrox = ' data-poptrox="ignore"';
       $type = 'anyfile-any';
+      $icon = '<i class="fa fa-external-link-square" aria-hidden="true"></i>';
 
     }
 
@@ -354,6 +358,7 @@ class Multiverse {
       // for poptrox-popup
       'url' => $media_url,
       'data' => $data_poptrox,
+      'icon' => $icon,
       // for image page
       'width' => isset($width) ? round($width) : null,
       'height' => isset($height) ? round($height) : null,
@@ -366,8 +371,8 @@ class Multiverse {
   /**
    * Scales dimensions following image size settings. Does not enlarge.
    * 
-   * @param integer     $width  Full widht of the media
-   * @param integer     $height Full height of the media
+   * @param int     $width  Full widht of the media
+   * @param int     $height Full height of the media
    * @return array<int>         scaled width and height
    */
   static function resizePoster($width, $height) {

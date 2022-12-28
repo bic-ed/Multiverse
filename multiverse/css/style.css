@@ -1263,7 +1263,6 @@ body.modal-active #main{
   width: 100%;
   cursor: zoom-in;
 }
-
 /* QUESTION:[IE support] Drop support for Internet Explorer?
 Then we have to add below rule after handling the same question in main.js
 and we can remove the backround declarations from the above rule */
@@ -1274,7 +1273,18 @@ and we can remove the backround declarations from the above rule */
   width: 100%;
   height: 100%;
 } */
-
+#main .thumb>.image[data-poptrox="ignore"] {
+  cursor: pointer;
+}
+#main .thumb>.image>i {
+  color: #fff;
+  position: absolute;
+  right: 1.075em;
+  top: 1.075em;
+  background-color: #00000042;
+  padding: .7em;
+  border-radius: .325em;
+}
 #main .thumb>h2 {
   bottom: 1.875em;
   font-size: 0.8em;
