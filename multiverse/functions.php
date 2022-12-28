@@ -168,8 +168,8 @@ if (extensionEnabled("themeSwitcher")) {
   setOption('themeSwitcher_css_loggedin', null, false);
 }
 
-// Set email subject if the theme option is filled
-$mailsubject = ($mailsubject = getThemeOption('multiverse_email_subject')) ? $mailsubject : "";
+// Store email subject from options to use it later
+$mailsubject = getThemeOption('multiverse_email_subject');
 
 /**
  *
