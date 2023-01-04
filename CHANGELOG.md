@@ -11,6 +11,7 @@
 * Zenphoto v1.6 support. Multiverse will not work correctly with previous versions of Zenphoto from now on
 
 ### Changed
+* Updated Raleway fonts to v28
 * Renamed all custom options. **NOTICE: Visit the theme’s option page after updgrading to import any existing option values with earlier names**
 * Simplified internal handling and saving of "social_content" option
 * Option "social_content" is now encoded with `encodeURIComponent` to avoid messing up things if a comma is eventually present in any field value

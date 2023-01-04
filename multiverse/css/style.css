@@ -13,8 +13,8 @@
   font-weight: 300;
   font-display: swap;
   src: local('Raleway Light'), local('Raleway-Light'),
-       url('../fonts/raleway-v26-latin-300.woff2') format('woff2'),
-       url('../fonts/raleway-v26-latin-300.woff') format('woff');
+       url('../fonts/raleway-v28-latin-300.woff2') format('woff2'),
+       url('../fonts/raleway-v28-latin-300.woff') format('woff');
 }
 
 /* raleway-regular - latin */
@@ -24,8 +24,8 @@
   font-weight: 400;
   font-display: swap;
   src: local('Raleway'), local('Raleway-Regular'),
-       url('../fonts/raleway-v26-latin-regular.woff2') format('woff2'),
-       url('../fonts/raleway-v26-latin-regular.woff') format('woff');
+       url('../fonts/raleway-v28-latin-regular.woff2') format('woff2'),
+       url('../fonts/raleway-v28-latin-regular.woff') format('woff');
 }
 
 /* raleway-italic - latin */
@@ -35,8 +35,8 @@
   font-weight: 400;
   font-display: swap;
   src: local('Raleway Italic'), local('Raleway-Italic'),
-       url('../fonts/raleway-v26-latin-italic.woff2') format('woff2'),
-       url('../fonts/raleway-v26-latin-italic.woff') format('woff');
+       url('../fonts/raleway-v28-latin-italic.woff2') format('woff2'),
+       url('../fonts/raleway-v28-latin-italic.woff') format('woff');
 }
 
 /* raleway-300italic - latin */
@@ -46,8 +46,8 @@
   font-weight: 300;
   font-display: swap;
   src: local('Raleway Light Italic'), local('Raleway-Light-Italic'),
-       url('../fonts/raleway-v26-latin-300italic.woff2') format('woff2'),
-       url('../fonts/raleway-v26-latin-300italic.woff') format('woff');
+       url('../fonts/raleway-v28-latin-300italic.woff2') format('woff2'),
+       url('../fonts/raleway-v28-latin-300italic.woff') format('woff');
 }
 
 
