@@ -16,7 +16,9 @@ This theme was initially developed for use on my own website, as a single album 
 
 A regular `image.php` page has been added since v2.0.
 
-\*Currently, **only image objects** are supported in albums, so Multiverse is not yet suitable for a full multimedia gallery. I may add support for medias other than images sooner or later, but I can't really say if and when. However, videos and other medias can of course be embedded in pages and news articles, like every other Zenpage theme allows to do.
+~~\*Currently, **only image objects** are supported in albums, so Multiverse is not yet suitable for a full multimedia gallery. I may add support for medias other than images sooner or later, but I can't really say if and when. However, videos and other medias can of course be embedded in pages and news articles, like every other Zenpage theme allows to do.~~
+
+Edit: since version 2.2, the support for the other multimedia elements: video, audio and Zenphoto class-textobject was added.
 
 A short video showing some theme features is available [here](https://www.antonioranesi.it/pages/multiverse-zenphoto-theme#demo-video). 
 
@@ -26,6 +28,8 @@ A short video showing some theme features is available [here](https://www.antoni
 2. Find the `multiverse` folder and use an ftp client to upload exclusively it into `themes` folder of your ZP installation.
 3. Visit Multiverse option page in your admin area.
 4. Activate Multiverse to use it as the main theme of your gallery or assign it to any album you wish.
+
+__NOTICE:__ Since option names were changed in version 2.2, if upgrading from a previuos version you must visit the theme options page to allow automatic import of existing settings.
 
 ### Translations
 

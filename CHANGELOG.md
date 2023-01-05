@@ -1,18 +1,19 @@
 # Changelog
-## [Unreleased]
+## [v2.2] - 2023-01-05
 
 ### Added
 * Multimedia support for album, search and image pages
+* Support for the `paged_thumbs_nav` extension
 * Implemented a custom mod version of _jquery.poptrox_ to support audio and video files
 * Open zoom from poptrox-popup on pinch 
 * Animated scrolling of the page, when the image in the popup changes, until the thumbnail of the new image reaches the center of the screen
 * Support for the max/min number of thumbs in transition page, new option in ZP v1.6
-* Support for Zenphoto changes in protect_full_image option values
+* Support for Zenphoto changes in `protect_full_image` option values
 * Zenphoto v1.6 support. Multiverse will not work correctly with previous versions of Zenphoto from now on
 
 ### Changed
 * Updated Raleway fonts to v28
-* Renamed all custom options. **NOTICE: Visit the theme’s option page after updgrading to import any existing option values with earlier names**
+* Renamed all custom options. Visit the theme’s option page after updgrading to import any existing option values with earlier names
 * Simplified internal handling and saving of "social_content" option
 * Option "social_content" is now encoded with `encodeURIComponent` to avoid messing up things if a comma is eventually present in any field value
 * Set color-scheme to dark to get dark scrollbars in browsers
@@ -102,7 +103,8 @@
 * Proper RSS header link in `gallery.php` ([fretzl])
 * Removed from theme options unnecessary request for `functions.php` ([fretzl])
 
-[Unreleased]: https://github.com/bic-ed/Multiverse/compare/2.1...master
+[Unreleased]: https://github.com/bic-ed/Multiverse/compare/2.2...master
+[v2.2]: https://github.com/bic-ed/Multiverse/compare/2.1...2.2
 [v2.1]: https://github.com/bic-ed/Multiverse/compare/2.0...2.1
 [v2.0]: https://github.com/bic-ed/Multiverse/compare/1.2...2.0
 [v1.2]: https://github.com/bic-ed/Multiverse/compare/1.1...1.2
