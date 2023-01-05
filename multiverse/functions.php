@@ -73,11 +73,14 @@ function css_head() {
   ?>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="<?php echo pathurlencode($_zp_themeroot . '/css/multi.css') ?>">
-  <?php if (extensionEnabled("themeSwitcher") && themeSwitcher::active()) { ?>
+<?php if (extensionEnabled("themeSwitcher") && themeSwitcher::active()) { ?>
 <style><?php echo file_get_contents(dirname(__FILE__) . '/css/internal/theme_switcher.min.css') ?></style>
   <?php }
   if ($_zp_loggedin) { ?>
-<style><?php echo file_get_contents(dirname(__FILE__) . '/css/mv_ad_tb.min.css') ?></style>
+<style><?php echo file_get_contents(dirname(__FILE__) . '/css/internal/mv_ad_tb.min.css') ?></style>
+<?php }
+  if (extensionEnabled('paged_thumbs_nav')) { ?>
+<link rel="stylesheet" href="<?php echo pathurlencode($_zp_themeroot . '/css/plugins/pagedthumbsnav.min.css') ?>">
 <?php }
 
 }
@@ -149,20 +152,23 @@ if (!OFFSET_PATH) {
 }
 
 
-// disable contact form unwanted fields
-setOption('contactform_title','omitted',false);
-setOption('contactform_city','omitted',false);
-setOption('contactform_state','omitted',false);
-setOption('contactform_company','omitted',false);
-setOption('contactform_street','omitted',false);
-setOption('contactform_postal','omitted',false);
-setOption('contactform_country','omitted',false);
-setOption('contactform_website','omitted',false);
-setOption('contactform_phone','omitted',false);
-setOption('contactform_confirm','0',false);
-setOption('contactform_email','required',false);
-setOption('contactform_name','required',false);
-setOption('tinymce4_comments',null,false);
+if (extensionEnabled("contact_form")) {
+  // disable contact form unwanted fields
+  setOption('contactform_title', 'omitted', false);
+  setOption('contactform_city', 'omitted', false);
+  setOption('contactform_state', 'omitted', false);
+  setOption('contactform_company', 'omitted', false);
+  setOption('contactform_street', 'omitted', false);
+  setOption('contactform_postal', 'omitted', false);
+  setOption('contactform_country', 'omitted', false);
+  setOption('contactform_website', 'omitted', false);
+  setOption('contactform_phone', 'omitted', false);
+  setOption('contactform_confirm', '0', false);
+  setOption('contactform_email', 'required', false);
+  setOption('contactform_name', 'required', false);
+  setOption('tinymce4_comments', null, false);
+}
+
 if (extensionEnabled("themeSwitcher")) {
   setOption('themeSwitcher_css', null, false);
   setOption('themeSwitcher_css_loggedin', null, false);
@@ -221,7 +227,7 @@ return;
 /**
  * Detects if there is at least one link to print
  * for the next function printFooterRSS()
- * @var boolean
+ * @var bool
  */
 $rss_links_enabled = false;
 if (class_exists('RSS') && !OFFSET_PATH) {

@@ -211,16 +211,19 @@
   var $innerSplit = $('.inner.split');
   var $menuGroup = $('.menu_group');
   var $copyright = $('.copyright');
+  var $pagedThumbsNav = $('#pagedthumbsnav');
   // var $social_placeolder = $social.prev();
   breakpoints.on('<=medium', function() {
     $menuGroup.insertAfter($innerSplit.children().first());
     $social.appendTo($innerSplit.children().last());
     $copyright.appendTo($innerSplit.children().last());
+    $pagedThumbsNav.insertAfter('#image');
   });
   breakpoints.on('>medium', function() {
     $menuGroup.appendTo($innerSplit);
     $social.insertAfter($social.prev());
     $copyright.appendTo($innerSplit.children().first());
+    $pagedThumbsNav.insertAfter($container);
   });
 
   // Main.
@@ -361,7 +364,7 @@
         .children(
           $('.nav-next').on('click', function() { changeImage(1) }),
           $('.nav-prev').on('click', function() { changeImage(-1) }),
-          $('.closer').add($poptroxOverlay).on('click', closePopup),
+          $('.closer').add($('.poptrox-overlay')).on('click', closePopup),
           $play.on('click', slideShow)
         );
 
@@ -570,16 +573,13 @@
     }
   }
 
-  var $poptroxOverlay = $('.poptrox-overlay');
   // Set windowMargin to 0 when 'small' activates.
-  if ($poptroxOverlay.length) {
-    breakpoints.on('>small', function() {
-      poptroxSettings.windowMargin = 34;
-    });
-    breakpoints.on('<=small', function() {
-      poptroxSettings.windowMargin = 0;
-    });
-  }
+  breakpoints.on('>small', function() {
+    poptroxSettings.windowMargin = 34;
+  });
+  breakpoints.on('<=small', function() {
+    poptroxSettings.windowMargin = 0;
+  });
 
   /*
   Fullscreen

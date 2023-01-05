@@ -1,0 +1,63 @@
+#pagedthumbsnav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 1.3em;
+}
+
+#pagedthumbsnav > p {
+  font-size: 0.8em;
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  white-space: nowrap;
+}
+
+#pagedthumbsnav > div:nth-child(odd) a::before {
+  font-family: 'FontAwesome';
+  font-size: 1.5em;
+  margin-right: -.5em;
+  content: '\f105\f105';
+}
+
+#pagedthumbsnav > div:first-child a {
+  transform: scaleX(-1);
+}
+
+#pagedthumbsnav a {
+  display: block;
+  color: inherit;
+  border: 0;
+}
+
+#pagedthumbsimages {
+  display: flex;
+  align-items: center;
+  margin: 0 .6em;
+  gap: 5px;
+}
+
+#pagedthumbsimages img {
+  display: block;
+}
+
+#pagedthumbsimages a#pagedthumbsnav-active {
+  pointer-events: none;
+  border-radius: 2px;
+  box-shadow: 0 0 0 2px #59a6d5;
+}
+
+#pagedthumbsnav > div[id$="disabled"] {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+@media screen and (max-width: 980px) {
+  #pagedthumbsnav{
+    padding-top: 1em;
+  }
+  #pagedthumbsnav + #img_info {
+    padding-top: .5em;
+  }
+}

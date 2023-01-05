@@ -155,7 +155,7 @@ if (!$_zp_current_image->isPhoto()) {
             } ?>
           </div>
         </div>
-        <?php // TODO: add support for paged_thumbs_nav. ?>
+        <?php @callUserFunction('printPagedThumbsNav', [6, false, " ", " ", 50, 50]) ?>
         <div class="img_descr">
           <?php printImageDesc(); ?>
         </div>

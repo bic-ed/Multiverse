@@ -49,11 +49,19 @@ body.modal-active #zp__admin_module {
 #zp__admin_info .zp_user {
   color: inherit;
 }
+/* Target margin for admin toolbar offset */
+:target {
+  scroll-margin-top: 40px
+}
 @media screen and (max-width: 736px) {
   body:not(.loading):not(.modal-active) #header {
     top: 30px;
   }
   .poptrox-overlay {
     z-index: 100002 !important;
+  }
+  /* Target margin for admin toolbar offset */
+  :target {
+    scroll-margin-top: calc(4em + 40px);
   }
 }
