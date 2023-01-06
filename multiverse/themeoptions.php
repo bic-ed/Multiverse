@@ -217,7 +217,7 @@ class ThemeOptions {
 
   function handleOption($option, $currentValue) {
     ?>
-    <input  id="<?php echo $option ?>" name="<?php echo $option;?>" value="<?php echo html_encode($currentValue);?>" type="number" size="4" required min="500">
+    <input  id="<?php echo $option ?>" name="<?php echo $option;?>" value="<?php echo html_encode($currentValue);?>" type="number" size="6" required min="500">
     <?php
   }
 }
