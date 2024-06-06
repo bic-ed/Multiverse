@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Multiverse 2.0\n"
-"POT-Creation-Date: 2024-06-06 13:37+0300\n"
-"PO-Revision-Date: 2024-06-06 14:09+0300\n"
+"POT-Creation-Date: 2024-06-06 14:15+0300\n"
+"PO-Revision-Date: 2024-06-06 14:27+0300\n"
 "Last-Translator: kuzzzma <kuzzzma@gmail.com>\n"
 "Language-Team: kuzzzma\n"
 "Language: ru\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: footer.php:28
 msgid "Follow me on..."
-msgstr "Ссылки на мои профили:"
+msgstr "Ссылки:"
 
 #: footer.php:75
 msgid "Copyright info"
@@ -181,12 +181,12 @@ msgstr ""
 
 #: themeoptions.php:168
 msgid "Your social profile URL"
-msgstr "URL для вашего профиля в соц.сети"
+msgstr "URL вашего профиля в социальной сети"
 
 #: themeoptions.php:170
 msgid "Font Awesome class for the icon (i.e. <em>fa-github</em> for GitHub)."
 msgstr ""
-"Класс Font Awesome для иконки (например, <em>fa-github</em> для GitHub)."
+"CSS класс Font Awesome для иконки (например, <em>fa-github</em> для GitHub)."
 
 #: themeoptions.php:172
 msgid "Here the full list"
