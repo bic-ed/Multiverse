@@ -1,0 +1,228 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Multiverse 2.0\n"
+"POT-Creation-Date: 2024-06-06 14:15+0300\n"
+"PO-Revision-Date: 2024-06-06 14:27+0300\n"
+"Last-Translator: kuzzzma <kuzzzma@gmail.com>\n"
+"Language-Team: kuzzzma\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Poedit-Basepath: ../../..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: ;gettext_th;ngettext_th\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: footer.php:28
+msgid "Follow me on..."
+msgstr "Ссылки:"
+
+#: footer.php:75
+msgid "Copyright info"
+msgstr "Авторские права"
+
+#: footer.php:81
+msgid "Photographer"
+msgstr "Фотограф"
+
+#: footer.php:88
+msgid "Get in touch"
+msgstr "Связаться"
+
+#: footer.php:99
+msgid "See more"
+msgstr "Еще"
+
+#: footer.php:150
+msgid "Language"
+msgstr "Язык"
+
+#: image.php:22
+msgid "Open the popup in Search page"
+msgstr "Всплывающее окно на страницах Поиска"
+
+#: image.php:28
+msgid "Open the popup in Archive page"
+msgstr "Всплывающее окно в Архиве"
+
+#: image.php:61
+msgid "Open the popup in Album page"
+msgstr "Всплывающее окно в Альбомах"
+
+#: search.php:42
+msgid "Search results"
+msgstr "Результаты поиска"
+
+#: search.php:143
+msgid "album"
+msgstr "альбом"
+
+#: search.php:181
+msgid "image"
+msgstr "изображение"
+
+#: themeoptions.php:118
+msgid "Image width"
+msgstr "Ширина изображения"
+
+#: themeoptions.php:122
+msgid "Set the max width in pixels for the image displayed in the popup."
+msgstr "Установите максимальную ширину для Изображения во всплывающем окне."
+
+#: themeoptions.php:124
+msgid "Image height"
+msgstr "Высота изображения"
+
+#: themeoptions.php:128
+msgid "Set the max height in pixels for the image displayed in the popup."
+msgstr "Установите максимальную высоту для Изображения во всплывающем окне."
+
+#: themeoptions.php:128
+msgid ""
+"<strong>Note:</strong> images in the popup might be visually reduced in "
+"width and height to fit user screen, but they can be zoomed to the sizes set "
+"here by double clicking on them."
+msgstr ""
+"<strong>Примечание:</strong> Изображения во всплывающем окне могут быть "
+"визуально уменьшены по ширине и высоте, чтобы соответствовать экрану "
+"пользователя, но их можно увеличить до размеров, установленных здесь, дважды "
+"щелкнув по ним."
+
+#: themeoptions.php:134
+msgid ""
+"Check to show a link to the full size image on the image page. The behavior "
+"of the link depends on the options set in <code>Options->Image: Full image "
+"protection</code>."
+msgstr ""
+"Отметьте, чтобы показывать ссылку на полноразмерное изображение на странице "
+"Изображения. Поведение ссылки зависит от параметров, установленных в "
+"<code>Настройки->Изображение: Защита оригиналов</code>."
+
+#: themeoptions.php:142
+msgid "Email subject"
+msgstr "Тема e-mail"
+
+#: themeoptions.php:146
+msgid ""
+"Subject of the email sent through the contact form included in Multiverse "
+"footer. Zenphoto automatically adds the title of your gallery (between "
+"brackets)"
+msgstr ""
+"Тема e-mail, отправленного через контактную форму, в \"подвале\" Multiverse. "
+"Zenphoto автоматически добавляет название вашей галереи (в скобках)"
+
+#: themeoptions.php:146
+msgid ""
+"<strong>Note:</strong> leave this field empty to include a subject field in "
+"the contact form and let users fill it as they wish."
+msgstr ""
+"<strong>Примечание:</strong> Оставьте это поле ПУСТЫМ, чтобы включить поле "
+"Темы e-mail в контактную форму и позволить пользователям заполнять его по "
+"своему усмотрению."
+
+#: themeoptions.php:148
+msgid "Copyright owner"
+msgstr "Владелец авторских прав"
+
+#: themeoptions.php:152
+msgid ""
+"Write the name of the copyright owner here. To this will be automatically "
+"added the year of the older image present in your gallery, followed by the "
+"current year, with a link to the full archive page."
+msgstr ""
+"Укажите здесь имя владельца авторских прав. К имени будет автоматически "
+"добавлен год самого старого изображения из вашей галереи, а затем текущий "
+"год со ссылкой на страницу Архива."
+
+#: themeoptions.php:152
+msgid ""
+"<strong>Note:</strong> leave this field empty if you don’t want any "
+"copyright text displayed."
+msgstr ""
+"<strong>Примечание:</strong> Оставьте эти поле ПУСТЫМ, если не хотите "
+"отображать информацию об авторских правах."
+
+#: themeoptions.php:154
+msgid "Copyright page"
+msgstr "Страница с политикой авторских прав"
+
+#: themeoptions.php:160
+msgid ""
+"Choose the page that contains your site copyright terms, if any. A link to "
+"this page will be generated on the name of the copyright owner."
+msgstr ""
+"Выберите страницу, содержащую политику авторских прав для вашего сайта, если "
+"таковая имеются. Ссылка на эту страницу будет создана с включением имени "
+"владельца авторских прав."
+
+#: themeoptions.php:160 themeoptions.php:186 themeoptions.php:195
+msgid ""
+"<strong>Note:</strong> You need the Zenpage extension enabled to use this "
+"feature."
+msgstr ""
+"<strong>Примечание:</strong> Для использования этой функции необходимо "
+"активировать плагин Zenpage."
+
+#: themeoptions.php:162
+msgid "Social profiles"
+msgstr "Социальные сети"
+
+#: themeoptions.php:166
+msgid ""
+"Check to display a list of icons with links to your social media profiles, "
+"defined by filling the fields below with the following data:"
+msgstr ""
+"Отметьте, чтобы отобразить список иконок со ссылками на ваши профили в "
+"социальных сетях из данных в заполненных полях ниже:"
+
+#: themeoptions.php:168
+msgid "Your social profile URL"
+msgstr "URL вашего профиля в социальной сети"
+
+#: themeoptions.php:170
+msgid "Font Awesome class for the icon (i.e. <em>fa-github</em> for GitHub)."
+msgstr ""
+"CSS класс Font Awesome для иконки (например, <em>fa-github</em> для GitHub)."
+
+#: themeoptions.php:172
+msgid "Here the full list"
+msgstr "Полный список"
+
+#: themeoptions.php:174
+msgid "Name of the social media"
+msgstr "Название социальной сети"
+
+#: themeoptions.php:176
+msgid ""
+"Use the <strong>Add</strong> button to add a new social media or the "
+"<strong>Delete</strong> button to remove the last one."
+msgstr ""
+"Используйте кнопку <strong>Добавить</strong>, чтобы добавить новую "
+"социальную сеть, или кнопку <strong>Удалить</strong>, чтобы удалить "
+"последнюю в текущем списке."
+
+#: themeoptions.php:197
+msgid "This overrides the <em>Homepage</em> option above."
+msgstr "Переопределяет настройку <em>Домашней страницы</em> выше."
+
+#: themeoptions.php:200
+msgid "Enable Pagination"
+msgstr "Включить разбивку по страницам"
+
+#: themeoptions.php:204
+msgid ""
+"Check to split albums into multiple pages, depending on the options "
+"<code>Albums</code> and <code>Images</code> found at the top of this page. "
+"The album design is cleaner with this option disabled (default), however if "
+"you have some albums with many images and you are experiencing a too long "
+"loading time, you may wish to enable this option."
+msgstr ""
+"Отметьте, чтобы разделить альбомы на несколько страниц, в зависимости от "
+"параметров <code>Альбомов</code> и <code>Изображений</code>, вверху этой "
+"страницы. Дизайн альбома чище, эта опция отключена (по умолчанию), однако, "
+"если у вас есть альбомы с большим количеством изображений и вы испытываете "
+"задержки при загрузке страниц, вы можете включить эту опцию."
