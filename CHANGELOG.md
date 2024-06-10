@@ -1,4 +1,16 @@
 # Changelog
+## [Unreleased]
+
+### Added
+* Fallback message for unsupported audio and video formats (image page)
+* Russian translation ([kuzzzma](https://github.com/kuz-z-zma))
+
+### Changed
+* The input fields for image size in the options have been made a little larger ([fretzl])
+
+### Fixed
+* Sidecar image for audio files was being used directly instead of being resized and cached, due to a typo.
+
 ## [v2.2] - 2023-01-05
 
 ### Added

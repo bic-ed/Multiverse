@@ -454,7 +454,7 @@ class Multiverse {
     if ($media_info['type'] == 'audio') {
       $class = ' class="is-media is-audio"';
       $poster = $media_info['poster'];
-      if (strpos($poster, 'themes/multiverse/images') === false) {
+      if (strpos($poster, 'themes/multiverse/images') !== false) {
         $poster_src = str_replace(SERVERPATH, WEBPATH, $poster);
       } else {
         $filename = makeSpecialImageName($poster);
@@ -462,9 +462,13 @@ class Multiverse {
         $mtime = filemtime(internalToFilesystem($poster));
         $poster_src = getImageURI($args, $media->getAlbumName(), $filename, $mtime);
       }
-      $element = '<audio style="background-image:url(' . $poster_src . ')" controls src="' . getUnprotectedImageURL() . '"></audio>';
+      $element = '<audio style="background-image:url(' . $poster_src . ')" controls src="' . getUnprotectedImageURL() . '">'
+      . gettext('Your browser sadly does not support this audio format.')
+      . '</audio>';
     } else if ($media_info['type'] == 'video') {
-      $element = '<video controls preload="metadata" src="' . getUnprotectedImageURL() . '"></video>';
+      $element = '<video controls preload="metadata" src="' . getUnprotectedImageURL() . '">'
+      . gettext('Your browser sadly does not support this video format.')
+      . '</video>';
     }
 
     return array(
