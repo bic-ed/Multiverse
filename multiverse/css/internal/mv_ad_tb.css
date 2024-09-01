@@ -20,6 +20,8 @@ body.modal-active #zp__admin_module {
   text-transform: none;
   letter-spacing: normal;
   font-weight: normal;
+  cursor: pointer;
+  transition: .4s;
 }
 #zp__admin_link::after {
   content: "\f0c9";
@@ -35,10 +37,14 @@ body.modal-active #zp__admin_module {
 #zp__admin_data li {
   border-top: 1px solid #3e3e3e;
 }
-#zp__admin_data a {
+#zp__admin_data :is(a, button) {
   color: #cacaca;
+  background: transparent;
+  transition: .4s;
 }
-#zp__admin_data a:hover {
+#zp__admin_data :is(a, button):hover,
+#zp__admin_data :is(a, button):focus,
+#zp__admin_data :is(a, button):active {
   background-color: #58595B;
   color: #FFF !important;
 }
@@ -64,4 +70,16 @@ body.modal-active #zp__admin_module {
   :target {
     scroll-margin-top: calc(4em + 40px);
   }
+}
+#zp__admin_data button.admin_data-delete {
+  color: #cf4949;
+}
+#zp__admin_data button.admin_data-delete:hover,
+#zp__admin_data button.admin_data-delete:active,
+#zp__admin_data button.admin_data-delete:focus {
+  color: #ff5757 !important;
+}
+#zp__admin_data li ul {
+  border-top: 0;
+  border-bottom: 2px solid #3e3e3e;
 }
