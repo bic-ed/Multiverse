@@ -4,6 +4,7 @@
 ### Added
 * Fallback message for unsupported audio and video formats (image page)
 * Russian translation ([kuzzzma](https://github.com/kuz-z-zma))
+* Refresh the reCaptcha iframe on the contact form upon reset
 
 ### Changed
 * The input fields for image size in the options have been made a little larger ([fretzl])

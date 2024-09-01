@@ -1498,7 +1498,15 @@
         $formResult.html(message).slideDown();
       }
     });
-  });
+  })
+  /* Clean Captcha on reset */
+  .on('reset', () => {
+    var captcha = $mailform.find($('.g-recaptcha iframe'))[0]
+    if (captcha) {
+      // Refresh iframe
+      captcha.src += ''
+    }
+  })
 
 
   /*
