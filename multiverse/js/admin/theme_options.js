@@ -5,7 +5,7 @@
  * @author bic-ed
  */
 
- (function() {
+(function() {
   var styleitem = ['margin:2px 0', 'margin:2px 0', 'margin:0 0 30px'],
   placeholder = ['placeholder = "https://www.social-media.com/your-profile"','placeholder = "fa-social-media"','placeholder = "Social media name"'];
   // create an array with DB stored value (or an empty one if DB option not set yet)

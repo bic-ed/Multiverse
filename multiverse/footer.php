@@ -7,13 +7,27 @@ $has_pages = ZENPAGE_ON && ZP_PAGES_ENABLED && !empty($_zp_zenpage->getPages(tru
 $see_more_count = $has_search + $has_album_menu + $has_news + $has_pages;
 $has_lang_menu = function_exists('printLanguageSelector');
 $menus_count = $see_more_count + 3 * $has_lang_menu;
-$has_contact = function_exists('printContactForm');
+$has_contact = method_exists( 'contactForm','printContactForm');
 $has_social = getThemeOption('multiverse_social_contacts');
+/** @var int Vertical "size" of the Contact Form */
+$contact_size = 0;
+if ($has_contact) {
+  $contact_size = $has_contact *
+    (4 // Minimum size of the Contact Form
+      + 2 * getOption('contactform_captcha') // reCaptcha widget takes about 2 slots
+      + empty(Multiverse::$mailsubject)
+      + !empty(getOption('contactform_dataconfirmation'))
+      + !empty(contactForm::getQuizFieldQuestion('contactform_textquiz'))
+      + !empty(contactForm::getQuizFieldQuestion('contactform_mathquiz'))
+    );
+}
+/** @var int Vertical "size" of the Menu Section */
+$menu_size = $has_search + $has_album_menu + $has_news + $has_pages + 2 * $has_lang_menu;
 
 // Positioning the "follow" section according to the layout
 // $rss_links_enabled is defined in functions.php
 if ($has_social || $rss_links_enabled) {
-  if ($menus_count > 0 && ($menus_count < 6 || $has_contact && getOption('contactform_captcha'))) {
+  if ($menus_count > 0 && $contact_size > $menu_size) {
     $follow_section = 3;
   } else if ($has_contact) {
     $follow_section = 2;
@@ -67,6 +81,7 @@ if ($has_social || $rss_links_enabled) {
           <?php if ($copy_text = getThemeOption('multiverse_copyrigth_text')) { ?>
             <i class="icon fa-copyright" aria-hidden="true"></i>
             <?php
+            echo $contact_size, ' ', $menu_size, ' ';
             $archive_link = getAllDates();
             reset($archive_link);
             $archive_link = substr(key($archive_link), 0, 4);
@@ -86,7 +101,7 @@ if ($has_social || $rss_links_enabled) {
       <div>
         <section>
           <h2><?php echo gettext_th('Get in touch'); ?></h2>
-          <?php printContactForm($mailsubject); ?>
+          <?php contactForm::printContactForm(Multiverse::$mailsubject); ?>
           <div id="form-result"></div>
         </section>
         <?php if ($follow_section == 2) printFollowSection(); ?>

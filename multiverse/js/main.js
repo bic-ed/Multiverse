@@ -84,6 +84,8 @@
 
   });
 
+  /* QUESTION: [IE support] Drop support for Internet Explorer? Then we can remove the below
+  placeholder polyfill and remove util.js from multi.js. */
   // Fix: Placeholder polyfill.
   $('form').placeholder();
 
@@ -212,7 +214,6 @@
   var $menuGroup = $('.menu_group');
   var $copyright = $('.copyright');
   var $pagedThumbsNav = $('#pagedthumbsnav');
-  // var $social_placeolder = $social.prev();
   breakpoints.on('<=medium', function() {
     $menuGroup.insertAfter($innerSplit.children().first());
     $social.appendTo($innerSplit.children().last());
@@ -229,9 +230,8 @@
   // Main.
   var $main = $('#main');
 
-  // QUESTION: [IE support] Drop support for Internet Explorer? Then we can remove
-  // the below each loop.
-  // Apply the corresponding question changes in style.css
+  /* QUESTION: [IE support] Drop support for Internet Explorer? Then we can remove the
+  below each loop. Apply the corresponding question changes in style.css */
 
   // Thumbs.
   $main.children('.thumb').each(function() {
@@ -257,7 +257,7 @@
 
 
   /*
-  Inizialize currentIndex and retrieve array of fullsize images links
+  Initialize currentIndex and retrieve array of fullsize images links
   */
 
   var currentIndex = 0,
@@ -276,7 +276,7 @@
 
  
   /**
-   * Used to avoid currentIndex messup on keyboard navigation and more
+   * Used to avoid currentIndex mess up on keyboard navigation and more
    * @type {boolean} 
   */
   var locked = true;
@@ -409,8 +409,8 @@
   /*
   Keyboard navigation adapted for slideshow and changeImage function.
   */
-  // NOTE: the below could become a theme option
-  // Assinging parameters "slide" and "duration" to changeImage can be used to slide images instead of fade and warp them.
+  // NOTE! the below could become a theme option
+  // Assigning parameters "slide" and "duration" to changeImage can be used to slide images instead of fade and warp them.
   $window.on('keyup', function(e) {
 
     if ($imgs.is(':visible') && !$zoom[0]) {
@@ -1425,7 +1425,6 @@
   // Layout
   $('#commentcontent > br, #commentcontent > a > img').remove();
   $mailform.prev().addClass('hide');
-  $mailform.children('label').add('#commentform > label').addClass("hide");
   $('#loginform button[type=submit]').addClass('special');
 
   // Zenphoto PasswordForm layout adaptation
@@ -1451,7 +1450,6 @@
   /*
   Submit mail form via ajax
   */
-
   $mailform.on('submit', function(e) {
     e.preventDefault();
 
@@ -1499,15 +1497,14 @@
       }
     });
   })
-  /* Clean Captcha on reset */
-  .on('reset', () => {
-    var captcha = $mailform.find($('.g-recaptcha iframe'))[0]
-    if (captcha) {
-      // Refresh iframe
-      captcha.src += ''
-    }
-  })
-
+    /* Clean Captcha on reset */
+    .on('reset', () => {
+      var captcha = $mailform.find($('.g-recaptcha iframe'))[0]
+      if (captcha) {
+        // Refresh iframe
+        captcha.src += ''
+      }
+    })
 
   /*
   Remove border bottom from links with images

@@ -75,13 +75,13 @@ class ThemeOptions {
     $social_contacts = getThemeOption('multiverse_social_contacts', null, 'multiverse');
     $social_content = getThemeOption('multiverse_social_content', null, 'multiverse');
     ?>
-<script>
-  var socialEnabled = "<?php echo $social_contacts ? $social_contacts: 0; ?>",
-    socialContent = "<?php echo $social_content ? $social_content : ',,'; ?>",
-    buttonAdd = '<?php echo ucfirst(gettext("add")) ?>',
-    buttonDel = '<?php echo gettext("Delete") ?>';
-</script>
-<script src="<?php echo WEBPATH . "/" . THEMEFOLDER; ?>/multiverse/js/admin/theme_options.min.js"></script>
+    <script>
+      var socialEnabled = "<?php echo $social_contacts ? $social_contacts : 0; ?>",
+        socialContent = "<?php echo $social_content ? $social_content : ',,'; ?>",
+        buttonAdd = '<?php echo ucfirst(gettext("add")) ?>',
+        buttonDel = '<?php echo gettext("Delete") ?>';
+    </script>
+    <script src="<?php echo WEBPATH . "/" . THEMEFOLDER; ?>/multiverse/js/admin/theme_options.min.js"></script>
     <?php
 
     if (class_exists('cacheManager')) {
@@ -143,7 +143,7 @@ class ThemeOptions {
         'key' => 'multiverse_email_subject',
         'type' => OPTION_TYPE_TEXTBOX,
         'order' => 5,
-        'desc' => gettext_th('Subject of the email sent through the contact form included in Multiverse footer. Zenphoto automatically adds the title of your gallery (between brackets)', $me) . '<p class="notebox">' .  gettext_th('<strong>Note:</strong> leave this field empty to include a subject field in the contact form and let users fill it as they wish.', $me) . "</p>"
+        'desc' => gettext_th('Subject of the email sent through the contact form included in Multiverse footer. Zenphoto automatically adds the title of your gallery (between brackets)', $me) . '<p class="notebox">' . gettext_th('<strong>Note:</strong> leave this field empty to include a subject field in the contact form and let users fill it as they wish.', $me) . "</p>"
       ),
       gettext_th('Copyright owner', $me) => array(
         'key' => 'multiverse_copyrigth_text',
@@ -217,7 +217,7 @@ class ThemeOptions {
 
   function handleOption($option, $currentValue) {
     ?>
-    <input  id="<?php echo $option ?>" name="<?php echo $option;?>" value="<?php echo html_encode($currentValue);?>" type="number" size="6" required min="500">
-    <?php
+    <input id="<?php echo $option ?>" name="<?php echo $option; ?>" value="<?php echo html_encode($currentValue); ?>" type="number" size="6" required min="500">
+  <?php
   }
 }

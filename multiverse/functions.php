@@ -82,6 +82,8 @@ function css_head() {
   if (extensionEnabled('paged_thumbs_nav')) { ?>
 <link rel="stylesheet" href="<?php echo pathurlencode($_zp_themeroot . '/css/plugins/pagedthumbsnav.min.css') ?>">
 <?php }
+  // Store the email subject theme option to use it later
+  Multiverse::$mailsubject = trim(getThemeOption('multiverse_email_subject'));
 
 }
 
@@ -174,8 +176,9 @@ if (extensionEnabled("themeSwitcher")) {
   setOption('themeSwitcher_css_loggedin', null, false);
 }
 
-// Store email subject from options to use it later
-$mailsubject = getThemeOption('multiverse_email_subject');
+if (extensionEnabled("reCaptcha")) {
+  setOption('reCaptcha_theme', 'dark', false);
+}
 
 /**
  *
@@ -184,7 +187,7 @@ $mailsubject = getThemeOption('multiverse_email_subject');
  *
  */
 function multiverse() {
-  global $mailsubject, $_zp_themeroot, $_zp_gallery_page, $_zp_loggedin;
+  global $_zp_themeroot, $_zp_gallery_page, $_zp_loggedin;
 
   // Some missing context sensitive menu behavior to be added via JavaScript:
   // $news_active = 1 -> Disable "All news" link in NewsCategories menu
@@ -212,7 +215,7 @@ function multiverse() {
     'newsActive' => ($news_active ? 1 : 0),
     'galleryActive' => ($gallery_active ? 1 : 0),
     'contactURL' => WEBPATH . '/themes/multiverse/ajax/contact.php',
-    'mailSubject' => $mailsubject,
+    'mailSubject' => Multiverse::$mailsubject,
     'mailSent' => get_language_string(getOption('contactform_thankstext')),
   );
 ?>
@@ -271,6 +274,8 @@ function printFooterRSS() {
 }
 
 class Multiverse {
+
+  static $mailsubject = '';
 
   /**
    * Implements audio, video and text object support for poptrox-popup
