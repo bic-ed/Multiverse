@@ -21,10 +21,13 @@
 
 (function($) {
 
-  var objWindow = window,
-    $window = $(objWindow),
+  var $window = $(window),
     $body = $('body'),
-    received = phpToJS;
+    received = phpToJS,
+    windowSize = {
+      w: innerWidth,
+      h: innerHeight
+    };
 
   // Breakpoints.
   breakpoints({
@@ -35,10 +38,12 @@
     xsmall:  [ null,      '480px'  ]
   });
 
+  /* QUESTION: [IE support] Drop support for Internet Explorer? Then we can remove the below. */
   // Hack: Enable IE workarounds.
   if (browser.name == 'ie')
     $body.addClass('ie');
-
+  
+  /* QUESTION: [IE support] Drop support for Internet Explorer? Then we can remove the below. */
   // Define Math.sign if not supported
   if (!Math.sign) {
     Math.sign = function(x) {
@@ -57,11 +62,6 @@
       $body.removeClass('loading');
     }, 100);
 
-    windowSize = {
-      w: objWindow.outerWidth,
-      h: objWindow.innerHeight
-    };    
-
   });
 
   // Prevent transitions/animations on resize.
@@ -74,8 +74,8 @@
     $body.addClass('resizing');
 
     windowSize = {
-      w: objWindow.outerWidth,
-      h: objWindow.innerHeight
+      w: innerWidth,
+      h: innerHeight
     };
 
     resizeTimeout = setTimeout(function() {
@@ -94,11 +94,11 @@
   var $panels = $('.panel');
 
   var $toggle = $header.children('nav').has('a'),
-    $closer = $('<span class="closer" />').appendTo($panels);
+    $closer = $('<span class="closer">').appendTo($panels);
 
   // Closer.
   $closer
-    .on('click', function(event) {
+    .on('click', function() {
       $panels.trigger('---hide');
     });
 
@@ -197,7 +197,7 @@
         event.preventDefault();
         event.stopPropagation();
 
-        objWindow.location.href = href;
+        location = href;
 
       });
 
@@ -293,7 +293,7 @@
    * @see {@link https://github.com/ajlkn/jquery.poptrox jquery.poptrox}
    */
   var poptroxSettings = {
-    baseZIndex: 20000,
+    baseZIndex: 100003,
     caption: function($a) { return $a.next().clone() },
     onPopupClose: resetPopup,
     onPopupOpen: initializePopup,
@@ -307,7 +307,7 @@
     popupCloserText: '',
     overlayOpacity: 0,
     usePopupCaption: true,
-    usePopupDefaultStyling: false,
+    // usePopupDefaultStyling: false,
     usePopupEasyClose: false,
     usePopupForceClose: true,
     useBodyOverflow: true,
@@ -381,7 +381,6 @@
    * - Swipe status
    */
   function resetPopup() {
-
     $body.removeClass('modal-active');
 
     slideShowRunning = clearInterval(slideShowRunning);
@@ -585,7 +584,7 @@
   Fullscreen
   */
   $fullscreen.on('click', function(e) {
-    var doc = objWindow.document;
+    var doc = document;
     var docEl = doc.documentElement;
     var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
     var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
@@ -606,10 +605,6 @@
   /*
    1) Popup
   */
-
-  /** Window inner size width, height (px).
-   *  @type {{ w: number, h: number }} */
-  var windowSize;
 
   /** Coordinates of the drag event starting point (px).
    *  @type {{ x: number, y: number }} */
@@ -668,7 +663,7 @@
    * 
    * Starting point coordinates are used when opening the zoom as well.
    * 
-   * @param {object} event - Original event object
+   * @param {JQuery.Event} event - Original event object
    * @param {string} phase - Swipe phase: start | move | end
    * @param {string} [_direction] - unused
    * @param {number} [_distance] - unused
@@ -681,9 +676,9 @@
       return false;
     }
 
-    var evt, isTouch = event.touches;
+    var isTouch = event.touches,
+      evt = isTouch ? isTouch[0] : event
 
-    isTouch ? evt = isTouch[0] : evt = event;
 
     endDistance = (windowSize.w + $imgs.width()) / 2;
 
@@ -943,14 +938,13 @@
   /**
    * Drags the enlarged image
    * 
-   * @param {object} event - Original event object
+   * @param {JQuery.Event} event - Original event object
    * @param {string} phase - Swipe phase: start | move
    * 
    */
   function zoomSwipeHandler(event, phase) {
 
-    var evt;
-    event.touches ? evt = event.touches[0] : evt = event;
+    var evt = event.touches ? event.touches[0] : event;
 
     if (phase == "start") { // start point
       lastZoomPosition = {
@@ -987,13 +981,13 @@
    * 
    * Uses {@link openZoom} and {@link closeZoom}
    * 
-   * @param {object} event - Original event object (placeholder)
+   * @param {JQuery.Event} _event - Original event object (placeholder)
    * @param {string} phase - Swipe phase: start | move | end | cancel
    * @param {string} direction - The direction pinched: in | out
    * @param {number} distance - The distance pinched
    * @since 2.2
    */
-  function zoomOnPinch(event, phase, direction, distance) {
+  function zoomOnPinch(_event, phase, direction, distance) {
 
     if (phase == 'move' && distance > 30) {
 
@@ -1187,7 +1181,7 @@
   * Otherwise the popup is returned to its initial position
   * with a sliding animation.
   *
-  * @param {object} event - Original event object
+  * @param {JQuery.Event} event - Original event object
   * @param {string} phase - Swipe phase: start | move | end
   * @param {string} [_direction] - unused
   * @param {number} [_distance] - unused
@@ -1199,10 +1193,8 @@
 
     var nextLink = $container.find('.nav-next').attr('href'),
       prevLink = $container.find('.nav-prev').attr('href'),
-      evt,
-      isTouch = event.touches;
-
-    isTouch ? evt = isTouch[0] : evt = event;
+      isTouch = event.touches,
+      evt = isTouch ? isTouch[0] : event
 
     if (phase == "start") {
 
@@ -1286,10 +1278,10 @@
   * Slides image out and redirects to next or previous page
   *
   * @param  {number} direction - Direction for image slide out [+1|-1]
-  * @param  {string} location  - URL of next or previous image page
+  * @param  {string} url       - URL of next or previous image page
   * 
   */
-  function changePage(direction, location) {
+  function changePage(direction, url) {
 
     var boxShadow = $container.css('box-shadow').match(/(-?\S+px)|(rgb\(.+\))/g);
 
@@ -1306,7 +1298,7 @@
 
     setTimeout(function() {
       $body.addClass('loading');
-      objWindow.location.href = location;
+      location = url;
     }, 300);
 
   }
@@ -1325,7 +1317,7 @@
   // Conform language menu style to album menu style
   var $flags = $('.flags');
   var $currentLanguage = $('.currentLanguage');
-  $flags.find($currentLanguage.find('img')).wrap('<a />');
+  $flags.find($currentLanguage.find('img')).wrap('<a>');
   $flags.find('img').each(function() {
     $(this).replaceWith($(this).attr('alt'));
   });
@@ -1341,7 +1333,7 @@
 
   // Conform news menu style to album menu style
   if (!$('#news_menu .active-item a').length > 0) {
-    $('#news_menu .active-item').not('a').contents().wrap('<a/>');
+    $('#news_menu .active-item').not('a').contents().wrap('<a>');
   }
 
   // Add active-item class if we are on news loop or gallery loop in home page
@@ -1453,17 +1445,21 @@
   $mailform.on('submit', function(e) {
     e.preventDefault();
 
-    var $submit = $(this).find('input[type="submit"]'), message;
+    var $submit = $(this).find('input[type="submit"]'),
+      $reset = $submit.next(),
+      message;
 
     // Disable buttons during ajax request
-    $submit.prop('disabled', 'disabled');
-    $submit.next().prop('disabled', 'disabled');
+    $submit.add($reset).prop('disabled', 'disabled');
 
     // Reposition container for feedback message and insert container for waiting icon spinner
     var $formResult = $('#form-result');
-    $submit.parent().after($formResult);
-    $submit.parent().after('<p class="idle" />');
-    $submit.parent().next().slideDown();
+    var $idle = $('<p class="idle">')
+    $mailform.append([
+      $idle,
+      $formResult
+    ])
+    $idle.slideDown();
 
     $.ajax({
       type: 'POST',
@@ -1483,17 +1479,16 @@
         }
       },
       complete: function() {
-        $submit.next().removeAttr('disabled');
-        $submit.parent().next().slideUp(500, function() {
-          $(this).remove();
-        });
-        $submit.next().one('click', function() {
-          $submit.removeAttr('disabled');
-          $formResult.slideUp(500, function() {
-            $(this).children().remove();
-          });
-        });
+
         $formResult.html(message).slideDown();
+        $reset.removeAttr('disabled');
+        $idle.slideUp();
+
+        $reset.one('click', function() {
+          $submit.removeAttr('disabled');
+          $idle.remove();
+          $formResult.slideUp();
+        });
       }
     });
   })

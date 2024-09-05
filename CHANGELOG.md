@@ -11,7 +11,8 @@
 * The input fields for image size in the options have been made a little larger ([fretzl])
 
 ### Fixed
-* Sidecar image for audio files was being used directly instead of being resized and cached, due to a typo.
+* Sidecar image for audio files was being used directly instead of being resized and cached, due to a typo
+* Improvements to Poptrox to prevent the admin toolbox and theme switcher checkbox from shifting slightly when the popup opens
 
 ## [v2.2] - 2023-01-05
 

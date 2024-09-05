@@ -9,6 +9,7 @@
   white-space: nowrap;
   font-weight: 400;
   transform: translateX(-50%);
+  transition: filter .2s;
 }
 #themeSwitcher_zenpage input {
   position: static;
@@ -32,7 +33,7 @@
   cursor: pointer;
   color: inherit !important;
 }
-body.modal-active .themeSwitcherControlLink {
+.modal-active .themeSwitcherControlLink {
   filter: blur(2px);
 }
 @media screen and (max-width: 736px) {
@@ -47,8 +48,5 @@ body.modal-active .themeSwitcherControlLink {
   }
   body {
     margin-bottom: 26px
-  }
-  .poptrox-overlay {
-    z-index: 100003 !important;
   }
 }

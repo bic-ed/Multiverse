@@ -7,5 +7,4 @@ require_once(SERVERPATH . "/" . ZENFOLDER . '/functions/functions-rewrite.php');
 
 require_once(SERVERPATH . "/" . THEMEFOLDER . '/multiverse/functions.php');
 
-printContactForm();
-?>
+contactForm::printContactForm();
