@@ -9,6 +9,7 @@
 
 ### Changed
 * The input fields for image size in the options have been made a little larger ([fretzl])
+* Updated Raleway fonts to v34
 
 ### Fixed
 * Sidecar image for audio files was being used directly instead of being resized and cached, due to a typo
