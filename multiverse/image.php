@@ -4,17 +4,6 @@ if (!defined('WEBPATH'))
 die();
 
 if (isset($_zp_current_search)) {
-  // We need to recalculate the page number, as it never changes when browsing the found images
-  // NOTE: cookie needed because, if requested from here, number of albums is returned including not owned albums!
-  if ($search_data = zp_getCookie('bic_multiverse_search')) {
-    $search_data = explode(',', $search_data);
-    // Album pages
-    $alb_pages = ceil($search_data[0] / $_zp_current_search->getAlbumsPerPage());
-    // Images pages (excluding transition page)
-    $img_pages = ceil((imageNumber() - $search_data[1]) / $_zp_current_search->getImagesPerPage());
-    
-    $_zp_current_search->page = $alb_pages + $img_pages;
-  }
 
   $origin = array_merge(
     getParentBreadcrumb()[0],

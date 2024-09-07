@@ -4,58 +4,53 @@
  *
  */
 function printZDSearchToggleJS() {
-  ?>
+  echo <<<HTML
   <script>
   function toggleExtraElements(category, show) {
     if (show) {
-      jQuery('.' + category + '_showless').show();
-      jQuery('.' + category + '_showmore').hide();
-      jQuery('.' + category + '_extrashow').show();
+      $('.' + category + '_showless').show()
+      $('.' + category + '_showmore').hide()
+      $('.' + category + '_extrashow').show()
     } else {
-      jQuery('.' + category + '_showless').hide();
-      jQuery('.' + category + '_showmore').show();
-      jQuery('.' + category + '_extrashow').hide();
+      $('.' + category + '_showless').hide()
+      $('.' + category + '_showmore').show()
+      $('.' + category + '_extrashow').hide()
     }
   }
   </script>
-  <?php
+  HTML;
 }
 
 /**
- * Prints the "Show more results link" for search results for Zenpage items
+ * Prints the "Show more/less results" buttons in search results for Zenpage items
  *
- * @param string $option "news" or "pages"
- * @param int $number_to_show how many search results should be shown initially
+ * @param string $type Item typology ("news" or "pages")
+ * @param int $limit How many search results should be shown initially
+ * @param int $tot Total items count
  */
-function printZDSearchShowMoreLink($option, $number_to_show) {
-  $option = strtolower($option);
-  switch ($option) {
-    case "news":
-    $num = getNumNews();
-    break;
-    case "pages":
-    $num = getNumPages();
-    break;
-  }
-  if ($num > $number_to_show) {
-    ?>
-    <a class="<?php echo $option; ?>_showmore"href="javascript:toggleExtraElements('<?php echo $option; ?>',true);"><?php echo gettext('Show more results'); ?></a>
-    <a class="<?php echo $option; ?>_showless" style="display: none;" href="javascript:toggleExtraElements('<?php echo $option; ?>',false);"><?php echo gettext('Show fewer results'); ?></a>
-    <?php
+function printZDSearchShowMoreLink($type, $limit, $tot) {
+  if ($tot > $limit) {
+    $more = gettext('Show more results');
+    $less = gettext('Show fewer results');
+    echo <<<HTML
+    <a class="{$type}_showmore small" href="javascript:toggleExtraElements('$type',true)">$more</a>
+    <a class="{$type}_showless small" href="javascript:toggleExtraElements('$type',false)" style="display:none">$less</a>
+    HTML;
   }
 }
 
 /**
- * Adds the css class necessary for toggling of Zenpage items search results
+ * Adds the css class necessary for toggling of Zenpage items search results.
+ * 
+ * Hides items exceeding the provided number to show initially.
  *
- * @param string $option "news" or "pages"
- * @param string $c After which result item the toggling should begin. Here to be passed from the results loop.
+ * @param string $type Item typology ("news" or "pages")
+ * @param int $count Current item number
+ * @param int $limit How many search results should be shown initially
  */
-function printZDToggleClass($option, $c, $number_to_show) {
-  $option = strtolower($option);
-  $c = sanitize_numeric($c);
-  if ($c > $number_to_show) {
-    echo ' class="' . $option . '_extrashow" style="display:none;"';
+function printZDToggleClass($type, $count, $limit) {
+  if ($count > $limit) {
+    echo "class='{$type}_extrashow' style='display:none'";
   }
 }
 

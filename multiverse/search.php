@@ -27,7 +27,6 @@ if ($pag_tot > 1) {
       printRSSHeaderLink("Gallery", gettext('Latest images'));
     }
   } ?>
-  <?php printZDSearchToggleJS(); ?>
 </head>
 <body class="loading">
   <?php zp_apply_filter('theme_body_open'); ?>
@@ -74,13 +73,18 @@ if ($pag_tot > 1) {
             $c = 0;
             ?>
             <hr />
-            <h3><?php echo gettext('Pages') . ' (' . $numpages . ')'; ?> <small><?php printZDSearchShowMoreLink('pages', $number_to_show); ?></small></h3>
+            <h3>
+            <?php
+              echo gettext('Pages') . ' (' . $numpages . ') ';
+              printZDSearchShowMoreLink('pages', $number_to_show, $numpages);
+            ?>
+            </h3>
             <ul class="searchresults">
               <?php while (next_page()) {
                 $c++; ?>
-                <li<?php printZDToggleClass('pages', $c, $number_to_show); ?>>
+                <li <?php printZDToggleClass('pages', $c, $number_to_show); ?>>
                   <h4><?php printPageURL(); ?></h4>
-                  <p class="zenpageexcerpt"><?php echo shortenContent(getBare(getPageContent()), 80, getOption("zenpage_textshorten_indicator")); ?></p>
+                  <p><?php echo shortenContent(getBare(getPageContent()), 80, ZP_SHORTENINDICATOR); ?></p>
                 </li>
               <?php } // end while ?>
             </ul>
@@ -90,15 +94,20 @@ if ($pag_tot > 1) {
             $number_to_show = 5;
             $c = 0;
             ?>
-            <h3><?php printf(gettext('Articles (%s)'), $numnews); ?> <small><?php printZDSearchShowMoreLink("news", $number_to_show); ?></small></h3>
+            <h3>
+            <?php
+              echo gettext('Articles') . ' (' . $numnews . ') ';
+              printZDSearchShowMoreLink("news", $number_to_show, $numnews);
+            ?>
+            </h3>
             <ul class="searchresults">
               <?php
               while (next_news()) {
                 $c++;
                 ?>
-                <li<?php printZDToggleClass('news',$c,$number_to_show); ?>>
+                <li <?php printZDToggleClass('news', $c, $number_to_show); ?>>
                   <h4><?php printNewsURL(); ?></h4>
-                  <p class="zenpageexcerpt"><?php echo shortenContent(strip_tags(getNewsContent()),80,getOption("zenpage_textshorten_indicator")); ?></p>
+                  <p><?php echo shortenContent(strip_tags(getNewsContent()),80, ZP_SHORTENINDICATOR) ?></p>
                 </li>
               <?php } // end while ?>
             </ul>
@@ -161,8 +170,6 @@ if ($pag_tot > 1) {
           $media_adapted = Multiverse::handleMediaAlbPage($_zp_current_image, $image_x, $image_y);
           if ($ii == 0) {
             $ii = 1;
-            // Set a cookie with number of albums and first page images, needed on image.php
-            zp_setCookie("bic_multiverse_search", $numalbums . ',' . $_zp_first_page_images, SEARCH_DURATION);
             $imagePageOffset = getTotalPages(2);
             if ($_zp_page == $imagePageOffset) {
               $from = 1;
@@ -194,13 +201,13 @@ if ($pag_tot > 1) {
     </div>
   </div>
   <?php include("footer.php"); ?>
-  <?php zp_apply_filter('theme_body_close');
+  <?php
+  printZDSearchToggleJS();
 
   // Open popup with the image of the referer image.php page
   if (!class_exists('static_html_cache')) { ?>
-    <script>
-      <?php echo file_get_contents(dirname(__FILE__) . '/js/internal/popup_on_hash.min.js'); ?>
-    </script>
+    <script><?php echo file_get_contents(__DIR__ . '/js/internal/popup_on_hash.min.js'); ?></script>
   <?php } ?>
+  <?php zp_apply_filter('theme_body_close'); ?>
 </body>
 </html>
