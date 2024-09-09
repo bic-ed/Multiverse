@@ -59,24 +59,38 @@ zp_register_filter('theme_head', 'css_head', 500);
 zp_register_filter('theme_body_close', 'multiverse');
 
 /**
- * Sets viewport & load CSS
+ * Sets viewport and loads CSS
  *
  * @return void 
  */
 function css_head() {
-  global $_zp_themeroot, $_zp_loggedin;
-  ?>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="<?php echo pathurlencode($_zp_themeroot . '/css/multi.css') ?>">
-<?php if (extensionEnabled("themeSwitcher") && themeSwitcher::active()) { ?>
-<style><?php echo file_get_contents(dirname(__FILE__) . '/css/internal/theme_switcher.min.css') ?></style>
-  <?php }
-  if ($_zp_loggedin) { ?>
-<style><?php echo file_get_contents(dirname(__FILE__) . '/css/internal/mv_ad_tb.min.css') ?></style>
-<?php }
-  if (extensionEnabled('paged_thumbs_nav')) { ?>
-<link rel="stylesheet" href="<?php echo pathurlencode($_zp_themeroot . '/css/plugins/pagedthumbsnav.min.css') ?>">
-<?php }
+  global $_zp_themeroot, $_zp_loggedin, $_zp_gallery_page;
+  // Viewport and CSS links
+  $multi_css = '/css/multi.css';
+  $timestamp = filemtime(__DIR__ . $multi_css);
+  echo <<<HTML
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">\n
+     <link rel="stylesheet" href="$_zp_themeroot$multi_css?t=$timestamp">\n
+     HTML;
+  if ($_zp_gallery_page == 'image.php' && extensionEnabled('paged_thumbs_nav')) {
+    $pagedthumbsnav_css = '/css/plugins/pagedthumbsnav.css';
+    $timestamp = filemtime(__DIR__ . $pagedthumbsnav_css);
+    echo <<<HTML
+     <link rel="stylesheet" href="$_zp_themeroot$pagedthumbsnav_css?t=$timestamp">\n
+     HTML;
+  }
+  // Internal CSS
+  $internal_style = '';
+  if (extensionEnabled("themeSwitcher") && themeSwitcher::active()) {
+    $internal_style .= '<style>';
+    $internal_style .= file_get_contents(__DIR__ . '/css/internal/theme_switcher.min.css');
+  }
+  if ($_zp_loggedin) {
+    $internal_style .= $internal_style ? '' : '<style>';
+    $internal_style .= file_get_contents(__DIR__ . '/css/internal/mv_ad_tb.min.css');
+  }
+  echo $internal_style ? "$internal_style</style>\n" : '';
+
   // Store the email subject theme option to use it later
   Multiverse::$mailsubject = trim(getThemeOption('multiverse_email_subject'));
 
@@ -135,13 +149,12 @@ function newsOnIndex($link, $obj, $page) {
 }
 
 if (!OFFSET_PATH) {
-  enableExtension('print_album_menu', 1 | THEME_PLUGIN, false);
   setOption('user_logout_login_form', 2, false);
   define('ZENPAGE_ON', extensionEnabled('zenpage'));
   $_zp_page_check = 'my_checkPageValidity';
   if (ZENPAGE_ON) {
     define('NEWS_IS_HOME', getThemeOption('multiverse_index_news'));
-    define('PAGE_IS_HOME', (NEWS_IS_HOME ? false : getThemeOption('multiverse_homepage')));
+    define('PAGE_IS_HOME', NEWS_IS_HOME ? false : getThemeOption('multiverse_homepage'));
     if (NEWS_IS_HOME) {  // only one index page if zenpage plugin is enabled & displaying
       zp_register_filter('getLink', 'newsOnIndex');
     }
@@ -150,7 +163,7 @@ if (!OFFSET_PATH) {
 
 
 if (extensionEnabled("contact_form")) {
-  // disable contact form unwanted fields
+  // Disable contact form unwanted fields.
   setOption('contactform_title', 'omitted', false);
   setOption('contactform_city', 'omitted', false);
   setOption('contactform_state', 'omitted', false);
@@ -163,6 +176,9 @@ if (extensionEnabled("contact_form")) {
   setOption('contactform_confirm', '0', false);
   setOption('contactform_email', 'required', false);
   setOption('contactform_name', 'required', false);
+}
+
+if (extensionEnabled('comment_form')) {
   setOption('tinymce4_comments', null, false);
 }
 
@@ -191,35 +207,35 @@ function multiverse() {
   if (ZENPAGE_ON) {
     switch ($_zp_gallery_page) {
       case 'index.php':
-      if (NEWS_IS_HOME) {
-        $news_active = 1;
-      } elseif (!PAGE_IS_HOME) {
-        $gallery_active = 1;
-      }
-      break;
+        if (NEWS_IS_HOME) {
+          $news_active = 1;
+        } elseif (!PAGE_IS_HOME) {
+          $gallery_active = 1;
+        }
+        break;
       case 'gallery.php':
-      $gallery_active = 1;
-      break;
+        $gallery_active = 1;
+        break;
     }
   } else if ($_zp_gallery_page == "index.php" && getCurrentPage() < 2) {
     $gallery_active = 1;
   }
 
-  $javas = array(
+  $javas = json_encode([
     'searchPlaceholder' => strtoupper(gettext("search")),
     'newsActive' => ($news_active ? 1 : 0),
     'galleryActive' => ($gallery_active ? 1 : 0),
     'contactURL' => WEBPATH . '/themes/multiverse/ajax/contact.php',
     'mailSubject' => Multiverse::$mailsubject,
     'mailSent' => get_language_string(getOption('contactform_thankstext')),
-  );
-?>
-<script>
-var phpToJS = <?php echo json_encode($javas) ?>;
-</script>
-<script src="<?php echo $_zp_themeroot; ?>/js/merged/multi.js"></script>
-<?php
-return;
+  ]);
+  $multi_js = '/js/merged/multi.js';
+  $timestamp = filemtime(__DIR__ . $multi_js);
+  echo <<<HTML
+     <script>phpToJS=$javas</script>
+     <script src="$_zp_themeroot$multi_js?t=$timestamp"></script>\n
+     HTML;
+  return;
 }
 
 /**
@@ -270,7 +286,7 @@ function printFooterRSS() {
 
 class Multiverse {
 
-  static $mailsubject = '';
+static $mailsubject = '';
 
   /**
    * Implements audio, video and text object support for poptrox-popup

@@ -7,6 +7,7 @@
 * Refresh the reCaptcha iframe on the contact form upon reset
 * Updated Contact and Comment forms to handle the new ZP options *autocomplete* (ZP 1.6.3) and *quizzes* (ZP 1.6.5)
 * Contact form feedback message is scrolled into view upon displaying
+* Timestamp as a parameter for css and js resources, so that browsers always load the correct version of the files, regardless of caching strategies
 
 ### Changed
 * The input fields for image size in the options have been made a little larger ([fretzl])
