@@ -24,14 +24,14 @@ $autocomplete = getOption('contactform_autocomplete') ? '' : ' autocomplete="off
   <?php
 	$textquiz_question = contactForm::getQuizFieldQuestion('contactform_textquiz');
 	if ($textquiz_question) { ?>
-    <input class="field" placeholder="<?php echo html_encode($textquiz_question); ?>" type="text" id="comment_textquiz" name="comment_textquiz" size="50" value="<?php echo $mailcontent['textquiz']; ?>" required autocomplete="off" />
-    <label class="hide" for="comment_textquiz"><?php echo html_encode($textquiz_question); ?><strong>*</strong></label>
+    <input class="field" placeholder="<?php echo html_encode($textquiz_question); ?>" type="text" id="contactform_textquiz" name="contactform_textquiz" size="50" value="<?php echo $mailcontent['textquiz']; ?>" required autocomplete="off" />
+    <label class="hide" for="contactform_textquiz"><?php echo html_encode($textquiz_question); ?><strong>*</strong></label>
 	<?php 
 	} 
 	$mathquiz_question = contactForm::getQuizFieldQuestion('contactform_mathquiz');
 	if ($mathquiz_question) { ?>
-    <input class="field" placeholder="<?php echo html_encode($mathquiz_question); ?>=" type="text" id="comment_mathquiz" name="comment_mathquiz" size="50" value="<?php echo $mailcontent['mathquiz']; ?>" required autocomplete="off" />
-    <label class="hide" for="comment_mathquiz"><?php echo html_encode($mathquiz_question); ?>=<strong>*</strong></label>
+    <input class="field" placeholder="<?php echo html_encode($mathquiz_question); ?>=" type="text" id="contactform_mathquiz" name="contactform_mathquiz" size="50" value="<?php echo $mailcontent['mathquiz']; ?>" required autocomplete="off" />
+    <label class="hide" for="contactform_mathquiz"><?php echo html_encode($mathquiz_question); ?>=<strong>*</strong></label>
 	<?php }
   if (getOption("contactform_captcha")) {
     $captcha = $_zp_captcha->getCaptcha(gettext("Enter CAPTCHA"));

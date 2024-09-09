@@ -1445,50 +1445,54 @@
   $mailform.on('submit', function(e) {
     e.preventDefault();
 
-    var $submit = $(this).find('input[type="submit"]'),
+    var $submit = $mailform.find('.special'),
       $reset = $submit.next(),
-      message;
+      message,
+      resultClass = 'errorbox',
+      $formResult = $('#form-result'),
+      $idle = $('<p class="idle">')
 
     // Disable buttons during ajax request
-    $submit.add($reset).prop('disabled', 'disabled');
+    $submit.add($reset).prop('disabled', 1)
 
-    // Reposition container for feedback message and insert container for waiting icon spinner
-    var $formResult = $('#form-result');
-    var $idle = $('<p class="idle">')
-    $mailform.append([
-      $idle,
-      $formResult
-    ])
+    // Insert the container for waiting icon spinner
+    $mailform.after($idle)
     $idle.slideDown();
 
     $.ajax({
       type: 'POST',
       cache: false,
-      data: $(this).serialize(),
+      data: $mailform.serialize(),
       url: received.contactURL,
       error: function(xhr) {
-        message = '<div class="errorbox">Ajax error ' + xhr.status + ': ' + xhr.statusText + '</div>';
+        message = 'Ajax error ' + xhr.status + ': ' + xhr.statusText;
       },
       success: function(res) {
         var $res = $(res);
-        message = $res.filter('.errorbox');
+        message = $res.filter('.errorbox').contents();
         if (!$res.filter('#mailform').length && !$res.find('a[href*="again"]').length) {
-          message = '<div class="errorbox">' + $res.text() + '</div>';
+          message = $res.text();
         } else if (!message.length) {
-          message = "<span>" + received.mailSent + "</span>";
+          resultClass = 'messagebox'
+          message = received.mailSent;
         }
       },
       complete: function() {
+        $idle.slideUp()
+        $formResult
+          .prop('class', resultClass) // Override any previously added class
+          .html(message)
+          .slideDown(400, () => {
+            $formResult[0].scrollIntoView(false)
+          })
 
-        $formResult.html(message).slideDown();
-        $reset.removeAttr('disabled');
-        $idle.slideUp();
-
-        $reset.one('click', function() {
-          $submit.removeAttr('disabled');
-          $idle.remove();
-          $formResult.slideUp();
-        });
+        $reset
+          .removeAttr('disabled')
+          .one('click', function() {
+            $submit.removeAttr('disabled')
+            $formResult.slideUp()
+            $idle.remove()
+          })
       }
     });
   })

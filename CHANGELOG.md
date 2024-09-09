@@ -6,6 +6,7 @@
 * Russian translation ([kuzzzma](https://github.com/kuz-z-zma))
 * Refresh the reCaptcha iframe on the contact form upon reset
 * Updated Contact and Comment forms to handle the new ZP options *autocomplete* (ZP 1.6.3) and *quizzes* (ZP 1.6.5)
+* Contact form feedback message is scrolled into view upon displaying
 
 ### Changed
 * The input fields for image size in the options have been made a little larger ([fretzl])

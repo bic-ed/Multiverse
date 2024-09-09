@@ -519,15 +519,7 @@ form textarea {
   margin-bottom: 1.2em;
 }
 #form-result {
-  display:none;
-}
-#form-result > span {
-  background: #409c81;
-  padding: 1em 1.4em;
-  color: #fff;
-  display: block;
-  margin-bottom: 2em;
-  border-radius: 4px;
+  display: none;
 }
 #commentform > p, .data_conf {
   margin: -.3em 0 1.2em;
@@ -594,9 +586,10 @@ input[type="checkbox"]:focus+label::before {
 .pagination a {
   color: #fff;
 }
-.errorbox {
-  padding: 20px;
-  background-color: #923A3A;
+.errorbox,
+.messagebox {
+  padding: 1.5em;
+  background: #923A3A;
   margin-bottom: 2em;
   border-radius: 4px;
   color: #e6e6e6;
@@ -604,8 +597,12 @@ input[type="checkbox"]:focus+label::before {
 .errorbox strong {
   color: #e6e6e6;
 }
-.errorbox > :last-child {
-  margin: 0;
+.messagebox {
+  background: #409c81;
+  color: #fff;
+}
+:is(.errorbox, .messagebox) > :last-child {
+  margin-bottom: 0;
 }
 
 #passwordform {
@@ -826,6 +823,7 @@ table.alt tfoot {
 .panel.active {
   box-shadow: 0 0 .68em 0 rgba(0,0,0,0.45);
   transform: translateY(1px);
+  scroll-behavior: smooth;
 }
 .panel>.inner {
   margin: 0 auto;

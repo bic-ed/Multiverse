@@ -81,7 +81,6 @@ if ($has_social || $rss_links_enabled) {
           <?php if ($copy_text = getThemeOption('multiverse_copyrigth_text')) { ?>
             <i class="icon fa-copyright" aria-hidden="true"></i>
             <?php
-            echo $contact_size, ' ', $menu_size, ' ';
             $archive_link = getAllDates();
             reset($archive_link);
             $archive_link = substr(key($archive_link), 0, 4);
